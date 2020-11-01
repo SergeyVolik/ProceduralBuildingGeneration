@@ -1,0 +1,31 @@
+fileFormatVersion: 2
+guid: c74e63d7ec28faf4ab8162c48f924843
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _wallPrefab: {fileID: 6283819138621053698, guid: b44fa5f0f82ce4d42be24967b100b5fb,
+      type: 3}
+  - _wallForDoorPrefab: {fileID: 2817590022721157599, guid: bb941942e2bb3734e95f1ed05e411900,
+      type: 3}
+  - _wallWithWindowPrefab: {fileID: 5625300126448925555, guid: 9244c27be0988554a8dc303d887f850b,
+      type: 3}
+  - _floorPrefab: {fileID: 9067027106840869735, guid: 33dd63fe10580c44680878f335de748d,
+      type: 3}
+  - m_requisite: {instanceID: 0}
+  - _ceilingPrefab: {fileID: 9067027106840869735, guid: 33dd63fe10580c44680878f335de748d,
+      type: 3}
+  - _wallMaterial: {instanceID: 0}
+  - _ceilingMaterial: {fileID: 2100000, guid: 60a4cda6e4f512f45b871230b4caf413, type: 2}
+  - _floorMaterial: {fileID: 2100000, guid: bca819c7880d78245b09885ed9230437, type: 2}
+  - wallPrefabForMaterial: {fileID: 2740209968976373107, guid: 3dbbc3a3e86d37e4aae193b145ad5b0f,
+      type: 3}
+  - wallForDoorPrefabForMaterial: {fileID: 1587642205990576176, guid: c8c3f50365fc1114684deeec917b7f38,
+      type: 3}
+  - wallWithWindowPrefabForMaterial: {fileID: 3776202608072612282, guid: 3c35f57f7f2af1d4f930cca6720ae3fa,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

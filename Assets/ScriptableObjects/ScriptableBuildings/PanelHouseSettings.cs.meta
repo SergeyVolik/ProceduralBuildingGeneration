@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: 93459374c3ba0344aa2944bf542cb822
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - defaultWall: {fileID: 239110934396663017, guid: 3114ebd7c997dcf4db564191cddbce88,
+      type: 3}
+  - defaultWallForDoor: {fileID: 1919896051305096428, guid: bb941942e2bb3734e95f1ed05e411900,
+      type: 3}
+  - defaultWallWithWindow: {fileID: 2564506703000426394, guid: 747e9a2f233c60447957a9716c99d08c,
+      type: 3}
+  - defaultCubeForFoundation: {fileID: 1145265921417058268, guid: f9abdd7d8b6b03042983291b3ae9710d,
+      type: 3}
+  - defaultFloorPrefab: {fileID: 2460871962331080593, guid: 1a073870f3372ea4bb364ae6e8f2a18d,
+      type: 3}
+  - defaultCeilingPrefab: {fileID: 6754535686825212179, guid: b871489a22006c942a85e8055179cf4a,
+      type: 3}
+  - defalutRoofMaterial: {fileID: 2100000, guid: 02459cf33eb7b0a448e0d5a23ada9a6a,
+      type: 2}
+  - defaultFloorMaterial: {fileID: 2100000, guid: 605e8934fe570bb4a8d46ac4b47cdc1e,
+      type: 2}
+  - defaultCeilingMaterial: {fileID: 2100000, guid: 60a4cda6e4f512f45b871230b4caf413,
+      type: 2}
+  - stairs: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

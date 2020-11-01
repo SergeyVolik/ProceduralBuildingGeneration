@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93459374c3ba0344aa2944bf542cb822, type: 3}
+  m_Name: PanelBuildingData1
+  m_EditorClassIdentifier: 
+  houseEndertWall: {fileID: 4578146322459339543, guid: 021901d4649f6bb4aa5a400bf6fee450,
+    type: 3}
+  houseEndertWallForMaterial: {fileID: 4730863975532162505, guid: 04e37b08a8aab754ead6ebf29a311c49,
+    type: 3}
+  defaultWall: {fileID: 6283819138621053698, guid: b44fa5f0f82ce4d42be24967b100b5fb,
+    type: 3}
+  defaultWallForMaterial: {fileID: 2740209968976373107, guid: 3dbbc3a3e86d37e4aae193b145ad5b0f,
+    type: 3}
+  defaultWallForDoor: {fileID: 2817590022721157599, guid: bb941942e2bb3734e95f1ed05e411900,
+    type: 3}
+  defaultWallForDoorMaterial: {fileID: 1587642205990576176, guid: c8c3f50365fc1114684deeec917b7f38,
+    type: 3}
+  BasementWindow: {fileID: 6220257808025952960, guid: 12aa69a18330c1740b471a7ec14426fe,
+    type: 3}
+  RoofBoarder: {fileID: 5085653073806353274, guid: 48186d8a154432941924b88220323204,
+    type: 3}
+  StairsRoofFaceWall: {fileID: 8888871854065743881, guid: 026e0c2cf8146a847a979bd874e56c11,
+    type: 3}
+  defaultWallWithWindow: {fileID: 5625300126448925555, guid: 9244c27be0988554a8dc303d887f850b,
+    type: 3}
+  defaultWallWithWindowForMaterial: {fileID: 3776202608072612282, guid: 3c35f57f7f2af1d4f930cca6720ae3fa,
+    type: 3}
+  defaultFloorRoomPrefab: {fileID: 2877516247857105304, guid: d64354c0dfd0d4647a2dd6f094faa950,
+    type: 3}
+  defaultCeilingRoomPrefab: {fileID: 2877516247857105304, guid: d64354c0dfd0d4647a2dd6f094faa950,
+    type: 3}
+  defaultFloorPrefab: {fileID: 9067027106840869735, guid: 33dd63fe10580c44680878f335de748d,
+    type: 3}
+  buildingRainDrainVerticalTop: {fileID: 2663795373345011624, guid: 1b79b1538e00af940936576a656225e7,
+    type: 3}
+  buildingRainDrainVerticalMidle: {fileID: 6771308214953884616, guid: 928f21187ce685f4d8f5e1794a28c92f,
+    type: 3}
+  buildingRainDrainVerticalBottom: {fileID: 7490171236375919359, guid: c2a1002700a62244191decaf42bd2bb0,
+    type: 3}
+  buildingRainDrainHorizontal: {fileID: 2939068314274812484, guid: f8735b879b2882b46a7cd5720c2d3afe,
+    type: 3}
+  OffsetForRainDrainHorozontal: 0.2
+  AdditionalOffsetForRainDrainHorozontal: {x: 0, y: 0.6, z: 0}
+  defalutRoofMaterial: {fileID: 2100000, guid: 62c53cf33ec5a4d48b0557efe333dde2, type: 2}
+  defaultFloorMaterial: {fileID: 2100000, guid: 605e8934fe570bb4a8d46ac4b47cdc1e,
+    type: 2}
+  defaultCeilingMaterial: {fileID: 2100000, guid: 60a4cda6e4f512f45b871230b4caf413,
+    type: 2}
+  possibleRooms:
+  - {fileID: 11400000, guid: 3e847e3e37f3f174c9ca3af129efe5b8, type: 2}
+  - {fileID: 11400000, guid: 74c29fefe0a13d546b13ebad418ebf3b, type: 2}
+  - {fileID: 11400000, guid: bf4c85458cb2d9448864694f5ea216d8, type: 2}
+  - {fileID: 11400000, guid: 026b0e1c5d03e054fae17c8dd5dcf30f, type: 2}
+  - {fileID: 11400000, guid: 0ae813fd5087b644d9a62b4257771ec4, type: 2}
+  - {fileID: 11400000, guid: 141ac73d53aecd04789084601796c702, type: 2}
+  RoomLinks:
+  - _name: BEDR1,BATH2
+    _doorType: 1
+    _to: BEDR1
+    _from: BATH2
+  - _name: DIN1,KITC1
+    _doorType: 0
+    _to: DIN1
+    _from: KITC1
+  stairsFirstFloor: {fileID: 6716406475488326899, guid: 8e404b10f1c0c684cb5d5e590f531255,
+    type: 3}
+  stairsnextFloor: {fileID: 2232215468068713760, guid: fb46e72c00b013d47a937bcb01ba6c2b,
+    type: 3}
+  stairsWallMaterial: {fileID: 2100000, guid: dace521a48d12644aa91b0758ce2934f, type: 2}
+  corridorWallMaterial: {fileID: 2100000, guid: dace521a48d12644aa91b0758ce2934f,
+    type: 2}
+  corridoCeilingMaterial: {fileID: 0}
+  corridorFloorMaterial: {fileID: 0}
+  floorsNumber: 6
+  BildingAngles: 4
+  areaForEntrace: 1000
+  entrances: 2

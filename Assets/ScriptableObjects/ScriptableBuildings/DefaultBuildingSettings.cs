@@ -1,0 +1,82 @@
+﻿using Assets.Scripts;
+using Rooms;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+
+public abstract class DefaultBuildingSettings : ScriptableObject
+{
+    [Space(10), Header("Wall prefabs")]
+
+    [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject houseEndertWall;
+    [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject houseEndertWallForMaterial;
+
+    [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject defaultWall;
+    [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject defaultWallForMaterial;
+
+
+    [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject defaultWallForDoor;
+    [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject defaultWallForDoorMaterial;
+
+    [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject BasementWindow;
+
+    [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject RoofBoarder;
+    [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject StairsRoofFaceWall;
+    [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject defaultWallWithWindow;
+    [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject defaultWallWithWindowForMaterial;
+
+
+
+    [Space(10), Header("floor, ceiling  prefabs")]
+    [SerializeField, Tooltip(RoomSetting.ceilingAndFloorRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject defaultFloorRoomPrefab;
+    [SerializeField, Tooltip(RoomSetting.ceilingAndFloorRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject defaultCeilingRoomPrefab;
+
+    [SerializeField, Tooltip(RoomSetting.ceilingAndFloorRequirement + RoomSetting.notSet), Space(5)]
+    public GameObject defaultFloorPrefab;
+
+    [Space(10), Header("building rain drain prefabs")]
+    public GameObject buildingRainDrainVerticalTop;
+    public GameObject buildingRainDrainVerticalMidle;
+    public GameObject buildingRainDrainVerticalBottom;
+  
+
+    public GameObject buildingRainDrainHorizontal;
+    public float OffsetForRainDrainHorozontal = 0.3f;
+    public Vector3 AdditionalOffsetForRainDrainHorozontal = new Vector3(0, 0.75f, 0);
+
+
+    [Space(10), Header("Buillding Materials settings")]
+    [SerializeField, Tooltip(RoomSetting.notSet), Space(5)]
+    public Material defalutRoofMaterial;
+    [SerializeField, Tooltip(RoomSetting.notSet), Space(5)]
+    public Material defaultFloorMaterial;
+    [SerializeField, Tooltip(RoomSetting.notSet), Space(5)]
+    public Material defaultCeilingMaterial;
+
+
+
+    //[SerializeField]
+    //public List<FloorSettings> floors;
+
+    [Space(10), Header("Rooms settings")]
+
+    [SerializeField, Space(10)]
+    public List<RoomSetting> possibleRooms;
+    [SerializeField, Space(10)]
+    public List<RoomLink> RoomLinks;
+}
