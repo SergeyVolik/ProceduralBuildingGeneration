@@ -6,6 +6,7 @@ using Assets.Scripts.Premies.Buildings.Floors;
 using Floor;
 using Rooms;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,6 +68,53 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D
                 }
 
                 room3d.Visualize();
+                rooms3D.Add(room3d);
+
+            }
+        }
+
+        public IEnumerator VisualizeAnimation()
+        {
+
+            List<PartOfWall> instantiatedWalls = new List<PartOfWall>();
+            var rooms = _floor2D.GetRooms();
+
+            rooms3D = new List<Room3D>();
+
+            floorRoot = new GameObject("Floor " + _floor2D.Floor);
+            floorRoot.transform.SetParent(floorsRoot.transform);
+
+            for (var i = 0; i < rooms.Count; i++)
+            {
+                Room3D room3d = null;
+
+                if (_floor2D.Floor == 0)
+                {
+                    if (rooms[i].RoomType != RoomType.Stairs)
+                        room3d = new APH_Room3D(rooms[i], floorRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, true, true);
+
+                    else room3d = new APH_Room3d_Stairs(rooms[i], floorRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, false, true);
+                }
+
+                else if (_settings.floorsNumber + 1 == _floor2D.Floor)
+                {
+                    if (rooms[i].RoomType != RoomType.Stairs)
+                        room3d = new APH_Room3D(rooms[i], floorRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, false, false);
+                    else room3d = new APH_Room3d_Stairs(rooms[i], floorRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, true, false);
+                }
+
+                else
+                {
+
+                    if (rooms[i].RoomType != RoomType.Stairs)
+                        room3d = new APH_Room3D(rooms[i], floorRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, true, true);
+
+                    else room3d = new APH_Room3d_Stairs(rooms[i], floorRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, false, false);
+
+
+                }
+
+                yield return room3d.VisualizeAnimation();
                 rooms3D.Add(room3d);
 
             }

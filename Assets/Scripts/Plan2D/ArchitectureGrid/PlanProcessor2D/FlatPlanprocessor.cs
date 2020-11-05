@@ -28,7 +28,7 @@ namespace ArchitectureGrid
 
 
         #region Constructors
-        public FlatPlanProcessor2D(List<Vector2d> polygon, List<Vector2d> buildingForm,  Vector2d exitPoint) : base(polygon, buildingForm, exitPoint)
+        public FlatPlanProcessor2D(List<Vector2d> polygon, List<Vector2d> buildingForm, Vector2d exitPoint) : base(polygon, buildingForm, exitPoint)
         {
 
             BuildingForm = buildingForm;
@@ -41,10 +41,43 @@ namespace ArchitectureGrid
 
         public override void CreatePlan()
         {
-          
+
             growthProcessor.GrowthOfRooms();
+            AddDoorsToRooms();
         }
 
+        void AddDoorsToRooms()
+        {
+
+            int roomsWithDoors = 0;
+
+            int breakCound = 0;
+            while (roomsWithDoors != Rooms.Count)
+            {
+                roomsWithDoors = 0;
+
+                var roomWithourDoor = Rooms.FirstOrDefault(r => !r.HaveDoor);
+
+                for (var i = 0; i < Rooms.Count; i++)
+                {
+                    if (Rooms[i] == roomWithourDoor)
+                        continue;
+
+                    if (Rooms[i].RoomRequisite.MaxDoorConections > Rooms[i].DoorCount)
+                    {
+                        if (roomWithourDoor.AddDoorBetweenRooms(Rooms[i]))
+                            break;
+                    }
+                }
+                breakCound++;
+
+                roomsWithDoors = Rooms.Count(r => r.HaveDoor);
+
+                if (breakCound > 100)
+                    break;
+            }
+
+        }
         void FindWindows()
         {
             var windows = Windows;

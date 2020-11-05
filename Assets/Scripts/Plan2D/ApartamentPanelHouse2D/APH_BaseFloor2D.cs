@@ -116,7 +116,18 @@ namespace Floor
                 flats.Add(new Flat2D(r.MainPolygon, BuildingForm, roomRequisites, FindExit(Corridor, r)));
             });
 
-            flats.ForEach(f => f.Create2DSpace());
+            flats.ForEach(f => { 
+
+                f.Create2DSpace();
+
+                f.Rooms.ForEach(r =>
+                {
+
+                    if (r.AddDoorBetweenRooms(Corridor))
+                        return;
+                });
+            });
+
         }
 
         Vector2d FindExit(Room2D corridor, Room2D flat)

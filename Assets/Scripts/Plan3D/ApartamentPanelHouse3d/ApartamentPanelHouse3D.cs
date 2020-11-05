@@ -14,11 +14,13 @@ using StraightSkeleton;
 using StraightSkeleton.Polygon.RandomRectangularPolygon;
 using StraightSkeleton.Primitives;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 namespace Assets.Scripts.Builders
 {
@@ -73,6 +75,35 @@ namespace Assets.Scripts.Builders
             RainDrainVisualize();
 
 
+        }
+
+        public IEnumerator VisualizeaAnimationCorotine()
+        {
+            var entraces = _house2D.Entraces;
+            var EntracesRoot = new GameObject("Entraces");
+            EntracesRoot.transform.parent = BuildingRoot.transform;
+
+            Entaraces3D = new List<Entrance3D>();
+
+
+
+            for (var j = 0; j < entraces.Count; j++)
+            {
+                var entrance3d = new APH_Entrance3D(entraces[j], EntracesRoot, BuildingRoot, _settings, buildingPossiblePrefabs);
+                yield return entrance3d.VisualizeAnimation();
+            }
+
+
+
+
+            //VisualizeRoof();
+            RainDrainVisualize();
+
+        }
+
+        public void StartAnimation()
+        {
+            Camera.main.GetComponentInParent<CameraRotateAround>().StartCoroutine(VisualizeaAnimationCorotine());
         }
 
         string tag = "CombineMesh";

@@ -1,5 +1,4 @@
 ﻿using ArchitectureGrid;
-
 using Rooms;
 using StraightSkeleton.Primitives;
 using System;
@@ -10,6 +9,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+
 namespace Floor
 {
     public class APH_RoofFloor2D : APH_BaseFloor2D
@@ -39,9 +39,12 @@ namespace Floor
             planProcessor2D = entraceProcessor2D;
             var room = entraceProcessor2D.Rooms.FindAll(r => r.RoomType == RoomType.Flat);
 
+            
+            
             FindStairs();
             AddExitToStairs();
 
+            room.ForEach(r => r.AddDoorBetweenRooms(Stairs));
 
 
         }

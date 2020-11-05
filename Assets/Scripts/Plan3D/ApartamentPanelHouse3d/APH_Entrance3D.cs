@@ -4,6 +4,7 @@ using Assets.Scripts.Premies.Buildings.Entrace3D;
 using Assets.Scripts.Premies.Buildings.Floors;
 using Floor;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,6 +39,25 @@ namespace Assets.Scripts.Premies.Buildings
             
         }
 
-        
+        public IEnumerator VisualizeAnimation()
+        {
+
+            entraceRoot = new GameObject("Entrace");
+            entraceRoot.transform.parent = entracesRoot.transform;
+            floors3D = new List<Floor3D>();
+
+            foreach(var f in entrace2D.floors)
+           {
+                var floor3D = new APH_Floor3D(f, entraceRoot, buildingRoot, _settings, buildingPossiblePrefabs);
+                yield return floor3D.VisualizeAnimation();
+                floors3D.Add(floor3D);
+            }
+
+            yield return null;
+
+
+        }
+
+
     }
 }

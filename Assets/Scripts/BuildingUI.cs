@@ -8,6 +8,7 @@ using StraightSkeleton.Corridor;
 using Buldings;
 using Assets.Scripts.Buildings;
 using Floor;
+using UnityStandardAssets.Characters.FirstPerson;
 
 [RequireComponent(typeof(BuildingManager))]
 public class BuildingUI : MonoBehaviour
@@ -58,61 +59,65 @@ public class BuildingUI : MonoBehaviour
     public enum ShowState { ShowOuterPolygon, ShowRoof, ShowCoridor, ShowArchGrid, ShowGridCoridor, ShowWindowsAndDoor, ShowCorridorAndCorrectCell, ShowCorridorAndSelectedCells, Show3d }
     public void BtnClick()
     {
+        playerCOntroller.gameObject.SetActive(false);
+        rotateCamera.gameObject.SetActive(true);
         foreach (Transform child in Panel.transform)
         {
             GameObject.Destroy(child.gameObject);
         }
-        var house = GetComponent<BuildingManager>().CreateHouse();
+        var house = GetComponent<BuildingManager>().CreateHouseWithAnimation();
 
-       
 
-      
-
-      
-
-     
-        
         //ShowRooms(house.House.Entraces[0].floors[1]);
        
     }
-   
 
-    //void ShowTree(SkeletonCorridor sk)
+    public RigidbodyFirstPersonController playerCOntroller;
+    public Camera rotateCamera;
+    public void BtnClickSkipAnimation()
+    {
+        playerCOntroller.StopAllCoroutines();
+        playerCOntroller.gameObject.SetActive(true);
+        rotateCamera.gameObject.SetActive(false);
+        var house = GetComponent<BuildingManager>().CreateHouse();
+    }
 
-    //{
-    //    DrawLine(new Vector3((float)sk.treeOfCorridor.root.data.PathEdge.Start.X * 10 + 400, 0, (float)sk.treeOfCorridor.root.data.PathEdge.Start.Y * 10 + 200),
-    //                new Vector3((float)sk.treeOfCorridor.root.data.PathEdge.End.X * 10 + 400, 0, (float)sk.treeOfCorridor.root.data.PathEdge.End.Y * 10 + 200), color);
+        //void ShowTree(SkeletonCorridor sk)
 
-    //    if (sk.treeOfCorridor.root.data.OuterWalls != null)
-    //        for (var j = 0; j < sk.treeOfCorridor.root.data.OuterWalls.Count; j++)
-    //        {
-    //            DrawLine(new Vector3((float)sk.treeOfCorridor.root.data.OuterWalls[j].Start.X * 10 + 400, 0, (float)sk.treeOfCorridor.root.data.OuterWalls[j].Start.Y * 10 + 200),
-    //            new Vector3((float)sk.treeOfCorridor.root.data.OuterWalls[j].End.X * 10 + 400, 0, (float)sk.treeOfCorridor.root.data.OuterWalls[j].End.Y * 10 + 200), color);
-    //        }
-    //    ShowNode(sk.treeOfCorridor.root);
+        //{
+        //    DrawLine(new Vector3((float)sk.treeOfCorridor.root.data.PathEdge.Start.X * 10 + 400, 0, (float)sk.treeOfCorridor.root.data.PathEdge.Start.Y * 10 + 200),
+        //                new Vector3((float)sk.treeOfCorridor.root.data.PathEdge.End.X * 10 + 400, 0, (float)sk.treeOfCorridor.root.data.PathEdge.End.Y * 10 + 200), color);
 
-    //}
-    //void ShowNode(Node<CorridorPart> node)
-    //{
-    //    if (node.nodes != null)
-    //        for (var i = 0; i < node.nodes.Count; i++)
-    //        {
-    //            if (node.nodes[i].data.OuterWalls != null)
-    //                for (var j = 0; j < node.nodes[i].data.OuterWalls.Count; j++)
-    //                {
-    //                    DrawLine(new Vector3((float)node.nodes[i].data.OuterWalls[j].Start.X * 10 + 400, 0, (float)node.nodes[i].data.OuterWalls[j].Start.Y * 10 + 200),
-    //                    new Vector3((float)node.nodes[i].data.OuterWalls[j].End.X * 10 + 400, 0, (float)node.nodes[i].data.OuterWalls[j].End.Y * 10 + 200), color);
-    //                }
-    //            DrawLine(new Vector3((float)node.nodes[i].data.PathEdge.Start.X * 10 + 400, 0, (float)node.nodes[i].data.PathEdge.Start.Y * 10 + 200),
-    //            new Vector3((float)node.nodes[i].data.PathEdge.End.X * 10 + 400, 0, (float)node.nodes[i].data.PathEdge.End.Y * 10 + 200), color);
-    //            ShowNode(node.nodes[i]);
-    //        }
-    //}
+        //    if (sk.treeOfCorridor.root.data.OuterWalls != null)
+        //        for (var j = 0; j < sk.treeOfCorridor.root.data.OuterWalls.Count; j++)
+        //        {
+        //            DrawLine(new Vector3((float)sk.treeOfCorridor.root.data.OuterWalls[j].Start.X * 10 + 400, 0, (float)sk.treeOfCorridor.root.data.OuterWalls[j].Start.Y * 10 + 200),
+        //            new Vector3((float)sk.treeOfCorridor.root.data.OuterWalls[j].End.X * 10 + 400, 0, (float)sk.treeOfCorridor.root.data.OuterWalls[j].End.Y * 10 + 200), color);
+        //        }
+        //    ShowNode(sk.treeOfCorridor.root);
+
+        //}
+        //void ShowNode(Node<CorridorPart> node)
+        //{
+        //    if (node.nodes != null)
+        //        for (var i = 0; i < node.nodes.Count; i++)
+        //        {
+        //            if (node.nodes[i].data.OuterWalls != null)
+        //                for (var j = 0; j < node.nodes[i].data.OuterWalls.Count; j++)
+        //                {
+        //                    DrawLine(new Vector3((float)node.nodes[i].data.OuterWalls[j].Start.X * 10 + 400, 0, (float)node.nodes[i].data.OuterWalls[j].Start.Y * 10 + 200),
+        //                    new Vector3((float)node.nodes[i].data.OuterWalls[j].End.X * 10 + 400, 0, (float)node.nodes[i].data.OuterWalls[j].End.Y * 10 + 200), color);
+        //                }
+        //            DrawLine(new Vector3((float)node.nodes[i].data.PathEdge.Start.X * 10 + 400, 0, (float)node.nodes[i].data.PathEdge.Start.Y * 10 + 200),
+        //            new Vector3((float)node.nodes[i].data.PathEdge.End.X * 10 + 400, 0, (float)node.nodes[i].data.PathEdge.End.Y * 10 + 200), color);
+        //            ShowNode(node.nodes[i]);
+        //        }
+        //}
 
 
-    
-   
-    void ShowList(List<Vector2d> pointsSkeleton, Color color, string name="")
+
+
+        void ShowList(List<Vector2d> pointsSkeleton, Color color, string name="")
     {
         for (var i = 0; i < pointsSkeleton.Count - 1; i++)
         {

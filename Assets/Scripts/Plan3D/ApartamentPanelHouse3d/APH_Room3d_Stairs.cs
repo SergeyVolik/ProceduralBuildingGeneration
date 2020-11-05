@@ -56,7 +56,12 @@ namespace Assets.Scripts.Plan3D.ApartamentPanelHouse3d
             }
 
             if (floor == 0)
-                currPrefab = settings.BasementWindow;
+            {
+                if (wall.WallType == WallType.NoWall)
+                    currPrefab = null;
+                else
+                    currPrefab = settings.BasementWindow;
+            }
 
 
             if (floor == settings.floorsNumber + 1 && wall.WallType == WallType.WallWithDoor)

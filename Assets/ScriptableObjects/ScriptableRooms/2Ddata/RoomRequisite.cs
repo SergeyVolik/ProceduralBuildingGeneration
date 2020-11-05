@@ -40,12 +40,15 @@ using UnityEngine;
         [SerializeField]
         private bool growthIfMaxSize = true;
 
+        [SerializeField]
+        private int maxDoorConections = 1;
 
-        #endregion
 
-        #region Public Props
-      
-        public string RoomName  => roomName; 
+    #endregion
+
+    #region Public Props
+
+    public string RoomName  => roomName; 
         public bool NeedWindow => needWindow;  
         public RoomType RoomType  => roomType;  
         public ZoneType ZoneType  => zoneType;
@@ -59,8 +62,9 @@ using UnityEngine;
 
         public bool GrowthIfMaxSize => growthIfMaxSize;
 
-           
+        public int MaxDoorConections => maxDoorConections;
 
-        #endregion
-    }
+
+    #endregion
+}
 

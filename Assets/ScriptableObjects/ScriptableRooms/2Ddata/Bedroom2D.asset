@@ -24,3 +24,4 @@ MonoBehaviour:
   areaMax: 20
   priority: 0
   growthIfMaxSize: 1
+  maxDoorConections: 3

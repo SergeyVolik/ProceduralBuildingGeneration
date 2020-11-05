@@ -37,6 +37,7 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D.Rooms
             var current_settings = settings.possibleRooms.FirstOrDefault(r => r.Requisite.RoomType == room2D.RoomType);
             if (current_settings != null)
                 m_wallMaterial = current_settings.WallMaterial;
+
             else if (room2D.RoomType == RoomType.Corridor)
             {
                 m_wallMaterial = settings.corridorWallMaterial;
@@ -53,10 +54,16 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D.Rooms
                 currPrefab = buildingPossiblePrefabs[0].SelectWallPrefab(wall.WallType);
                 currPrefabForMaterial = buildingPossiblePrefabs[0].SelectWallPrefabForMaterial(wall.WallType);
             }
-            
+
 
             if (floor == 0)
-                currPrefab = settings.BasementWindow;
+            {
+                if (wall.WallType == WallType.NoWall)
+                    currPrefab = null;
+                else if (wall.WallType == WallType.SimpleWall)
+                    currPrefab = settings.BasementWindow;
+               
+            }
 
             else if (floor > settings.floorsNumber && room2D.RoomType == RoomType.Flat)
                 currPrefab = settings.RoofBoarder;

@@ -70,11 +70,13 @@ namespace Assets.Scripts.Builders
 
             //roof3D.Visualize();
 
-            Entaraces3D.ForEach(f => f.Visualize());
+            //Entaraces3D.ForEach(f => f.Visualize());
 
             //basemante3D.Visualize();
           
         }
+
+
 
 
         protected abstract void InitializeSpaces3D();

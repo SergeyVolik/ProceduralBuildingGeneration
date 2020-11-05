@@ -5,11 +5,13 @@ using Newtonsoft.Json.Bson;
 using Rooms;
 using StraightSkeleton.Primitives;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 namespace Assets.Scripts.Builders
 {
@@ -75,6 +77,7 @@ namespace Assets.Scripts.Builders
             roomRoot.transform.SetParent(roomsRoot.transform);
 
             CustomRoomVisualization();
+            VisualizeWalls();
 
             if (NeedCeiling)
                 VisualizeCeiling();
@@ -82,10 +85,36 @@ namespace Assets.Scripts.Builders
             if (NeedFloor)
                 VisualizeFloor();
 
-            VisualizeWalls();
+            
 
             CombineMeshes();
 
+
+
+            //roomRoot.GetComponent<CombineMesh>().CombineMeshes();
+        }
+
+        public IEnumerator VisualizeAnimation()
+        {
+
+            roomRoot = new GameObject("Room " + room2D.RoomType + "  " + room2D.Name);
+            //roomRoot.AddComponent<CombineMesh>();
+            roomRoot.transform.SetParent(roomsRoot.transform);
+            yield return VisualizeWallsAnim();
+            CustomRoomVisualization();
+
+            
+            if (NeedCeiling)
+              VisualizeCeiling();
+
+            if (NeedFloor)
+               VisualizeFloor();
+
+
+
+            CombineMeshes();
+
+           
 
 
             //roomRoot.GetComponent<CombineMesh>().CombineMeshes();
@@ -168,6 +197,33 @@ namespace Assets.Scripts.Builders
             
         }
 
+        private IEnumerator VisualizeFloorAnim()
+        {
+
+            var roomCells = room2D.Cells;
+
+            FloorsRoot = new GameObject("Floor");
+            FloorsRoot.transform.SetParent(roomRoot.transform);
+
+            foreach (var cell in roomCells)
+            {
+                var center = cell.Center;
+
+                var high = floor * Building2D.FloorHight - Building2D.FloorHight / 2;
+
+                var position = new Vector3((float)center.X, high, (float)center.Y) + buildingRoot.transform.position;
+
+                var local = Instantiate(buildingPossiblePrefabs[0].FloorPrefab, position, Quaternion.identity);
+                local.transform.parent = FloorsRoot.transform;
+
+                yield return new WaitForSeconds(0.1f);
+            }
+
+
+
+
+        }
+
         private void VisualizeCeiling()
         {
            
@@ -191,6 +247,31 @@ namespace Assets.Scripts.Builders
             
         }
 
+        private IEnumerator VisualizeCeilingAnim()
+        {
+
+            var roomCells = room2D.Cells;
+
+            ceilingRoot = new GameObject("Ceiling");
+            ceilingRoot.transform.SetParent(roomRoot.transform);
+
+            foreach (var cell in roomCells)
+            {
+                var center = cell.Center;
+
+                var high = (floor + 1) * Building2D.FloorHight - Building2D.FloorHight / 2;
+
+                var position = new Vector3((float)center.X, high, (float)center.Y) + buildingRoot.transform.position;
+
+                var local = Instantiate(buildingPossiblePrefabs[0].CeilingPrefab, position, Quaternion.identity);
+                local.transform.parent = ceilingRoot.transform;
+
+                yield return new WaitForSeconds(0.1f);
+
+            }
+           
+        }
+
         private void VisualizeWalls()
         {
             var wallpositions = room2D.Walls;
@@ -202,6 +283,22 @@ namespace Assets.Scripts.Builders
                 WallSelection(wallpositions[k]);
 
                 VisualizeWall(wallpositions[k], currPrefab, currPrefabForMaterial, floor * Building2D.FloorHight, m_floorsNumber);
+            }
+        }
+
+        private IEnumerator VisualizeWallsAnim()
+        {
+            var wallpositions = room2D.Walls;
+            wallsRoot = new GameObject("Walls");
+            wallsRoot.transform.SetParent(roomRoot.transform);
+
+            for (var k = 0; k < wallpositions.Count; k++)
+            {
+                WallSelection(wallpositions[k]);
+
+                VisualizeWall(wallpositions[k], currPrefab, currPrefabForMaterial, floor * Building2D.FloorHight, m_floorsNumber);
+
+                yield return new WaitForSeconds(0.1f);
             }
         }
 

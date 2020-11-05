@@ -80,7 +80,8 @@ namespace Rooms
 
         public RoomRequisite RoomRequisite => m_roomRequisite;
 
-      
+
+        public bool HaveDoor => Walls.Exists(w => w.WallType == WallType.WallWithDoor || w.WallType == WallType.NoWall);
 
         public RoomType RoomType {
             get {
@@ -89,6 +90,8 @@ namespace Rooms
                 else return m_roomType;
             }
         }
+
+        public int DoorCount => Walls.Count(w => w.IsDoor);
 
 
         public Vector2d CenterOfRoom;
@@ -153,9 +156,38 @@ namespace Rooms
             return PolygonUtils.CenterMasFormula(points);
         }
 
-       
+        public bool AddDoorBetweenRooms(Room2D neighboarRoom)
+        {
+            var nighboarWalls1 = new List<PartOfWall>();
+            var nighboarWalls2 = new List<PartOfWall>();
+            neighboarRoom.Walls.ForEach(w =>
+            {
+                if (Walls.Exists(w2 => w2.Equals(w)))
+                {
+                   
+                  
+                    nighboarWalls2.Add(w);
+                }
 
-        PartOfWall AngleCell(PlanCell PrevCell, PartOfWall prevEdge)
+            });
+
+
+            if (nighboarWalls2.Count > 0)
+            {
+                var wall = nighboarWalls2[UnityEngine.Random.Range(0, nighboarWalls2.Count)];
+
+                wall.WallType = WallType.NoWall;
+                var wall2 = Walls.FirstOrDefault(w2 => w2.Equals(wall));
+                wall2.WallType = WallType.NoWall;
+
+                return true;
+            }
+               
+            return false;
+        }
+        
+
+        private PartOfWall AngleCell(PlanCell PrevCell, PartOfWall prevEdge)
         {
             PartOfWall edge = null;
             if (Cells.Count != 1)
@@ -199,7 +231,7 @@ namespace Rooms
             return edge;
         }
 
-        int NeighboringPoints(PlanCell c1, PlanCell c2)
+        private int NeighboringPoints(PlanCell c1, PlanCell c2)
         {
             int counter = 0;
 

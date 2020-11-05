@@ -72,7 +72,7 @@ public class BuildingManager : MonoBehaviour
 
     GameObject target;
 
-    public ApartamentPanelHouse3D CreateHouse()
+    public ApartamentPanelHouse3D CreateHouseWithAnimation()
     {
         
         Clear();
@@ -84,7 +84,50 @@ public class BuildingManager : MonoBehaviour
 
         var house = new ApartamentPanelHouse3D(settings, spawnPosition);
 
+        //house.Visualize();
+
+        house.StartAnimation();
+
+
+       var childTrans = spawnPosition.GetComponentsInChildren<MeshRenderer>().ToList();
+
+
+
+        var points = new List<Vector3>();
+
+        childTrans.ForEach(r => points.Add(r.transform.position));
+
+        var center = points.CenterMassUnityVector3();
+
+        if (target)
+            Destroy(target);
+
+        target = new GameObject("Target");
+        target.transform.position = center;
+        Camera.main.GetComponent<CameraRotateAround>().target = target.transform;
+
+
+       
+
+        return house;
+     
+    }
+    public ApartamentPanelHouse3D CreateHouse()
+    {
+
+        Clear();
+
+        if (settings == null)
+        {
+            settings = Resources.Load("PanelBuildingData1") as PanelHouseSettings;
+        }
+
+        var house = new ApartamentPanelHouse3D(settings, spawnPosition);
+
         house.Visualize();
+
+        //house.StartAnimation();
+
 
         //var childTrans = spawnPosition.GetComponentsInChildren<MeshRenderer>().ToList();
 
@@ -107,9 +150,8 @@ public class BuildingManager : MonoBehaviour
         //spawnPosition.GetComponent<CombineMesh>().CombineMeshes();
 
         return house;
-     
+
     }
-    
     public void Clear()
     {
         foreach (Transform child in spawnPosition.transform)
