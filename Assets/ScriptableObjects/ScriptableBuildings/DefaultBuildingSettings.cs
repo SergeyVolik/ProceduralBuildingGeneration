@@ -1,13 +1,28 @@
 ﻿using Assets.Scripts;
 using Rooms;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
+[Serializable]
+public class PoolElementData
+{
+    public GameObject PrefabToPool;
+    [Range(1, 1000)]
+    public int numberPrefabsToPool = 100;
+}
 
 public abstract class DefaultBuildingSettings : ScriptableObject
 {
+    [Space(10), Header("Optimization")]
+
+    [SerializeField, Tooltip("create pool of object for more faster creation"), Space(5)]
+    public PoolElementData[] PoolElement;
+
+    public GameObject RoomCombiner;
+
     [Space(10), Header("Wall prefabs")]
 
     [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]

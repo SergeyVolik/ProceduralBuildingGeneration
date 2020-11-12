@@ -56,26 +56,9 @@ public class BuildingManager : MonoBehaviour
 
         spawnPosition.name = "BuildingRoot";
 
-        Debug.LogError("DefaultBuildingSettings Awake ");
 
-        ObjectsPool.Instance.AddToPoolObjects(settings.houseEnterWall, 10);
-        ObjectsPool.Instance.AddToPoolObjects(settings.houseEnterWallForMaterial, 10);
-
-        ObjectsPool.Instance.AddToPoolObjects(settings.defaultWall, 100);
-        ObjectsPool.Instance.AddToPoolObjects(settings.defaultWallForMaterial, 100);
-
-        ObjectsPool.Instance.AddToPoolObjects(settings.defaultWallForDoor, 20);
-        ObjectsPool.Instance.AddToPoolObjects(settings.defaultWallForDoorMaterial, 20);
-
-        ObjectsPool.Instance.AddToPoolObjects(settings.defaultWallWithWindow, 40);
-        ObjectsPool.Instance.AddToPoolObjects(settings.defaultWallWithWindowForMaterial, 40);
-
-        ObjectsPool.Instance.AddToPoolObjects(settings.defaultFloorRoomPrefab, 100);
-        ObjectsPool.Instance.AddToPoolObjects(settings.defaultCeilingRoomPrefab, 100);
-        ObjectsPool.Instance.AddToPoolObjects(settings.defaultFloorPrefab, 100);
-
-        ObjectsPool.Instance.AddToPoolObjects(settings.BasementWindow, 100);
-        ObjectsPool.Instance.AddToPoolObjects(settings.RoofBoarder, 100);
+        settings.PoolElement.ToList().ForEach(e =>  ObjectsPool.Instance.AddToPoolObjects(e.PrefabToPool, e.numberPrefabsToPool));
+        ObjectsPool.Instance.AddToPoolObjects(settings.RoomCombiner, 5000, true);
     }
 
     GameObject target;

@@ -41,29 +41,31 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D
 
             for (var i = 0; i < rooms.Count; i++)
             {
+                var roomRoot = ObjectsPool.Instance.GetObjectFromPool(_settings.RoomCombiner, true);
+                roomRoot.transform.parent = floorRoot.transform;
                 Room3D room3d = null;
 
                 if (_floor2D.Floor == 0)
                 {
                     if (rooms[i].RoomType != RoomType.Stairs)
-                        room3d = new APH_Room3D(rooms[i], floorRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, true, true);                   
+                        room3d = new APH_Room3D(rooms[i], roomRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, true, true);                   
 
-                    else room3d = new APH_Room3d_Stairs(rooms[i], floorRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, false, true);
+                    else room3d = new APH_Room3d_Stairs(rooms[i], roomRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, false, true);
                 }
 
                 else if (_settings.floorsNumber + 1 == _floor2D.Floor)
                 {
                     if (rooms[i].RoomType != RoomType.Stairs)
-                        room3d = new APH_Room3D(rooms[i], floorRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, false, false);                
-                    else room3d = new APH_Room3d_Stairs(rooms[i], floorRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, true, false);
+                        room3d = new APH_Room3D(rooms[i], roomRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, false, false);                
+                    else room3d = new APH_Room3d_Stairs(rooms[i], roomRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, true, false);
                 }
 
                 else {
                    
                     if (rooms[i].RoomType != RoomType.Stairs)
-                        room3d = new APH_Room3D(rooms[i], floorRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, true, true);                  
+                        room3d = new APH_Room3D(rooms[i], roomRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, true, true);                  
 
-                    else room3d = new APH_Room3d_Stairs(rooms[i], floorRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, false, false);
+                    else room3d = new APH_Room3d_Stairs(rooms[i], roomRoot, _buildingRoot, _settings, _buildingPossiblePrefabs, _floor2D.Floor, instantiatedWalls, false, false);
 
                   
                 }

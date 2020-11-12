@@ -4,11 +4,27 @@ using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(MeshCollider))]
 public class MeshCombiner : MonoBehaviour
 {
 	private const int Mesh16BitBufferVertexLimit = 65535;
 
-	[SerializeField]
+	private MeshFilter MeshFilter;
+	private MeshCollider MeshCollider;
+
+    private void Awake()
+    {
+		MeshFilter = GetComponent<MeshFilter>();
+		MeshCollider = GetComponent<MeshCollider>();
+
+	}
+
+	public void CreateMeshCollider()
+	{
+		if (MeshFilter && !MeshCollider.sharedMesh)
+			MeshCollider.sharedMesh = MeshFilter.sharedMesh;
+	}
+    [SerializeField]
 	private bool createMultiMaterialMesh = false, combineInactiveChildren = false, deactivateCombinedChildren = true,
 		deactivateCombinedChildrenMeshRenderers = false, generateUVMap = false, destroyCombinedChildren = false;
 	[SerializeField]

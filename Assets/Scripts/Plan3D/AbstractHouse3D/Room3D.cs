@@ -27,7 +27,7 @@ namespace Assets.Scripts.Builders
         protected GameObject OutsideDoor;
 
         protected GameObject buildingRoot;
-        protected GameObject roomsRoot;
+
         protected GameObject roomRoot;
 
         protected Room2D room2D;
@@ -49,7 +49,7 @@ namespace Assets.Scripts.Builders
         public Room3D(Room2D room2D, GameObject roomsRoot, GameObject buildingRoot, List<RoomSetting> buildingPossiblePrefabs, int floor, List<PartOfWall> instantiatedWalls, int floorsNumber, RoomSetting settings, bool visualizeCeiling, bool visualizeFloor)
         {
             this.room2D = room2D;
-            this.roomsRoot = roomsRoot;
+            this.roomRoot = roomsRoot;
             this.buildingRoot = buildingRoot;
 
             this.buildingPossiblePrefabs = buildingPossiblePrefabs;
@@ -73,18 +73,7 @@ namespace Assets.Scripts.Builders
         public override void Visualize()
         {
            
-            roomRoot = new GameObject("Room " + room2D.RoomType + "  "+ room2D.Name);
 
-            var combiner = roomRoot.AddComponent<MeshCombiner>();
-
-            combiner.CreateMultiMaterialMesh = true;
-            combiner.DeactivateCombinedChildrenMeshRenderers = true;
-
-
-            //roomRoot.AddComponent<CombineMesh>();
-            roomRoot.transform.SetParent(roomsRoot.transform);
-
-           
             VisualizeWalls();
 
             if (NeedCeiling)
@@ -93,21 +82,19 @@ namespace Assets.Scripts.Builders
             if (NeedFloor)
                 VisualizeFloor();
 
+            var meshCombiner = roomRoot.GetComponent<MeshCombiner>();
 
+            meshCombiner.CombineMeshes(false);
+            meshCombiner.CreateMeshCollider();
 
-            //CombineMeshes();
-
-          
-
-            combiner.CombineMeshes(false);
-            var colldier = roomRoot.AddComponent<MeshCollider>();
+            var colldier = roomRoot.GetComponent<MeshCollider>();
             var meshFilter = roomRoot.GetComponent<MeshFilter>();
-            if (meshFilter)
-                colldier.sharedMesh = roomRoot.GetComponent<MeshFilter>().sharedMesh;
+
+           
 
             CustomRoomVisualization();
 
-            //roomRoot.GetComponent<CombineMesh>().CombineMeshes();
+            ObjectsPool.Instance.UnblockAllObjects();
         }
 
         public IEnumerator VisualizeAnimation()
@@ -121,7 +108,7 @@ namespace Assets.Scripts.Builders
             combiner.DeactivateCombinedChildrenMeshRenderers = true;
             //combiner.coll
             //roomRoot.AddComponent<CombineMesh>();
-            roomRoot.transform.SetParent(roomsRoot.transform);
+          
             yield return VisualizeWallsAnim();
          
 
@@ -134,57 +121,15 @@ namespace Assets.Scripts.Builders
 
             combiner.CombineMeshes(false);
 
-            //CombineMeshes();
 
             CustomRoomVisualization();
 
+            ObjectsPool.Instance.UnblockAllObjects();
 
             //roomRoot.GetComponent<CombineMesh>().CombineMeshes();
         }
 
-        private void CombineMeshes()
-        {
-            var meshesRenderers = roomRoot.GetComponentsInChildren<MeshRenderer>().ToList();
-
-            var toRemove = new List<MeshRenderer>();
-
-
-            meshesRenderers.RemoveAll(r => !r.CompareTag(tag));
-
-
-            List<Material> DifferentMaterials = new List<Material>();
-
-            if (meshesRenderers.Count > 0)
-            {
-                DifferentMaterials.Add(meshesRenderers[0].material);
-
-                foreach (var renderer in meshesRenderers)
-                {
-                    if (DifferentMaterials.Exists(m => m.name == renderer.material.name))
-                        continue;
-                    else DifferentMaterials.Add(renderer.material);
-                }
-
-                foreach (var material in DifferentMaterials)
-                {
-
-                    var toCombine = meshesRenderers.FindAll(r => r.material.name == material.name);
-
-                    if (toCombine.Count > 1)
-                    {
-                        GameObject combine = new GameObject("combine with materia -> " + material.name);
-                        combine.transform.parent = roomRoot.transform;
-                        combine.AddComponent<CombineMesh>();
-
-                        toCombine.ForEach(toc => toc.transform.SetParent(combine.transform));
-
-                        combine.GetComponent<CombineMesh>().CombineMeshes(material);
-                    }
-
-
-                }
-            }
-        }
+       
         protected abstract void WallSelection(PartOfWall wall);
         protected abstract void CustomRoomVisualization();
         protected virtual Vector3 CustomHightOfWall(Vector2d center, float high, PartOfWall partWall)
@@ -208,7 +153,9 @@ namespace Assets.Scripts.Builders
 
                 var position = new Vector3((float)center.X, high, (float)center.Y) + buildingRoot.transform.position;
 
-                var local = Instantiate(buildingPossiblePrefabs[0].FloorPrefab, position, Quaternion.identity);
+                var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].FloorPrefab);
+                local.transform.position = position;
+               
                 local.transform.parent = FloorsRoot.transform;
 
 
@@ -263,7 +210,8 @@ namespace Assets.Scripts.Builders
 
                 var position = new Vector3((float)center.X, high, (float)center.Y) + buildingRoot.transform.position;
 
-                var local = Instantiate(buildingPossiblePrefabs[0].CeilingPrefab, position, Quaternion.identity);
+                var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].CeilingPrefab);
+                local.transform.position = position;
                 local.transform.parent = ceilingRoot.transform;
             });
             
@@ -285,7 +233,8 @@ namespace Assets.Scripts.Builders
 
                 var position = new Vector3((float)center.X, high, (float)center.Y) + buildingRoot.transform.position;
 
-                var local = Instantiate(buildingPossiblePrefabs[0].CeilingPrefab, position, Quaternion.identity);
+                var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].CeilingPrefab);
+                local.transform.position = position;
                 local.transform.parent = ceilingRoot.transform;
 
                 yield return new WaitForSeconds(0.1f);
@@ -306,6 +255,8 @@ namespace Assets.Scripts.Builders
 
                 VisualizeWall(wallpositions[k], currPrefab, currPrefabForMaterial, floor * Building2D.FloorHight, m_floorsNumber);
             }
+
+
         }
 
         private IEnumerator VisualizeWallsAnim()
@@ -322,6 +273,8 @@ namespace Assets.Scripts.Builders
 
                 yield return new WaitForSeconds(0.1f);
             }
+
+
         }
 
         protected void VisualizeWall(PartOfWall partWall, GameObject currPrefab, GameObject currPrefabForMaterial, float high, int floors)
@@ -351,7 +304,7 @@ namespace Assets.Scripts.Builders
 
                     curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefabForMaterial);
                     curWall.transform.position = positionForMaterial;
-                    curWall.name = "wallForMaterial(" + partWall.V1 + " "+partWall.V2+")";
+                    //curWall.name = "wallForMaterial(" + partWall.V1 + " "+partWall.V2+")";
                     curWall.transform.parent = wallsRoot.transform;
 
                     curWall.transform.rotation = Quaternion.Euler(curWall.transform.rotation.x, curWall.transform.rotation.y + rotationY, curWall.transform.rotation.z);
@@ -359,14 +312,15 @@ namespace Assets.Scripts.Builders
                     
                 }
 
-            if (instantiatedWalls.Exists(w => w.V1 == partWall.V1 && partWall.V2 == w.V2 || w.V2 == partWall.V1 && partWall.V2 == w.V1))
-                return;
+            //if (instantiatedWalls.Exists(w => w.V1 == partWall.V1 && partWall.V2 == w.V2 || w.V2 == partWall.V1 && partWall.V2 == w.V1))
+            //    return;
 
             if (currPrefab != null)
             {
-                 
-                curWall = Instantiate(currPrefab, position, Quaternion.identity);
-                curWall.name = "wall(" + partWall.V1 + " " + partWall.V2 + ")"; ;
+
+                curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefab);
+                curWall.transform.position = position;
+                //curWall.name = "wall(" + partWall.V1 + " " + partWall.V2 + ")"; ;
                 curWall.transform.parent = wallsRoot.transform;
 
                 curWall.transform.rotation = Quaternion.Euler(curWall.transform.rotation.x, curWall.transform.rotation.y + rotationY, curWall.transform.rotation.z);
@@ -374,7 +328,7 @@ namespace Assets.Scripts.Builders
 
             }
 
-            instantiatedWalls.Add(partWall);
+            //instantiatedWalls.Add(partWall);
             
         }
        
