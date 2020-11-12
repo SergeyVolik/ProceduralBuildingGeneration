@@ -11,9 +11,9 @@ public abstract class DefaultBuildingSettings : ScriptableObject
     [Space(10), Header("Wall prefabs")]
 
     [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
-    public GameObject houseEndertWall;
+    public GameObject houseEnterWall;
     [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
-    public GameObject houseEndertWallForMaterial;
+    public GameObject houseEnterWallForMaterial;
 
     [SerializeField, Tooltip(RoomSetting.wallRequirement + RoomSetting.notSet), Space(5)]
     public GameObject defaultWall;
@@ -79,4 +79,6 @@ public abstract class DefaultBuildingSettings : ScriptableObject
     public List<RoomSetting> possibleRooms;
     [SerializeField, Space(10)]
     public List<RoomLink> RoomLinks;
+
+    
 }

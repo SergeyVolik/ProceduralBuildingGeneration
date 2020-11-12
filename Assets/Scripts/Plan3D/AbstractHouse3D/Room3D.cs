@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityStandardAssets.Characters.FirstPerson;
 
 namespace Assets.Scripts.Builders
@@ -73,10 +74,17 @@ namespace Assets.Scripts.Builders
         {
            
             roomRoot = new GameObject("Room " + room2D.RoomType + "  "+ room2D.Name);
+
+            var combiner = roomRoot.AddComponent<MeshCombiner>();
+
+            combiner.CreateMultiMaterialMesh = true;
+            combiner.DeactivateCombinedChildrenMeshRenderers = true;
+
+
             //roomRoot.AddComponent<CombineMesh>();
             roomRoot.transform.SetParent(roomsRoot.transform);
 
-            CustomRoomVisualization();
+           
             VisualizeWalls();
 
             if (NeedCeiling)
@@ -85,11 +93,19 @@ namespace Assets.Scripts.Builders
             if (NeedFloor)
                 VisualizeFloor();
 
-            
-
-            CombineMeshes();
 
 
+            //CombineMeshes();
+
+          
+
+            combiner.CombineMeshes(false);
+            var colldier = roomRoot.AddComponent<MeshCollider>();
+            var meshFilter = roomRoot.GetComponent<MeshFilter>();
+            if (meshFilter)
+                colldier.sharedMesh = roomRoot.GetComponent<MeshFilter>().sharedMesh;
+
+            CustomRoomVisualization();
 
             //roomRoot.GetComponent<CombineMesh>().CombineMeshes();
         }
@@ -97,11 +113,17 @@ namespace Assets.Scripts.Builders
         public IEnumerator VisualizeAnimation()
         {
 
+          
             roomRoot = new GameObject("Room " + room2D.RoomType + "  " + room2D.Name);
+            var combiner = roomRoot.AddComponent<MeshCombiner>();
+
+            combiner.CreateMultiMaterialMesh = true;
+            combiner.DeactivateCombinedChildrenMeshRenderers = true;
+            //combiner.coll
             //roomRoot.AddComponent<CombineMesh>();
             roomRoot.transform.SetParent(roomsRoot.transform);
             yield return VisualizeWallsAnim();
-            CustomRoomVisualization();
+         
 
             
             if (NeedCeiling)
@@ -110,11 +132,11 @@ namespace Assets.Scripts.Builders
             if (NeedFloor)
                VisualizeFloor();
 
+            combiner.CombineMeshes(false);
 
+            //CombineMeshes();
 
-            CombineMeshes();
-
-           
+            CustomRoomVisualization();
 
 
             //roomRoot.GetComponent<CombineMesh>().CombineMeshes();
@@ -310,7 +332,7 @@ namespace Assets.Scripts.Builders
             Vector3 position;
             float xOffset, zoffset;
                 
-            var rotationY = GiveWallRotation(partWall, out xOffset, out zoffset);
+            var rotationY = FindWallRotation(partWall, out xOffset, out zoffset);
             var center = LineSegment2d.Center(partWall.V1, partWall.V2);
 
             
@@ -327,7 +349,8 @@ namespace Assets.Scripts.Builders
                         currPrefabForMaterial.GetComponent<MeshRenderer>().material = m_wallMaterial;
 
 
-                    curWall = Instantiate(currPrefabForMaterial, positionForMaterial, Quaternion.identity);
+                    curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefabForMaterial);
+                    curWall.transform.position = positionForMaterial;
                     curWall.name = "wallForMaterial(" + partWall.V1 + " "+partWall.V2+")";
                     curWall.transform.parent = wallsRoot.transform;
 

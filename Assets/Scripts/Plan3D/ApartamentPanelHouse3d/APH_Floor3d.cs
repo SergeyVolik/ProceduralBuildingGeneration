@@ -38,6 +38,7 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D
             floorRoot = new GameObject("Floor " + _floor2D.Floor);
             floorRoot.transform.SetParent(floorsRoot.transform);
 
+
             for (var i = 0; i < rooms.Count; i++)
             {
                 Room3D room3d = null;
@@ -68,6 +69,8 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D
                 }
 
                 room3d.Visualize();
+
+               
                 rooms3D.Add(room3d);
 
             }

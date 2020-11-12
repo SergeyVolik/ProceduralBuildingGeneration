@@ -58,6 +58,7 @@ namespace Assets.Scripts.Builders
             var EntracesRoot = new GameObject("Entraces");
             EntracesRoot.transform.parent = BuildingRoot.transform;
 
+          
             Entaraces3D = new List<Entrance3D>();
 
 
@@ -69,7 +70,7 @@ namespace Assets.Scripts.Builders
             }
 
 
-
+  
 
             //VisualizeRoof();
             RainDrainVisualize();
@@ -106,51 +107,6 @@ namespace Assets.Scripts.Builders
             Camera.main.GetComponentInParent<CameraRotateAround>().StartCoroutine(VisualizeaAnimationCorotine());
         }
 
-        string tag = "CombineMesh";
-
-        private void CombineMeshes()
-        {
-            var meshesRenderers = BuildingRoot.GetComponentsInChildren<MeshRenderer>().ToList();
-
-            var toRemove = new List<MeshRenderer>();
-
-
-            meshesRenderers.RemoveAll(r => !r.CompareTag(tag));
-
-
-            List<Material> DifferentMaterials = new List<Material>();
-
-            if (meshesRenderers.Count > 0)
-            {
-                DifferentMaterials.Add(meshesRenderers[0].material);
-
-                foreach (var renderer in meshesRenderers)
-                {
-                    if (DifferentMaterials.Exists(m => m.name == renderer.material.name))
-                        continue;
-                    else DifferentMaterials.Add(renderer.material);
-                }
-
-                foreach (var material in DifferentMaterials)
-                {
-
-                    var toCombine = meshesRenderers.FindAll(r => r.material.name == material.name);
-
-                    if (toCombine.Count > 1)
-                    {
-                        GameObject combine = new GameObject("combine with materia -> " + material.name);
-                        combine.transform.parent = BuildingRoot.transform;
-                        combine.AddComponent<CombineMesh>();
-
-                        toCombine.ForEach(toc => toc.transform.SetParent(combine.transform));
-
-                        combine.GetComponent<CombineMesh>().CombineMeshes(material);
-                    }
-
-
-                }
-            }
-        }
 
         void WallPartToSingleDiraction()
         {

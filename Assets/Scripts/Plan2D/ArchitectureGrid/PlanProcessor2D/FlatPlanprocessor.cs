@@ -35,7 +35,7 @@ namespace ArchitectureGrid
             neighbourCells = new List<PlanCell>();
             Rooms = new List<Room2D>();
             FindWindows();
-            growthProcessor = new FlatGrowthProcessor(Grid, GridVector, Rooms, ExitCell);
+            growthProcessor = new RoomGrowthProcessor2D(Grid, GridVector, Rooms, ExitCell);
 
         }
 

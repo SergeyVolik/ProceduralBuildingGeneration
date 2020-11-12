@@ -47,16 +47,6 @@ public class BuildingManager : MonoBehaviour
 
     [SerializeField]
     private GameObject spawnPosition;
-
-    private GameObject defaultCubeForFoundation;
-    private GameObject defaultFloorPrefab;
-    private GameObject defaultCeilingPrefab;
-    private GameObject defaultWallWithWindow;
-    private GameObject defaultWall;
-    private GameObject defaultWallForDoor;
-    private Material defaultCeilingMaterial;
-    private Material defaultFloorMaterial;
-    private Material defalutRoofMaterial;
    
 
     public IBuilding3D visualizator;
@@ -64,10 +54,28 @@ public class BuildingManager : MonoBehaviour
     private void Awake()
     {
 
-        spawnPosition.name = "BuildingRoot";       
-       
-        LoadMaterials();
-        LoadPrefabs();
+        spawnPosition.name = "BuildingRoot";
+
+        Debug.LogError("DefaultBuildingSettings Awake ");
+
+        ObjectsPool.Instance.AddToPoolObjects(settings.houseEnterWall, 10);
+        ObjectsPool.Instance.AddToPoolObjects(settings.houseEnterWallForMaterial, 10);
+
+        ObjectsPool.Instance.AddToPoolObjects(settings.defaultWall, 100);
+        ObjectsPool.Instance.AddToPoolObjects(settings.defaultWallForMaterial, 100);
+
+        ObjectsPool.Instance.AddToPoolObjects(settings.defaultWallForDoor, 20);
+        ObjectsPool.Instance.AddToPoolObjects(settings.defaultWallForDoorMaterial, 20);
+
+        ObjectsPool.Instance.AddToPoolObjects(settings.defaultWallWithWindow, 40);
+        ObjectsPool.Instance.AddToPoolObjects(settings.defaultWallWithWindowForMaterial, 40);
+
+        ObjectsPool.Instance.AddToPoolObjects(settings.defaultFloorRoomPrefab, 100);
+        ObjectsPool.Instance.AddToPoolObjects(settings.defaultCeilingRoomPrefab, 100);
+        ObjectsPool.Instance.AddToPoolObjects(settings.defaultFloorPrefab, 100);
+
+        ObjectsPool.Instance.AddToPoolObjects(settings.BasementWindow, 100);
+        ObjectsPool.Instance.AddToPoolObjects(settings.RoofBoarder, 100);
     }
 
     GameObject target;
@@ -160,21 +168,7 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
-    private void LoadMaterials()
-    {
-        defalutRoofMaterial = Resources.Load("Materials/Floor_concrete") as Material;
-        defaultCeilingMaterial = Resources.Load("Materials/Ceiling") as Material;
-        defaultFloorMaterial = Resources.Load("Materials/Floor_Wood") as Material;
-    }
-    private void LoadPrefabs()
-    {
-        defaultCubeForFoundation = Resources.Load("Prefabs/CubeForFoundation") as GameObject;
-        defaultWall = Resources.Load("Prefabs/Wall") as GameObject;
-        defaultWallWithWindow = Resources.Load("Prefabs/WallandWindow") as GameObject;
-        defaultWallForDoor = Resources.Load("Prefabs/wallForDoor") as GameObject;
-        defaultFloorPrefab = Resources.Load("Prefabs/Floor") as GameObject;
-        defaultCeilingPrefab = Resources.Load("Prefabs/Ceiling") as GameObject;
-    }
+   
 
 
 }

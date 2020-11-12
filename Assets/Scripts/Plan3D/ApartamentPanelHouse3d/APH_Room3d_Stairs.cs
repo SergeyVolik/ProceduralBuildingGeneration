@@ -40,8 +40,8 @@ namespace Assets.Scripts.Plan3D.ApartamentPanelHouse3d
         {
             if (wall.WallType == WallType.WallWithDoor && floor == 1)
             {
-                currPrefab = settings.houseEndertWall;
-                currPrefabForMaterial = settings.houseEndertWallForMaterial;
+                currPrefab = settings.houseEnterWall;
+                currPrefabForMaterial = settings.houseEnterWallForMaterial;
             }
             
             else if (wall.WallType == WallType.WallWithDoor)

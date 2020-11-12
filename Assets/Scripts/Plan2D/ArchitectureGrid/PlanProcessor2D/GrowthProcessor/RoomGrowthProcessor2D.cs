@@ -10,12 +10,12 @@ namespace ArchitectureGrid
 {
   
 
-    public class FlatGrowthProcessor : GrowthProcessor
+    public class RoomGrowthProcessor2D : GrowthProcessor
     {
 
 
 
-        public FlatGrowthProcessor(PlanCell[,] _Grid, List<PlanCell> _gridVector, List<Room2D> _Rooms, PlanCell exitcell) : base(_Grid, _gridVector,_Rooms, exitcell)
+        public RoomGrowthProcessor2D(PlanCell[,] _Grid, List<PlanCell> _gridVector, List<Room2D> _Rooms, PlanCell exitcell) : base(_Grid, _gridVector,_Rooms, exitcell)
         {
             
         }

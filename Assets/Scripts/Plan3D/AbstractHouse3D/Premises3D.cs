@@ -30,7 +30,7 @@ namespace Assets.Scripts
         }
 
 
-        protected float GiveWallRotation(PartOfWall wall, out float xOffset, out float yOffset, float maxOffset = 0.1f, bool moveDiractionInside = true)
+        protected float FindWallRotation(PartOfWall wall, out float xOffset, out float yOffset, float maxOffset = 0.1f, bool moveDiractionInside = true)
         {
 
             var point1 = new Vector3((float)wall.V1.X, 0, (float)wall.V1.Y);
@@ -83,7 +83,7 @@ namespace Assets.Scripts
         {
             float xOffset;
             float zOffset;
-            var rotationY = GiveWallRotation(partWall, out xOffset, out zOffset, rotationPosOffset, moveDirectionInside);
+            var rotationY = FindWallRotation(partWall, out xOffset, out zOffset, rotationPosOffset, moveDirectionInside);
             var center = LineSegment2d.Center(partWall.V1, partWall.V2);
 
 
@@ -107,10 +107,10 @@ namespace Assets.Scripts
 
             
 
-            GiveWallRotation(angle.FirstWall, out xOffset, out zOffset, 0.1f, false);
+            FindWallRotation(angle.FirstWall, out xOffset, out zOffset, 0.1f, false);
             position += new Vector3(xOffset, 0, zOffset);
 
-            GiveWallRotation(angle.SecondWall, out xOffset, out zOffset, 0.1f, false);
+            FindWallRotation(angle.SecondWall, out xOffset, out zOffset, 0.1f, false);
             position += new Vector3(xOffset, YOffset, zOffset);
            
             var curRainDrain = Instantiate(prefab, position, Quaternion.identity);

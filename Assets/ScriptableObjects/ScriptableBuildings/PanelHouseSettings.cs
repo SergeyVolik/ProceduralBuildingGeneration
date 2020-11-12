@@ -32,4 +32,6 @@ public class PanelHouseSettings : DefaultBuildingSettings
     public int entrances = 4;
 
 
+   
+
 }

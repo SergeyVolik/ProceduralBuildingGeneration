@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace ArchitectureGrid
 {
-    public class EntrancesGrowthProcessor : GrowthProcessor
+    public class FlatGrowthProcessor2D : GrowthProcessor
     {
       
 
      
-        public EntrancesGrowthProcessor(PlanCell[,] _Grid, List<PlanCell> _gridVector,  List<Room2D> _Rooms, PlanCell exitcell) : base(_Grid, _gridVector, _Rooms, exitcell)
+        public FlatGrowthProcessor2D(PlanCell[,] _Grid, List<PlanCell> _gridVector,  List<Room2D> _Rooms, PlanCell exitcell) : base(_Grid, _gridVector, _Rooms, exitcell)
         {          
             
         }

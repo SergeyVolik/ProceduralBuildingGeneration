@@ -26,7 +26,7 @@ namespace ArchitectureGrid
             neighbourCells = new List<PlanCell>();
             Rooms = new List<Room2D>();
 
-            growthProcessor = new EntrancesGrowthProcessor(Grid, GridVector, Rooms, ExitCell);
+            growthProcessor = new FlatGrowthProcessor2D(Grid, GridVector, Rooms, ExitCell);
 
         }
 

@@ -67,9 +67,9 @@ public class BuildingUI : MonoBehaviour
         }
         var house = GetComponent<BuildingManager>().CreateHouseWithAnimation();
 
+      
+        ShowRooms(house.House.Entraces[0].floors[1]);
 
-        //ShowRooms(house.House.Entraces[0].floors[1]);
-       
     }
 
     public RigidbodyFirstPersonController playerCOntroller;
@@ -117,7 +117,7 @@ public class BuildingUI : MonoBehaviour
 
 
 
-        void ShowList(List<Vector2d> pointsSkeleton, Color color, string name="")
+        void ShowList(List<Vector2d> pointsSkeleton, Color color, string name="", float multCoef = 10f)
     {
         for (var i = 0; i < pointsSkeleton.Count - 1; i++)
         {
@@ -242,7 +242,7 @@ public class BuildingUI : MonoBehaviour
     //    ShowOuterPolygon();
     //    ShowList(corridor.polygonOfCorridor, new Color((float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f)));
     //}
-    void ShowArchGrid(Premises2D floor1)
+    void ShowArchGrid(Premises2D floor1, Color insideColor)
     {
         
         for (var i = 0; i < floor1.planProcessor2D.Grid.GetLength(0); i++)
@@ -252,9 +252,9 @@ public class BuildingUI : MonoBehaviour
 
                 if (floor1.planProcessor2D.Grid[i, j].Tag == ArchitectureGrid.PlanCellTag.Inside)
                 {
-                    ShowList(floor1.planProcessor2D.Grid[i, j].Square, inside);
+                    ShowList(floor1.planProcessor2D.Grid[i, j].Square, insideColor, multCoef: 8f);
                 }
-                else ShowList(floor1.planProcessor2D.Grid[i, j].Square, outside);
+               
             }
 
         }
@@ -275,11 +275,11 @@ public class BuildingUI : MonoBehaviour
 
             var rnd = new Color((float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f));
 
-            if (rooms[i].RoomType == Rooms.RoomType.Building)
+            if (rooms[i].RoomType == Rooms.RoomType.Corridor || rooms[i].RoomType == Rooms.RoomType.Stairs || rooms[i].RoomType == Rooms.RoomType.Lift)
                 continue;
             for (var j = 0; j < rooms[i].Cells.Count; j++)
             {
-                ShowList(rooms[i].Cells[j].Square, rnd, rooms[i].Name);
+                ShowList(rooms[i].Cells[j].Square, rnd, rooms[i].Name, 8f);
             }
             //var rnd = new Color((float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f));
             ////if (roomWalls != null)
@@ -375,7 +375,7 @@ public class BuildingUI : MonoBehaviour
     }
     //void ShowCorridorAndCorrectCell()
     //{
-       
+
     //    for (var i = 0; i < PrivateHouse.floors[0].planProcessor2D.CorrectCells.Count; i++)
     //        ShowList(PrivateHouse.floors[0].planProcessor2D.CorrectCells[i].Square, correct
     //              );
@@ -386,7 +386,7 @@ public class BuildingUI : MonoBehaviour
     //}
     //void ShowCorridorAndSelectedCells()
     //{
-       
+
     //    for (var i = 0; i < PrivateHouse.floors[0].planProcessor2D.SelectedCellsForGrowth.Count; i++)
     //        ShowList(PrivateHouse.floors[0].planProcessor2D.SelectedCellsForGrowth[i].Square, selected
     //              );
@@ -395,7 +395,7 @@ public class BuildingUI : MonoBehaviour
     //              );
 
     //}
-   
+
 
 
     bool value = false;
