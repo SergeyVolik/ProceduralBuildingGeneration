@@ -59,7 +59,7 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D
                     else room3d = new APH_Room3d_Stairs(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, m_floor2D.Floor, m_floorNumber, instantiatedWalls, false, true, outerWallMaterial);
                 }
 
-                else if (m_floorNumber + 1 == m_floor2D.Floor)
+                else if (m_floorNumber-1 == m_floor2D.Floor)
                 {
                     if (rooms[i].RoomType != RoomType.Stairs)
                         room3d = new APH_Room3D(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, m_floor2D.Floor, m_floorNumber, instantiatedWalls, false, false, outerWallMaterial);                

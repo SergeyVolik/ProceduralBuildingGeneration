@@ -64,7 +64,7 @@ namespace Assets.Scripts.Plan3D.ApartamentPanelHouse3d
             }
 
 
-            if (floor == m_floorsNumber + 1 && wall.WallType == WallType.WallWithDoor)
+            if (floor == m_floorsNumber-1 && wall.WallType == WallType.WallWithDoor)
                 currPrefab = settings.StairsRoofFaceWall;
         }
       

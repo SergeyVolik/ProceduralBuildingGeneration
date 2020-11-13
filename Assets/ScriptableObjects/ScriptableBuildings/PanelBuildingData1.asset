@@ -98,10 +98,8 @@ MonoBehaviour:
     - FloorOuterWallMaterial: {fileID: 0}
     - FloorOuterWallMaterial: {fileID: 0}
     - FloorOuterWallMaterial: {fileID: 0}
-    - FloorOuterWallMaterial: {fileID: 0}
   - EntraceOuterWallMaterial: {fileID: 2100000, guid: 605e8934fe570bb4a8d46ac4b47cdc1e, type: 2}
     FloorsSettings:
-    - FloorOuterWallMaterial: {fileID: 0}
     - FloorOuterWallMaterial: {fileID: 0}
     - FloorOuterWallMaterial: {fileID: 0}
     - FloorOuterWallMaterial: {fileID: 0}

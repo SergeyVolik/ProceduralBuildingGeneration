@@ -60,7 +60,7 @@ namespace Floor
                 floors.Add(floor);
             }
 
-            roofFloor2d = new APH_RoofFloor2D(MainPolygon, BuildingForm, roomsRequisite, floors.Count-1, floors.Count, _exit);
+            roofFloor2d = new APH_RoofFloor2D(MainPolygon, BuildingForm, roomsRequisite, floors.Count, floors.Count, _exit);
             roofFloor2d.Create2DSpace();
             floors.Add(roofFloor2d);
         }

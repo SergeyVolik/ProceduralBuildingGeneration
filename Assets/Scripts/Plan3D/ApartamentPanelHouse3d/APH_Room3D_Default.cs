@@ -33,10 +33,9 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D.Rooms
 
         protected override void WallSelection(PartOfWall wall)
         {
-
-            var current_settings = settings.possibleRooms.FirstOrDefault(r => r.Requisite.RoomType == room2D.RoomType);
-            if (current_settings != null)
-                m_wallMaterial = current_settings.WallMaterial;
+          
+            if (m_settings != null)
+                m_wallMaterial = m_settings.WallMaterial;
 
             else if (room2D.RoomType == RoomType.Corridor)
             {
@@ -62,11 +61,14 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D.Rooms
                     currPrefab = null;
                 else if (wall.WallType == WallType.SimpleWall)
                     currPrefab = settings.BasementWindow;
-               
+
             }
 
-            else if (floor > m_floorsNumber && room2D.RoomType == RoomType.Flat)
+            else if (floor == m_floorsNumber - 1 && room2D.RoomType == RoomType.Flat)
+            {
                 currPrefab = settings.RoofBoarder;
+                currPrefabForMaterial = null;
+            }
 
            
         }

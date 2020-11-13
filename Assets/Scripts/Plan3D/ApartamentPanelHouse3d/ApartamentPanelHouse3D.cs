@@ -130,12 +130,12 @@ namespace Assets.Scripts.Builders
             RainDrain.transform.SetParent(BuildingRoot.transform);
             rainDrainpositions.ForEach(partWall =>
             {
-                InstantiateWallPrefab(partWall, m_panelHousesettings.buildingRainDrainHorizontal, RainDrain.transform, BuildingRoot.transform, m_panelHousesettings.entraces[0].FloorsSettings.Count, m_panelHousesettings.AdditionalOffsetForRainDrainHorozontal, m_panelHousesettings.OffsetForRainDrainHorozontal, false);
+                InstantiateWallPrefab(partWall, m_panelHousesettings.buildingRainDrainHorizontal, RainDrain.transform, BuildingRoot.transform, m_panelHousesettings.entraces[0].FloorsSettings.Count-2, m_panelHousesettings.AdditionalOffsetForRainDrainHorozontal, m_panelHousesettings.OffsetForRainDrainHorozontal, false);
             });
 
             var points = GetAnglePoints(rainDrainpositions);
 
-            for (var i = 1; i < m_panelHousesettings.entraces[0].FloorsSettings.Count+1; i++)
+            for (var i = 1; i < m_panelHousesettings.entraces[0].FloorsSettings.Count-1; i++)
             {
                 points.ForEach(angle =>
                 {

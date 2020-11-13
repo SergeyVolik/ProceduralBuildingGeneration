@@ -14,17 +14,7 @@ namespace Floor
     public abstract class Premises2D : Polygon, ISpaceCreator2D
     {
         public Vector2d _exitPoint;
-
-        //virtual public List<PartOfWall> GetPartOfBuilding() {
-        //    var parts = new List<PartOfWall>();
-
-        //    for (var i = 0; i < planProcessor2D.Grid.GetLength(0); i++)
-        //        for (var j = 0; j < planProcessor2D.Grid.GetLength(1); j++)
-        //            parts.AddRange(planProcessor2D.Grid[i, j].BuildingWalls);
-
-        //    return parts;
-        //}
-
+       
         public BasePlanProcessor2D planProcessor2D;
         public List<Room2D> Rooms;
         protected List<RoomRequisite> roomRequisites;
@@ -35,8 +25,7 @@ namespace Floor
         }
 
         public Premises2D(List<Vector2d> _OutsidePolygon, List<Vector2d> _BuildingForm)
-        {
-            
+        {           
             MainPolygon = _OutsidePolygon;
             BuildingForm = _BuildingForm;
         }
