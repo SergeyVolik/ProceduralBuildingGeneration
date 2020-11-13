@@ -47,6 +47,8 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D
             {
                 var outerWallMaterial = m_outerWallMaterial;
 
+                //var roomsettings = m_panelHouseSettings.possibleRooms.Find(r => r.Requisite.RoomName == rooms[i].RoomName);
+
                 var roomRoot = ObjectsPool.Instance.GetObjectFromPool(m_panelHouseSettings.RoomCombiner, true);
                 roomRoot.transform.parent = m_floorRoot.transform;
                 Room3D room3d = null;

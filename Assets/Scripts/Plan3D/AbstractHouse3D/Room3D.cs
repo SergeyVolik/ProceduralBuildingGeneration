@@ -298,7 +298,7 @@ namespace Assets.Scripts.Builders
                   
                     //var m_wallMaterial = m_settings?.prefabs.WallMaterial;
                     if (m_wallMaterial != null)
-                        currPrefabForMaterial.GetComponent<MeshRenderer>().material = m_wallMaterial;
+                        currPrefabForMaterial.GetComponent<Renderer>().material = m_wallMaterial;
 
 
                     curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefabForMaterial);

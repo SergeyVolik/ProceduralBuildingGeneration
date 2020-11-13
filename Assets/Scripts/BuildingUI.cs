@@ -279,7 +279,7 @@ public class BuildingUI : MonoBehaviour
                 continue;
             for (var j = 0; j < rooms[i].Cells.Count; j++)
             {
-                ShowList(rooms[i].Cells[j].Square, rnd, rooms[i].Name, 8f);
+                ShowList(rooms[i].Cells[j].Square, rnd, rooms[i].RoomName, 8f);
             }
             //var rnd = new Color((float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f));
             ////if (roomWalls != null)

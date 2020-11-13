@@ -66,7 +66,7 @@ namespace Rooms
 
 
        
-        public string Name {
+        public string RoomName {
             get {
                 if (RoomRequisite)
                     return RoomRequisite.RoomName;

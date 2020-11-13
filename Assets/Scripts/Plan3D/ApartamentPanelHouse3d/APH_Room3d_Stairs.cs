@@ -73,9 +73,6 @@ namespace Assets.Scripts.Plan3D.ApartamentPanelHouse3d
         {
             float high = floor * Building2D.FloorHight;
 
-
-
-
             if (floor != 0)
             {                
                 GameObject stairs;

@@ -18,7 +18,7 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D.Rooms
 
         public APH_Room3D(Room2D room2D, GameObject roomsRoot, GameObject buildingRoot, PanelHouseSettings _settings,
             List<RoomSetting> buildingPossiblePrefabs, int floor, int floorsNumber , List<PartOfWall> instantiatedWalls, bool ceiling, bool needFloor, Material outerWallMaterial = null) : base(room2D, roomsRoot, buildingRoot,
-                buildingPossiblePrefabs, floor, instantiatedWalls, floorsNumber, _settings.possibleRooms.Find(r => r.Requisite.RoomName == room2D.Name), ceiling, needFloor, outerWallMaterial)
+                buildingPossiblePrefabs, floor, instantiatedWalls, floorsNumber, _settings.possibleRooms.Find(r => r.Requisite.RoomName == room2D.RoomName), ceiling, needFloor, outerWallMaterial)
         {
             settings = _settings;
         }

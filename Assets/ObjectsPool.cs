@@ -65,11 +65,14 @@ public class ObjectsPool  : Singleton<ObjectsPool>
         {
             if (m_singleUsedObjects.TryGetValue(ObjectFromPool.name, out poolObjetcs))
             {
+                GameObject elem = null;
                 if (poolObjetcs.Count == 0)
+                {
                     AddToPoolObjects(ObjectFromPool, 50, true);
+                    elem = m_singleUsedObjects[ObjectFromPool.name][0];
+                }
+                else elem = poolObjetcs[0];
 
-              
-                var elem = poolObjetcs[0];
                 elem.SetActive(true);
                 elem.transform.localScale = Vector3.one;
                 poolObjetcs.Remove(elem);
@@ -89,15 +92,20 @@ public class ObjectsPool  : Singleton<ObjectsPool>
         {
             if (m_freeObjects.TryGetValue(ObjectFromPool.name, out poolObjetcs))
             {
+                GameObject elem = null;
                 if (poolObjetcs.Count == 0)
+                {
                     AddToPoolObjects(ObjectFromPool, 50);
+                    elem = m_freeObjects[ObjectFromPool.name][0];
+                }
+                else elem = poolObjetcs[0];
 
-                var obj = poolObjetcs[0];
-                m_blokedOjects[ObjectFromPool.name].Add(obj);
-                m_freeObjects[ObjectFromPool.name].Remove(obj);
-                obj.SetActive(true);
-                obj.Descendants().ForEach(c => c.SetActive(true));
-                return obj;
+               
+                m_blokedOjects[ObjectFromPool.name].Add(elem);
+                m_freeObjects[ObjectFromPool.name].Remove(elem);
+                elem.SetActive(true);
+                elem.Descendants().ForEach(c => c.SetActive(true));
+                return elem;
 
             }
             else
@@ -105,7 +113,12 @@ public class ObjectsPool  : Singleton<ObjectsPool>
                 Debug.LogError(ObjectFromPool.name);
                 AddToPoolObjects(ObjectFromPool, 50);
                 var elem = m_freeObjects[ObjectFromPool.name][0];
+                m_blokedOjects[ObjectFromPool.name].Add(elem);
+                m_freeObjects[ObjectFromPool.name].Remove(elem);
+
                 elem.SetActive(true);
+                elem.Descendants().ForEach(c => c.SetActive(true));
+               
                 return elem;
             }
         }
