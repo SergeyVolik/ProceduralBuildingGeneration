@@ -116,9 +116,13 @@ namespace Floor
                 flats.Add(new Flat2D(r.MainPolygon, BuildingForm, roomRequisites, FindExit(Corridor, r)));
             });
 
+            int j = 0;
             flats.ForEach(f => { 
 
                 f.Create2DSpace();
+
+                for (var i = 0; i < f.Rooms.Count; i++)
+                    f.Rooms[i].FlatId = j;
 
                 f.Rooms.ForEach(r =>
                 {
@@ -126,7 +130,10 @@ namespace Floor
                     if (r.AddDoorBetweenRooms(Corridor))
                         return;
                 });
+                j++;
             });
+
+
 
         }
 

@@ -45,9 +45,16 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D
 
             for (var i = 0; i < rooms.Count; i++)
             {
-                var outerWallMaterial = m_outerWallMaterial;
+                var flatSettings = m_floorSettings.GetFlatById(rooms[i].FlatId);
+                Material outerWallMaterial = null;
+                if(flatSettings!= null)                   
+                  outerWallMaterial = flatSettings.FloorOuterWallMaterial;
 
-                //var roomsettings = m_panelHouseSettings.possibleRooms.Find(r => r.Requisite.RoomName == rooms[i].RoomName);
+
+                if (rooms[i].FlatId == null || !outerWallMaterial)
+                    outerWallMaterial = m_outerWallMaterial;
+
+
 
                 var roomRoot = ObjectsPool.Instance.GetObjectFromPool(m_panelHouseSettings.RoomCombiner, true);
                 roomRoot.transform.parent = m_floorRoot.transform;

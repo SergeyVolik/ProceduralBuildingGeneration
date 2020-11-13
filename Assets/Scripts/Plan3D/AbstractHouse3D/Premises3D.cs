@@ -79,7 +79,7 @@ namespace Assets.Scripts
         public abstract void Visualize();
 
 
-        public void InstantiateWallPrefab(PartOfWall partWall, GameObject prefab, Transform parent, Transform buildingTransform, int floor, Vector3 additionalOffset, float rotationPosOffset, bool moveDirectionInside)
+        public GameObject InstantiateWallPrefab(PartOfWall partWall, GameObject prefab, Transform parent, Transform buildingTransform, int floor, Vector3 additionalOffset, float rotationPosOffset, bool moveDirectionInside)
         {
             float xOffset;
             float zOffset;
@@ -92,12 +92,14 @@ namespace Assets.Scripts
             var curRainDrain = Instantiate(prefab, position, Quaternion.identity);
 
             curRainDrain.transform.SetParent(parent);
-
+            
             curRainDrain.transform.rotation = Quaternion.Euler(curRainDrain.transform.rotation.x, curRainDrain.transform.rotation.y + rotationY, curRainDrain.transform.rotation.z);
             curRainDrain.transform.localPosition += additionalOffset;
+
+            return curRainDrain;
         }
 
-        public void InstacntiateAngleObject(Angle angle, GameObject prefab, Transform parent, Transform buildingTransform, int floor, float YOffset = -0.2f)
+        public GameObject InstacntiateAngleObject(Angle angle, GameObject prefab, Transform parent, Transform buildingTransform, int floor, float YOffset = -0.2f)
         {
             float xOffset;
             float zOffset;
@@ -116,6 +118,8 @@ namespace Assets.Scripts
             var curRainDrain = Instantiate(prefab, position, Quaternion.identity);
 
             curRainDrain.transform.SetParent(parent);
+
+            return curRainDrain;
         }
     }
 }

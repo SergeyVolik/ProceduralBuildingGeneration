@@ -36,6 +36,7 @@ namespace Rooms
 
     public class Room2D : Polygon
     {
+        public int? FlatId = null;
         private RoomRequisite m_roomRequisite;
         private List<PartOfWall> m_walls;
         private List<PlanCell> m_cells;

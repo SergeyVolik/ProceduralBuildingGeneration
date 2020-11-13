@@ -45,9 +45,17 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D.Rooms
 
             if (wall.WallType == WallType.WallWithWindow)
             {
-                currPrefab = buildingPossiblePrefabs[0].GetRandowmWindow();
-                currPrefabForMaterial = null;
+                if (floor > 1)
+                {
+                    currPrefab = buildingPossiblePrefabs[0].GetRandowmWindow();
+                    currPrefabForMaterial = null;
+                }
+                else {
+                    currPrefab = buildingPossiblePrefabs[0].WallWithWindowPrefab;
+                    currPrefabForMaterial = null;
+                }
             }
+
             else
             {
                 currPrefab = buildingPossiblePrefabs[0].SelectWallPrefab(wall.WallType);

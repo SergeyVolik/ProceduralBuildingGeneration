@@ -84,53 +84,57 @@ namespace Assets.Scripts.Buildings
             Debug.Log("CreateEntrances");
 
             var bottomEntrances = new List<List<Vector2d>>();
-            
-            var lenght = (int)MainPolygon[0].DistanceTo(MainPolygon[1]);
-            var step = Area / BUILDING_WIDTH;
-            var t = step + 2;
-            var currVertexTop = new Vector2d(MainPolygon[3]);
-            var currVertexBottom = new Vector2d(MainPolygon[0]);
-            var nextTop = new Vector2d(t, Math.Round(MainPolygon[2].Y));
-            var nextBottom = new Vector2d(t, Math.Round(MainPolygon[1].Y));
 
-            var list = new List<Vector2d>();
-
-            list.Add(currVertexBottom);
-            list.Add(nextBottom);
-            list.Add(nextTop);
-            list.Add(currVertexTop);
-
-            bottomEntrances.Add(list);
-
-            while ((lenght - t) / step > 1)
+            if (EntracesNumber > 1)
             {
-                t += step;
+                var lenght = (int)MainPolygon[0].DistanceTo(MainPolygon[1]);
+                var step = Area / BUILDING_WIDTH;
+                var t = step + 2;
+                var currVertexTop = new Vector2d(MainPolygon[3]);
+                var currVertexBottom = new Vector2d(MainPolygon[0]);
+                var nextTop = new Vector2d(t, Math.Round(MainPolygon[2].Y));
+                var nextBottom = new Vector2d(t, Math.Round(MainPolygon[1].Y));
 
-                list = new List<Vector2d>();
-                currVertexBottom = nextBottom;
-                currVertexTop = nextTop;
+                var list = new List<Vector2d>();
 
                 list.Add(currVertexBottom);
-                nextBottom = new Vector2d(t, currVertexBottom.Y);
                 list.Add(nextBottom);
-                nextTop = new Vector2d(t, currVertexTop.Y);
                 list.Add(nextTop);
                 list.Add(currVertexTop);
 
                 bottomEntrances.Add(list);
 
+                while ((lenght - t) / step > 1)
+                {
+                    t += step;
+
+                    list = new List<Vector2d>();
+                    currVertexBottom = nextBottom;
+                    currVertexTop = nextTop;
+
+                    list.Add(currVertexBottom);
+                    nextBottom = new Vector2d(t, currVertexBottom.Y);
+                    list.Add(nextBottom);
+                    nextTop = new Vector2d(t, currVertexTop.Y);
+                    list.Add(nextTop);
+                    list.Add(currVertexTop);
+
+                    bottomEntrances.Add(list);
+
+                }
+
+                //bottomEntrances.Remove(list);
+                list = new List<Vector2d>();
+
+                list.Add(nextBottom);
+                list.Add(MainPolygon[1]);
+                list.Add(MainPolygon[2]);
+                list.Add(nextTop);
+
+
+                bottomEntrances.Add(list);
             }
-
-            //bottomEntrances.Remove(list);
-            list = new List<Vector2d>();
-
-            list.Add(nextBottom);
-            list.Add(MainPolygon[1]);
-            list.Add(MainPolygon[2]);
-            list.Add(nextTop);
-
-
-            bottomEntrances.Add(list);
+            else bottomEntrances.Add(MainPolygon);
 
             return bottomEntrances;
         }

@@ -8,8 +8,11 @@ using System;
 public class EntraceSetting
 {
     [Tooltip("При отсутсвии ошибла не возникнет, если у квартиры или этажа задан материал то он имеет больший приоритет")]
+
+    [SerializeField]
     public Material EntraceOuterWallMaterial;
-    
+
+    [Header("Floor outer wall materias")]
     public List<FloorSettings> FloorsSettings = new List<FloorSettings>();
 
 }
@@ -18,15 +21,38 @@ public class EntraceSetting
 public class FloorSettings
 {
     [Tooltip("При отсутсвии ошибла не возникнет, если у квартиры задан материал то он имеет больший приоритет")]
+    [SerializeField]
     public Material FloorOuterWallMaterial;
 
+    [Header("Flat outer wall materias")]
+    [SerializeField]
+
     public FlatSettings Flat1;
-    public FlatSettings Flat2;
-    public FlatSettings Flat3;
-    public FlatSettings Flat4;
+    [SerializeField]
+    private FlatSettings Flat2;
+    [SerializeField]
+    private FlatSettings Flat3;
+    [SerializeField]
+    private FlatSettings Flat4;
+
+    public FlatSettings GetFlatById(int? id)
+    {
+        switch (id)
+        {
+            case 0:
+                return Flat1;
+            case 1:
+                return Flat2;
+            case 2:
+                return Flat3;
+            case 3:
+                return Flat4;
+        }
+        return null;
+    }
 }
 
-[SerializeField]
+[Serializable]
 public class FlatSettings
 {
     public Material FloorOuterWallMaterial;
@@ -42,11 +68,14 @@ public class PanelHouseSettings : DefaultBuildingSettings
         Debug.Log("PanelHouseSettings awake");
     }
 
-    [Space(10), Header("Panel Building Prefabs"), Tooltip("Для панельного дома нужно создать лесницу 2х2х4 м где 4 - длинна" + RoomSetting.notSet)]
+   
 
+    [Header("Entrance outer wall materias")]
     [SerializeField]
     public List<EntraceSetting> entraces;
 
+    [Space(10), Tooltip("Для панельного дома нужно создать лесницу 2х2х4 м где 4 - длинна" + RoomSetting.notSet)]
+    [Header("Panel Building Prefabs")]
     public GameObject stairsFirstFloor;    
     public GameObject stairsnextFloor;
 

@@ -83,6 +83,8 @@ namespace Assets.Scripts.Builders
             RainDrainVisualize();
 
             ObjectsPool.Instance.UnblockAllObjects();
+
+            BuildingRoot.transform.rotation = Quaternion.Euler(BuildingRoot.transform.rotation.eulerAngles + BuildingRoot.transform.rotation.eulerAngles);
         }
 
         public IEnumerator VisualizeaAnimationCorotine()
@@ -219,6 +221,8 @@ namespace Assets.Scripts.Builders
                 MeshFilter filter = emptyObj.AddComponent(typeof(MeshFilter)) as MeshFilter;
                 filter.mesh = msh;            
             }
+            
+
         }
 
 
