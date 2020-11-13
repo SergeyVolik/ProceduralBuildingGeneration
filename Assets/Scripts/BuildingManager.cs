@@ -13,6 +13,7 @@ using Assets.Scripts.Builders;
 using Assets.Scripts.Buildings;
 using System.Linq;
 using StraightSkeleton.Polygon.Utils;
+using System;
 
 [System.Serializable]
 public class FloorSettings
@@ -113,10 +114,15 @@ public class BuildingManager : MonoBehaviour
             settings = Resources.Load("PanelBuildingData1") as PanelHouseSettings;
         }
 
+        DateTime now = DateTime.Now;
+
         var house = new ApartamentPanelHouse3D(settings, spawnPosition);
+
+       
 
         house.Visualize();
 
+        Debug.LogError("TIme for calc = " + (DateTime.Now - now));
         //house.StartAnimation();
 
 

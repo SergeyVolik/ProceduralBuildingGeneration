@@ -10,7 +10,7 @@ using UnityEngine;
 public class PoolElementData
 {
     public GameObject PrefabToPool;
-    [Range(1, 1000)]
+    [Range(1, 5000)]
     public int numberPrefabsToPool = 100;
 }
 

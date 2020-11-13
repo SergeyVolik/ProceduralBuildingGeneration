@@ -82,32 +82,23 @@ namespace Assets.Scripts.Builders
             if (NeedFloor)
                 VisualizeFloor();
 
-            var meshCombiner = roomRoot.GetComponent<MeshCombiner>();
-
-            meshCombiner.CombineMeshes(false);
-            meshCombiner.CreateMeshCollider();
-
-            var colldier = roomRoot.GetComponent<MeshCollider>();
-            var meshFilter = roomRoot.GetComponent<MeshFilter>();
-
-           
+         
 
             CustomRoomVisualization();
 
-            ObjectsPool.Instance.UnblockAllObjects();
+            
         }
 
         public IEnumerator VisualizeAnimation()
         {
 
           
-            roomRoot = new GameObject("Room " + room2D.RoomType + "  " + room2D.Name);
-            var combiner = roomRoot.AddComponent<MeshCombiner>();
+            //roomRoot = new GameObject("Room " + room2D.RoomType + "  " + room2D.Name);
+            //var combiner = roomRoot.AddComponent<MeshCombiner>();
 
-            combiner.CreateMultiMaterialMesh = true;
-            combiner.DeactivateCombinedChildrenMeshRenderers = true;
-            //combiner.coll
-            //roomRoot.AddComponent<CombineMesh>();
+            //combiner.CreateMultiMaterialMesh = true;
+            //combiner.DeactivateCombinedChildrenMeshRenderers = true;
+
           
             yield return VisualizeWallsAnim();
          
@@ -119,14 +110,14 @@ namespace Assets.Scripts.Builders
             if (NeedFloor)
                VisualizeFloor();
 
-            combiner.CombineMeshes(false);
+            //combiner.CombineMeshes(false);
 
 
-            CustomRoomVisualization();
+            //CustomRoomVisualization();
 
-            ObjectsPool.Instance.UnblockAllObjects();
+            //ObjectsPool.Instance.UnblockAllObjects();
 
-            //roomRoot.GetComponent<CombineMesh>().CombineMeshes();
+
         }
 
        
@@ -153,9 +144,10 @@ namespace Assets.Scripts.Builders
 
                 var position = new Vector3((float)center.X, high, (float)center.Y) + buildingRoot.transform.position;
 
-                var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].FloorPrefab);
-                local.transform.position = position;
-               
+                //var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].FloorPrefab);
+                //local.transform.position = position;
+
+                var local = Instantiate(buildingPossiblePrefabs[0].FloorPrefab, position, Quaternion.identity);
                 local.transform.parent = FloorsRoot.transform;
 
 
@@ -210,8 +202,9 @@ namespace Assets.Scripts.Builders
 
                 var position = new Vector3((float)center.X, high, (float)center.Y) + buildingRoot.transform.position;
 
-                var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].CeilingPrefab);
-                local.transform.position = position;
+                var local = Instantiate(buildingPossiblePrefabs[0].CeilingPrefab, position, Quaternion.identity);
+                //var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].CeilingPrefab);
+                //local.transform.position = position;
                 local.transform.parent = ceilingRoot.transform;
             });
             
@@ -302,23 +295,24 @@ namespace Assets.Scripts.Builders
                         currPrefabForMaterial.GetComponent<MeshRenderer>().material = m_wallMaterial;
 
 
-                    curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefabForMaterial);
-                    curWall.transform.position = positionForMaterial;
+                    //curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefabForMaterial);
+
+                    curWall = Instantiate(currPrefabForMaterial, position, Quaternion.identity);
                     //curWall.name = "wallForMaterial(" + partWall.V1 + " "+partWall.V2+")";
                     curWall.transform.parent = wallsRoot.transform;
-
+                    curWall.transform.position = positionForMaterial;
                     curWall.transform.rotation = Quaternion.Euler(curWall.transform.rotation.x, curWall.transform.rotation.y + rotationY, curWall.transform.rotation.z);
 
                     
                 }
 
-            //if (instantiatedWalls.Exists(w => w.V1 == partWall.V1 && partWall.V2 == w.V2 || w.V2 == partWall.V1 && partWall.V2 == w.V1))
-            //    return;
+            if (instantiatedWalls.Exists(w => w.V1 == partWall.V1 && partWall.V2 == w.V2 || w.V2 == partWall.V1 && partWall.V2 == w.V1))
+                return;
 
             if (currPrefab != null)
             {
-
-                curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefab);
+                curWall = Instantiate(currPrefab, position, Quaternion.identity);
+                //curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefab);
                 curWall.transform.position = position;
                 //curWall.name = "wall(" + partWall.V1 + " " + partWall.V2 + ")"; ;
                 curWall.transform.parent = wallsRoot.transform;
@@ -328,7 +322,7 @@ namespace Assets.Scripts.Builders
 
             }
 
-            //instantiatedWalls.Add(partWall);
+            instantiatedWalls.Add(partWall);
             
         }
        

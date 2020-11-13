@@ -14,35 +14,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolElement:
   - PrefabToPool: {fileID: 4578146322459339543, guid: 021901d4649f6bb4aa5a400bf6fee450, type: 3}
-    numberPrefabsToPool: 1
+    numberPrefabsToPool: 5
   - PrefabToPool: {fileID: 4730863975532162505, guid: 04e37b08a8aab754ead6ebf29a311c49, type: 3}
-    numberPrefabsToPool: 20
+    numberPrefabsToPool: 5
   - PrefabToPool: {fileID: 6283819138621053698, guid: b44fa5f0f82ce4d42be24967b100b5fb, type: 3}
-    numberPrefabsToPool: 100
+    numberPrefabsToPool: 2000
   - PrefabToPool: {fileID: 2740209968976373107, guid: 3dbbc3a3e86d37e4aae193b145ad5b0f, type: 3}
-    numberPrefabsToPool: 100
+    numberPrefabsToPool: 2000
   - PrefabToPool: {fileID: 2817590022721157599, guid: bb941942e2bb3734e95f1ed05e411900, type: 3}
-    numberPrefabsToPool: 20
+    numberPrefabsToPool: 50
   - PrefabToPool: {fileID: 1587642205990576176, guid: c8c3f50365fc1114684deeec917b7f38, type: 3}
-    numberPrefabsToPool: 20
+    numberPrefabsToPool: 50
   - PrefabToPool: {fileID: 6220257808025952960, guid: 12aa69a18330c1740b471a7ec14426fe, type: 3}
-    numberPrefabsToPool: 100
+    numberPrefabsToPool: 1000
   - PrefabToPool: {fileID: 5085653073806353274, guid: 48186d8a154432941924b88220323204, type: 3}
-    numberPrefabsToPool: 100
+    numberPrefabsToPool: 1000
   - PrefabToPool: {fileID: 8888871854065743881, guid: 026e0c2cf8146a847a979bd874e56c11, type: 3}
-    numberPrefabsToPool: 1
+    numberPrefabsToPool: 5
   - PrefabToPool: {fileID: 5625300126448925555, guid: 9244c27be0988554a8dc303d887f850b, type: 3}
-    numberPrefabsToPool: 30
+    numberPrefabsToPool: 1000
   - PrefabToPool: {fileID: 3776202608072612282, guid: 3c35f57f7f2af1d4f930cca6720ae3fa, type: 3}
-    numberPrefabsToPool: 30
+    numberPrefabsToPool: 1000
   - PrefabToPool: {fileID: 2877516247857105304, guid: d64354c0dfd0d4647a2dd6f094faa950, type: 3}
-    numberPrefabsToPool: 500
+    numberPrefabsToPool: 5000
   - PrefabToPool: {fileID: 2877516247857105304, guid: d64354c0dfd0d4647a2dd6f094faa950, type: 3}
-    numberPrefabsToPool: 500
+    numberPrefabsToPool: 5000
   - PrefabToPool: {fileID: 9067027106840869735, guid: 33dd63fe10580c44680878f335de748d, type: 3}
-    numberPrefabsToPool: 500
+    numberPrefabsToPool: 5000
   - PrefabToPool: {fileID: 4026234526951509021, guid: 2abb9a09ef1deae4291241d33082324f, type: 3}
-    numberPrefabsToPool: 30
+    numberPrefabsToPool: 1000
   RoomCombiner: {fileID: 385356959401662716, guid: 7fdff432ce4ec4a43a8bc80d813d2ed7, type: 3}
   houseEnterWall: {fileID: 4578146322459339543, guid: 021901d4649f6bb4aa5a400bf6fee450, type: 3}
   houseEnterWallForMaterial: {fileID: 4730863975532162505, guid: 04e37b08a8aab754ead6ebf29a311c49, type: 3}

@@ -60,7 +60,15 @@ namespace Assets.Scripts.Builders
 
           
             Entaraces3D = new List<Entrance3D>();
+            var meshCombiner = BuildingRoot.AddComponent<MeshCombiner>();
 
+            meshCombiner.DeactivateCombinedChildrenMeshRenderers = true;
+            meshCombiner.CreateMultiMaterialMesh = true;
+
+           
+         
+
+           
 
 
             for (var j = 0; j < entraces.Count; j++)
@@ -70,12 +78,13 @@ namespace Assets.Scripts.Builders
             }
 
 
-  
+            meshCombiner.CombineMeshes(false);
+            meshCombiner.CreateMeshCollider();
 
             //VisualizeRoof();
             RainDrainVisualize();
 
-
+            ObjectsPool.Instance.UnblockAllObjects();
         }
 
         public IEnumerator VisualizeaAnimationCorotine()

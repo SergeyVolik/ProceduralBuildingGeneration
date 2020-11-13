@@ -71,6 +71,7 @@ public class ObjectsPool  : Singleton<ObjectsPool>
               
                 var elem = poolObjetcs[0];
                 elem.SetActive(true);
+                elem.transform.localScale = Vector3.one;
                 poolObjetcs.Remove(elem);
                 return elem;
             }
