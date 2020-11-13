@@ -14,7 +14,7 @@ namespace Floor
     public abstract class APH_BaseFloor2D : Floor2D
     {
 
-        public APH_BaseFloor2D(List<Vector2d> outerPolygon, List<Vector2d> buildingPolygon,  List<RoomRequisite> requisite, int floor, Vector2d exit) : base(outerPolygon, buildingPolygon, exit, requisite,  floor)
+        public APH_BaseFloor2D(List<Vector2d> outerPolygon, List<Vector2d> buildingPolygon,  List<RoomRequisite> requisite, int floor, int floornumber, Vector2d exit) : base(outerPolygon, buildingPolygon, exit, requisite,  floor, floornumber)
         {
 
         }

@@ -13,21 +13,24 @@ namespace Assets.Scripts.Premies.Buildings.Entrace3D
 {
     public abstract class Entrance3D : UnityEngine.Object, IVisualizer
     {
-        protected Entrance2D entrace2D;
-       
-        protected GameObject entracesRoot;
-        protected GameObject buildingRoot;
-        protected GameObject entraceRoot;
+        protected Entrance2D m_entrace2D;
+        protected EntraceSetting m_EntraceSettings;
+        protected GameObject m_entracesRoot;
+        protected GameObject m_buildingRoot;
+        protected GameObject m_entraceRoot;
 
         protected List<RoomSetting> buildingPossiblePrefabs;
 
         protected List<Floor3D> floors3D;
-        
-        public Entrance3D(Entrance2D entrace2D, GameObject entracesRoot, GameObject buildingRoot, List<RoomSetting> buildingPossiblePrefabs)
+
+        protected Material m_outerWallMaterial;
+        public Entrance3D(Entrance2D entrace2D, EntraceSetting settings, GameObject entracesRoot, GameObject buildingRoot, List<RoomSetting> buildingPossiblePrefabs, Material outerWallMaterial=null)
         {
-            this.entrace2D = entrace2D;
-            this.entracesRoot = entracesRoot;
-            this.buildingRoot = buildingRoot;
+            m_outerWallMaterial = outerWallMaterial;
+            m_EntraceSettings = settings;
+            this.m_entrace2D = entrace2D;
+            this.m_entracesRoot = entracesRoot;
+            this.m_buildingRoot = buildingRoot;
 
             this.buildingPossiblePrefabs = buildingPossiblePrefabs;
 

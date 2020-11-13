@@ -17,8 +17,8 @@ namespace Assets.Scripts.Plan3D.ApartamentPanelHouse3d
         protected PanelHouseSettings settings;
 
         public APH_Room3d_Stairs(Room2D room2D, GameObject roomsRoot, GameObject buildingRoot, PanelHouseSettings _settings,
-            List<RoomSetting> buildingPossiblePrefabs, int floor, List<PartOfWall> instantiatedWalls, bool ceiling, bool needFloor) : base(room2D, roomsRoot, buildingRoot,
-                buildingPossiblePrefabs, floor, instantiatedWalls, _settings.floorsNumber, null, ceiling, needFloor)
+            List<RoomSetting> buildingPossiblePrefabs, int floor, int floorNumber, List<PartOfWall> instantiatedWalls, bool ceiling, bool needFloor, Material outerWallMaterial= null) : base(room2D, roomsRoot, buildingRoot,
+                buildingPossiblePrefabs, floor, instantiatedWalls, floorNumber, null, ceiling, needFloor, outerWallMaterial)
         {
             settings = _settings;
         }
@@ -64,7 +64,7 @@ namespace Assets.Scripts.Plan3D.ApartamentPanelHouse3d
             }
 
 
-            if (floor == settings.floorsNumber + 1 && wall.WallType == WallType.WallWithDoor)
+            if (floor == m_floorsNumber + 1 && wall.WallType == WallType.WallWithDoor)
                 currPrefab = settings.StairsRoofFaceWall;
         }
       

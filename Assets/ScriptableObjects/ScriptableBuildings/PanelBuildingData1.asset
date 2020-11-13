@@ -91,13 +91,26 @@ MonoBehaviour:
     _doorType: 1
     _to: bedroom1
     _from: Restroom1
+  entraces:
+  - EntraceOuterWallMaterial: {fileID: 2100000, guid: dc958cef6ac274b409362d583b3fa355, type: 2}
+    FloorsSettings:
+    - FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+  - EntraceOuterWallMaterial: {fileID: 2100000, guid: 605e8934fe570bb4a8d46ac4b47cdc1e, type: 2}
+    FloorsSettings:
+    - FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
   stairsFirstFloor: {fileID: 6716406475488326899, guid: 8e404b10f1c0c684cb5d5e590f531255, type: 3}
   stairsnextFloor: {fileID: 2232215468068713760, guid: fb46e72c00b013d47a937bcb01ba6c2b, type: 3}
   stairsWallMaterial: {fileID: 2100000, guid: dace521a48d12644aa91b0758ce2934f, type: 2}
   corridorWallMaterial: {fileID: 2100000, guid: dace521a48d12644aa91b0758ce2934f, type: 2}
   corridoCeilingMaterial: {fileID: 0}
   corridorFloorMaterial: {fileID: 0}
-  floorsNumber: 6
   BildingAngles: 4
   areaForEntrace: 1000
-  entrances: 2

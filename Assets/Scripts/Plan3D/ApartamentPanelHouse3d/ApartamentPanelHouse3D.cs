@@ -28,19 +28,19 @@ namespace Assets.Scripts.Builders
     {
         private const int BUILDING_WIDTH = 20;
 
-        PanelHouseSettings _settings;
+        PanelHouseSettings m_panelHousesettings;
         public ApartamentPanelHouse3D(PanelHouseSettings settings, GameObject root) : base(
             settings.possibleRooms, null, settings.possibleRooms, root)
         {
 
-            _settings = settings;
+            m_panelHousesettings = settings;
 
             var roomRequisites = GetListRoomRequisite();
-            var random = new ControlledRandomRectangularPolygon(4, settings.areaForEntrace * settings.entrances);
+            var random = new ControlledRandomRectangularPolygon(4, settings.areaForEntrace * settings.entraces.Count);
 
             var MainPolygon = random.CreateRectangle(BUILDING_WIDTH, BUILDING_WIDTH);
 
-            _house2D = new ApartamentPanelHouse2D(settings.floorsNumber, settings.areaForEntrace, settings.entrances, roomRequisites, MainPolygon);
+            _house2D = new ApartamentPanelHouse2D(settings.entraces[0].FloorsSettings.Count, settings.areaForEntrace, settings.entraces.Count, roomRequisites, MainPolygon);
 
         }
 
@@ -48,7 +48,7 @@ namespace Assets.Scripts.Builders
         {
             var requisite = new List<RoomRequisite>();
 
-            _settings.possibleRooms.ForEach((r) => { requisite.Add(r.Requisite); });
+            m_panelHousesettings.possibleRooms.ForEach((r) => { requisite.Add(r.Requisite); });
 
             return requisite;
         }
@@ -66,14 +66,12 @@ namespace Assets.Scripts.Builders
             meshCombiner.CreateMultiMaterialMesh = true;
 
            
-         
-
-           
-
-
+            
             for (var j = 0; j < entraces.Count; j++)
             {
-                var entrance3d = new APH_Entrance3D(entraces[j], EntracesRoot, BuildingRoot, _settings, buildingPossiblePrefabs);
+                var outerWallMaterial = m_panelHousesettings.entraces[j].EntraceOuterWallMaterial;
+
+                var entrance3d = new APH_Entrance3D(entraces[j], m_panelHousesettings.entraces[j] ,EntracesRoot, BuildingRoot, m_panelHousesettings, buildingPossiblePrefabs, outerWallMaterial);
                 entrance3d.Visualize();
             }
 
@@ -89,25 +87,26 @@ namespace Assets.Scripts.Builders
 
         public IEnumerator VisualizeaAnimationCorotine()
         {
-            var entraces = _house2D.Entraces;
-            var EntracesRoot = new GameObject("Entraces");
-            EntracesRoot.transform.parent = BuildingRoot.transform;
+            //var entraces = _house2D.Entraces;
+            //var EntracesRoot = new GameObject("Entraces");
+            //EntracesRoot.transform.parent = BuildingRoot.transform;
 
-            Entaraces3D = new List<Entrance3D>();
-
-
-
-            for (var j = 0; j < entraces.Count; j++)
-            {
-                var entrance3d = new APH_Entrance3D(entraces[j], EntracesRoot, BuildingRoot, _settings, buildingPossiblePrefabs);
-                yield return entrance3d.VisualizeAnimation();
-            }
+            //Entaraces3D = new List<Entrance3D>();
 
 
 
+            //for (var j = 0; j < entraces.Count; j++)
+            //{
+            //    var entrance3d = new APH_Entrance3D(entraces[j], EntracesRoot, BuildingRoot, m_panelHousesettings, buildingPossiblePrefabs);
+            //    yield return entrance3d.VisualizeAnimation();
+            //}
 
-            //VisualizeRoof();
-            RainDrainVisualize();
+
+
+
+            ////VisualizeRoof();
+            //RainDrainVisualize();
+            yield return null;
 
         }
 
@@ -131,16 +130,16 @@ namespace Assets.Scripts.Builders
             RainDrain.transform.SetParent(BuildingRoot.transform);
             rainDrainpositions.ForEach(partWall =>
             {
-                InstantiateWallPrefab(partWall, _settings.buildingRainDrainHorizontal, RainDrain.transform, BuildingRoot.transform, _settings.floorsNumber, _settings.AdditionalOffsetForRainDrainHorozontal, _settings.OffsetForRainDrainHorozontal, false);
+                InstantiateWallPrefab(partWall, m_panelHousesettings.buildingRainDrainHorizontal, RainDrain.transform, BuildingRoot.transform, m_panelHousesettings.entraces[0].FloorsSettings.Count, m_panelHousesettings.AdditionalOffsetForRainDrainHorozontal, m_panelHousesettings.OffsetForRainDrainHorozontal, false);
             });
 
             var points = GetAnglePoints(rainDrainpositions);
 
-            for (var i = 1; i < _settings.floorsNumber+1; i++)
+            for (var i = 1; i < m_panelHousesettings.entraces[0].FloorsSettings.Count+1; i++)
             {
                 points.ForEach(angle =>
                 {
-                    InstacntiateAngleObject(angle, _settings.buildingRainDrainVerticalTop, RainDrain.transform, BuildingRoot.transform, i);
+                    InstacntiateAngleObject(angle, m_panelHousesettings.buildingRainDrainVerticalTop, RainDrain.transform, BuildingRoot.transform, i);
                 });
             }
         }
@@ -191,7 +190,7 @@ namespace Assets.Scripts.Builders
                 emptyObj.AddComponent(typeof(MeshRenderer));
 
                 var meshRender = emptyObj.GetComponent<MeshRenderer>();
-                meshRender.material = _settings.defalutRoofMaterial;
+                meshRender.material = m_panelHousesettings.defalutRoofMaterial;
 
                Vector3[] vertices = msh.vertices;
 

@@ -15,22 +15,22 @@ using System.Linq;
 using StraightSkeleton.Polygon.Utils;
 using System;
 
-[System.Serializable]
-public class FloorSettings
-{
+//[System.Serializable]
+//public class FloorSettings
+//{
 
-    [SerializeField, Range(1, 4), Space(5)]
-    public int windowIndent;
+//    [SerializeField, Range(1, 4), Space(5)]
+//    public int windowIndent;
 
-    [Space(10), Header("Corridor settings")]
+//    [Space(10), Header("Corridor settings")]
 
-    [SerializeField, Space(5)]
-    public bool needCorridor;
+//    [SerializeField, Space(5)]
+//    public bool needCorridor;
 
-    [SerializeField, Range(1, 3), Space(5)]
-    public int corridorWidth;
+//    [SerializeField, Range(1, 3), Space(5)]
+//    public int corridorWidth;
 
-}
+//}
 
 
 public class BuildingManager : MonoBehaviour

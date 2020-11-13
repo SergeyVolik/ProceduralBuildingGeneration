@@ -46,8 +46,14 @@ namespace Assets.Scripts.Builders
         private GameObject ceilingRoot;
         private GameObject wallsRoot;
 
-        public Room3D(Room2D room2D, GameObject roomsRoot, GameObject buildingRoot, List<RoomSetting> buildingPossiblePrefabs, int floor, List<PartOfWall> instantiatedWalls, int floorsNumber, RoomSetting settings, bool visualizeCeiling, bool visualizeFloor)
+        protected Material m_outerWallMaterial;
+
+        public Room3D(Room2D room2D, GameObject roomsRoot, GameObject buildingRoot,
+            List<RoomSetting> buildingPossiblePrefabs, int floor,
+            List<PartOfWall> instantiatedWalls, int floorsNumber,
+            RoomSetting settings, bool visualizeCeiling, bool visualizeFloor, Material outerWallMaterial)
         {
+            m_outerWallMaterial = outerWallMaterial;
             this.room2D = room2D;
             this.roomRoot = roomsRoot;
             this.buildingRoot = buildingRoot;
@@ -314,6 +320,10 @@ namespace Assets.Scripts.Builders
                 //curWall = Instantiate(currPrefab, position, Quaternion.identity);
                 curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefab);
                 curWall.transform.position = position;
+
+                if(m_outerWallMaterial)
+                    curWall.GetComponent<MeshRenderer>().sharedMaterial = m_outerWallMaterial;
+
                 //curWall.name = "wall(" + partWall.V1 + " " + partWall.V2 + ")"; ;
                 curWall.transform.parent = wallsRoot.transform;
 

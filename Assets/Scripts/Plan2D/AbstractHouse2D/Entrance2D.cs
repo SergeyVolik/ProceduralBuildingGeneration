@@ -49,18 +49,18 @@ namespace Floor
         //}
         protected override void Create2DSpaceInternal()
         {
-            basementFloor2d = new APH_BasementFloor2D(MainPolygon, BuildingForm, roomsRequisite, _exit);
+            basementFloor2d = new APH_BasementFloor2D(MainPolygon, BuildingForm, roomsRequisite, floors.Count, _exit);
             basementFloor2d.Create2DSpace();
             floors.Add(basementFloor2d);
 
-            for (var i = 0; i < FloorNumber; i++)
+            for (var i = 0; i < FloorNumber-2; i++)
             {
-                var floor = new APH_DefaulFloor2D(MainPolygon, BuildingForm, roomsRequisite, i + 1, _exit);
+                var floor = new APH_DefaulFloor2D(MainPolygon, BuildingForm, roomsRequisite, i + 1, floors.Count, _exit);
                 floor.Create2DSpace();
                 floors.Add(floor);
             }
 
-            roofFloor2d = new APH_RoofFloor2D(MainPolygon, BuildingForm, roomsRequisite, floors.Count, _exit);
+            roofFloor2d = new APH_RoofFloor2D(MainPolygon, BuildingForm, roomsRequisite, floors.Count-1, floors.Count, _exit);
             roofFloor2d.Create2DSpace();
             floors.Add(roofFloor2d);
         }

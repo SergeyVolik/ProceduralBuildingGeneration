@@ -17,8 +17,8 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D.Rooms
         protected PanelHouseSettings settings;
 
         public APH_Room3D(Room2D room2D, GameObject roomsRoot, GameObject buildingRoot, PanelHouseSettings _settings,
-            List<RoomSetting> buildingPossiblePrefabs, int floor, List<PartOfWall> instantiatedWalls, bool ceiling, bool needFloor) : base(room2D, roomsRoot, buildingRoot,
-                buildingPossiblePrefabs, floor, instantiatedWalls, _settings.floorsNumber, _settings.possibleRooms.Find(r => r.Requisite.RoomName == room2D.Name), ceiling, needFloor)
+            List<RoomSetting> buildingPossiblePrefabs, int floor, int floorsNumber , List<PartOfWall> instantiatedWalls, bool ceiling, bool needFloor, Material outerWallMaterial = null) : base(room2D, roomsRoot, buildingRoot,
+                buildingPossiblePrefabs, floor, instantiatedWalls, floorsNumber, _settings.possibleRooms.Find(r => r.Requisite.RoomName == room2D.Name), ceiling, needFloor, outerWallMaterial)
         {
             settings = _settings;
         }
@@ -65,7 +65,7 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D.Rooms
                
             }
 
-            else if (floor > settings.floorsNumber && room2D.RoomType == RoomType.Flat)
+            else if (floor > m_floorsNumber && room2D.RoomType == RoomType.Flat)
                 currPrefab = settings.RoofBoarder;
 
            

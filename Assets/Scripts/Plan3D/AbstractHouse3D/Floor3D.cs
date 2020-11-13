@@ -16,14 +16,17 @@ namespace Assets.Scripts.Premies.Buildings.Floors
     public abstract class Floor3D : UnityEngine.Object, IVisualizer
     {
 
-        protected List<Premises3D> _floors3D;
+        protected List<Premises3D> m_floors3D;
+        
 
-        protected Floor2D _floor2D;
+        protected Floor2D m_floor2D;
 
-        protected GameObject floorRoot;
-        protected GameObject floorsRoot;
-        protected GameObject _buildingRoot;
 
+        protected GameObject m_floorRoot;
+        protected GameObject m_floorsRoot;
+        protected GameObject m_buildingRoot;
+
+        protected Material m_outerWallMaterial;
 
      
 
@@ -31,12 +34,13 @@ namespace Assets.Scripts.Premies.Buildings.Floors
 
         protected List<Room3D> rooms3D;
 
-        public Floor3D(Floor2D floor2d, GameObject floorsRoot, GameObject buildingRoot, List<RoomSetting> buildingPossiblePrefabs)
+        public Floor3D(Floor2D floor2d, GameObject floorsRoot, GameObject buildingRoot, List<RoomSetting> buildingPossiblePrefabs, Material outerWallMaterial=null)
         {
-            _floor2D = floor2d;
-            this.floorsRoot = floorsRoot;
+            m_outerWallMaterial = outerWallMaterial;
+            m_floor2D = floor2d;
+            this.m_floorsRoot = floorsRoot;
            
-            _buildingRoot = buildingRoot;
+            m_buildingRoot = buildingRoot;
 
             _buildingPossiblePrefabs = buildingPossiblePrefabs;
 

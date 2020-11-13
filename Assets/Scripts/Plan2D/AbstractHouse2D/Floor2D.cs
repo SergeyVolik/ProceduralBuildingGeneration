@@ -20,8 +20,8 @@ namespace Floor
         protected Room2D Lift;
         protected Room2D Stairs;
         public int Floor;
-
-        public Floor2D(List<Vector2d> _MainPolygon, List<Vector2d> _BuildingForm, Vector2d exitPoint, List<RoomRequisite> requisite, int floor)
+        public int FloorsNumber;
+        public Floor2D(List<Vector2d> _MainPolygon, List<Vector2d> _BuildingForm, Vector2d exitPoint, List<RoomRequisite> requisite, int floor, int floorNumber)
         {
             _exitPoint = exitPoint;
             MainPolygon = _MainPolygon;

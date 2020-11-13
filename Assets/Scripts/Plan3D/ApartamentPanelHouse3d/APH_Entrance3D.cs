@@ -15,43 +15,48 @@ namespace Assets.Scripts.Premies.Buildings
 {
     public class APH_Entrance3D : Entrance3D
     {
-        protected PanelHouseSettings _settings;
+        protected PanelHouseSettings m_PanelHouseSettings;
 
-        public APH_Entrance3D(Entrance2D entrace2D, GameObject entracesRoot, GameObject buildingRoot,
-            PanelHouseSettings settings, List<RoomSetting> buildingPossiblePrefabs) : base(entrace2D, entracesRoot, buildingRoot, buildingPossiblePrefabs)
+        public APH_Entrance3D(Entrance2D entrace2D, EntraceSetting e_settings,  GameObject entracesRoot, GameObject buildingRoot,
+            PanelHouseSettings settings, List<RoomSetting> buildingPossiblePrefabs, Material outerWallMaterial=null) : base(entrace2D, e_settings, entracesRoot, buildingRoot, buildingPossiblePrefabs, outerWallMaterial)
         {
-            _settings = settings;
+            m_PanelHouseSettings = settings;
         }
 
         public override void Visualize()
         {
             
-            entraceRoot = new GameObject("Entrace");
-            entraceRoot.transform.parent = entracesRoot.transform;
+            m_entraceRoot = new GameObject("Entrace");
+            m_entraceRoot.transform.parent = m_entracesRoot.transform;
             floors3D = new List<Floor3D>();
 
-            entrace2D.floors.ForEach(f => {
-                var floor3D = new APH_Floor3D(f, entraceRoot, buildingRoot, _settings, buildingPossiblePrefabs);
+
+            for (var i = 0; i < m_entrace2D.FloorNumber; i++)
+            {
+                var material = m_outerWallMaterial;
+
+                //if (m_EntraceSettings.FloorsSettings[i].FloorOuterWallMaterial)
+                //    material = m_EntraceSettings.FloorsSettings[i].FloorOuterWallMaterial;
+
+                var floor3D = new APH_Floor3D(m_entrace2D.floors[i], m_EntraceSettings.FloorsSettings[i] , m_entraceRoot, m_buildingRoot, m_PanelHouseSettings, buildingPossiblePrefabs, m_EntraceSettings.FloorsSettings.Count, material);
                 floor3D.Visualize();
                 floors3D.Add(floor3D);
-            });
-
-            
+            }       
         }
 
         public IEnumerator VisualizeAnimation()
         {
 
-            entraceRoot = new GameObject("Entrace");
-            entraceRoot.transform.parent = entracesRoot.transform;
-            floors3D = new List<Floor3D>();
+           // m_entraceRoot = new GameObject("Entrace");
+           // m_entraceRoot.transform.parent = m_entracesRoot.transform;
+           // floors3D = new List<Floor3D>();
 
-            foreach(var f in entrace2D.floors)
-           {
-                var floor3D = new APH_Floor3D(f, entraceRoot, buildingRoot, _settings, buildingPossiblePrefabs);
-                yield return floor3D.VisualizeAnimation();
-                floors3D.Add(floor3D);
-            }
+           // foreach(var f in m_entrace2D.floors)
+           //{
+           //     var floor3D = new APH_Floor3D(f, m_entraceRoot, m_buildingRoot, _settings, buildingPossiblePrefabs);
+           //     yield return floor3D.VisualizeAnimation();
+           //     floors3D.Add(floor3D);
+           // }
 
             yield return null;
 

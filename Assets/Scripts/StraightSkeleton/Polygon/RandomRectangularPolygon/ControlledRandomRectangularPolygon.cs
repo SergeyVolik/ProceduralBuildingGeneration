@@ -19,16 +19,17 @@ namespace StraightSkeleton.Polygon.RandomRectangularPolygon
     class ControlledRandomRectangularPolygon
     {
         
-
         private double _recomArea;
         private int _numberOfPoints;
         public ControlledRandomRectangularPolygon(int pointsNumber, double area)
         {
+
+
             _recomArea = area;
             _numberOfPoints = pointsNumber;
             
-            if(_recomArea % 4 != 0)
-                throw new ArgumentException("Invalid value: _recomArea are not multiples of 4");
+            if(_recomArea % 4 != 0 || _recomArea <= 0)
+                throw new ArgumentException("Invalid value: _recomArea ");
             if (_numberOfPoints % 2 != 0)
                 throw new ArgumentException("Invalid value: NumberOfPoints isn't even number");
             if (_numberOfPoints < 4 || _numberOfPoints > 12)
