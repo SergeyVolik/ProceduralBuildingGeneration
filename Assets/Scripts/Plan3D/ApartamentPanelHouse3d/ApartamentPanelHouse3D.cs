@@ -62,7 +62,7 @@ namespace Assets.Scripts.Builders
             Entaraces3D = new List<Entrance3D>();
             var meshCombiner = BuildingRoot.AddComponent<MeshCombiner>();
 
-            meshCombiner.DeactivateCombinedChildrenMeshRenderers = true;
+            meshCombiner.DeactivateCombinedChildren = true;
             meshCombiner.CreateMultiMaterialMesh = true;
 
            

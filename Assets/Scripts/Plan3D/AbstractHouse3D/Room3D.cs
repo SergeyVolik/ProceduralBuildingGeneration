@@ -69,7 +69,7 @@ namespace Assets.Scripts.Builders
         bool NeedCeiling { get; set; }
         bool NeedFloor { get; set; }
 
-        string tag = "CombineMesh";
+       
         public override void Visualize()
         {
            
@@ -144,10 +144,10 @@ namespace Assets.Scripts.Builders
 
                 var position = new Vector3((float)center.X, high, (float)center.Y) + buildingRoot.transform.position;
 
-                //var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].FloorPrefab);
-                //local.transform.position = position;
+                var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].FloorPrefab);
+                local.transform.position = position;
 
-                var local = Instantiate(buildingPossiblePrefabs[0].FloorPrefab, position, Quaternion.identity);
+                //var local = Instantiate(buildingPossiblePrefabs[0].FloorPrefab, position, Quaternion.identity);
                 local.transform.parent = FloorsRoot.transform;
 
 
@@ -202,9 +202,9 @@ namespace Assets.Scripts.Builders
 
                 var position = new Vector3((float)center.X, high, (float)center.Y) + buildingRoot.transform.position;
 
-                var local = Instantiate(buildingPossiblePrefabs[0].CeilingPrefab, position, Quaternion.identity);
-                //var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].CeilingPrefab);
-                //local.transform.position = position;
+                //var local = Instantiate(buildingPossiblePrefabs[0].CeilingPrefab, position, Quaternion.identity);
+                var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].CeilingPrefab);
+                local.transform.position = position;
                 local.transform.parent = ceilingRoot.transform;
             });
             
@@ -295,9 +295,9 @@ namespace Assets.Scripts.Builders
                         currPrefabForMaterial.GetComponent<MeshRenderer>().material = m_wallMaterial;
 
 
-                    //curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefabForMaterial);
+                    curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefabForMaterial);
 
-                    curWall = Instantiate(currPrefabForMaterial, position, Quaternion.identity);
+                    //curWall = Instantiate(currPrefabForMaterial, position, Quaternion.identity);
                     //curWall.name = "wallForMaterial(" + partWall.V1 + " "+partWall.V2+")";
                     curWall.transform.parent = wallsRoot.transform;
                     curWall.transform.position = positionForMaterial;
@@ -311,8 +311,8 @@ namespace Assets.Scripts.Builders
 
             if (currPrefab != null)
             {
-                curWall = Instantiate(currPrefab, position, Quaternion.identity);
-                //curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefab);
+                //curWall = Instantiate(currPrefab, position, Quaternion.identity);
+                curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefab);
                 curWall.transform.position = position;
                 //curWall.name = "wall(" + partWall.V1 + " " + partWall.V2 + ")"; ;
                 curWall.transform.parent = wallsRoot.transform;

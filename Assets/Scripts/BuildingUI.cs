@@ -65,10 +65,10 @@ public class BuildingUI : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
-        var house = GetComponent<BuildingManager>().CreateHouseWithAnimation();
+       /* var house = */GetComponent<BuildingManager>().CreateHouseWithAnimation();
 
       
-        ShowRooms(house.House.Entraces[0].floors[1]);
+        //ShowRooms(house.House.Entraces[0].floors[1]);
 
     }
 
@@ -79,7 +79,7 @@ public class BuildingUI : MonoBehaviour
         playerCOntroller.StopAllCoroutines();
         playerCOntroller.gameObject.SetActive(true);
         rotateCamera.gameObject.SetActive(false);
-        var house = GetComponent<BuildingManager>().CreateHouse();
+        /*var house = */GetComponent<BuildingManager>().CreateHouse();
     }
 
         //void ShowTree(SkeletonCorridor sk)
