@@ -20,15 +20,15 @@ namespace Assets.Scripts.Builders
     /// <summary>
     /// Абстрактный класс который определяет общие действия для всех Домов
     /// </summary>
-    public abstract class Building3D : Premises3D, IBuilding3D, IVisualizer
+    public abstract class Building3D : Premises3D, IBuilding3D
     {
         ///пустышка корень дома
         public GameObject BuildingRoot { get; set; }
 
-        public Building2D House { get => _house2D; /*set => _house2D = value;*/ }
+        public Building2D House { get => m_building2D; /*set => _house2D = value;*/ }
 
         protected List<RoomSetting> buildingPossiblePrefabs;
-        protected Building2D _house2D;
+        protected Building2D m_building2D;
 
         public Vector3 Center { 
             get {

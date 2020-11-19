@@ -13,9 +13,9 @@ namespace Floor
 {
     public abstract class Premises2D : Polygon, ISpaceCreator2D
     {
-        public Vector2d _exitPoint;
+        public Vector2d ExitPosition;
        
-        public BasePlanProcessor2D planProcessor2D;
+        public BasePlanProcessor2D PlanProcessor2D;
         public List<Room2D> Rooms;
         protected List<RoomRequisite> roomRequisites;
         protected abstract void Create2DSpaceInternal();
@@ -43,9 +43,9 @@ namespace Floor
         {
             var list = new List<PartOfWall>();
 
-            for (var i = 0; i < planProcessor2D.OuterBoarderCells.Count; i++)
+            for (var i = 0; i < PlanProcessor2D.OuterBoarderCells.Count; i++)
             {
-                list.AddRange(planProcessor2D.OuterBoarderCells[i].PartsOfOutsideWalls);
+                list.AddRange(PlanProcessor2D.OuterBoarderCells[i].PartsOfOutsideWalls);
             }
 
             return list;

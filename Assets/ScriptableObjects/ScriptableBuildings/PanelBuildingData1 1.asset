@@ -61,6 +61,8 @@ MonoBehaviour:
     _doorType: 1
     _to: bedroom1
     _from: Restroom1
+  RoofType: 1
+  RoofForAllBuilding: 1
   entraces:
   - EntraceOuterWallMaterial: {fileID: 2100000, guid: dc958cef6ac274b409362d583b3fa355, type: 2}
     FloorsSettings:

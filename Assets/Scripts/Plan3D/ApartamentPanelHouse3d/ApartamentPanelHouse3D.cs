@@ -6,6 +6,7 @@ using Assets.Scripts.Premies.Buildings.Entrace3D;
 using Assets.Scripts.Premies.Buildings.Floors;
 
 using Assets.Scripts.Tools;
+using Floor;
 using JetBrains.Annotations;
 using Newtonsoft.Json.Bson;
 using Plan3d;
@@ -40,7 +41,7 @@ namespace Assets.Scripts.Builders
 
             var MainPolygon = random.CreateRectangle(BUILDING_WIDTH, BUILDING_WIDTH);
 
-            _house2D = new ApartamentPanelHouse2D(settings.entraces[0].FloorsSettings.Count, settings.areaForEntrace, settings.entraces.Count, roomRequisites, MainPolygon);
+            m_building2D = new ApartamentPanelHouse2D(settings.entraces[0].FloorsSettings.Count, settings.areaForEntrace, settings.entraces.Count, roomRequisites, MainPolygon, settings.RoofType);
 
         }
 
@@ -54,7 +55,7 @@ namespace Assets.Scripts.Builders
         }
         protected override void InitializeSpaces3D()
         {
-            var entraces = _house2D.Entraces;
+            var entraces = m_building2D.BuildingPremises2D;
             var EntracesRoot = new GameObject("Entraces");
             EntracesRoot.transform.parent = BuildingRoot.transform;
 
@@ -71,16 +72,19 @@ namespace Assets.Scripts.Builders
             {
                 var outerWallMaterial = m_panelHousesettings.entraces[j].EntraceOuterWallMaterial;
 
-                var entrance3d = new APH_Entrance3D(entraces[j], m_panelHousesettings.entraces[j] ,EntracesRoot, BuildingRoot, m_panelHousesettings, buildingPossiblePrefabs, outerWallMaterial);
+                var entrance3d = new APH_Entrance3D(entraces[j] as Entrance2D, m_panelHousesettings.entraces[j] ,EntracesRoot, BuildingRoot, m_panelHousesettings, buildingPossiblePrefabs, outerWallMaterial);
                 entrance3d.Visualize();
             }
 
+            if (m_building2D.RoofType == RoofType.CASCADE)
+                VisualizeRoof();
+
+            RainDrainVisualize();
 
             meshCombiner.CombineMeshes(false);
             meshCombiner.CreateMeshCollider();
 
-            //VisualizeRoof();
-            RainDrainVisualize();
+            
 
             ObjectsPool.Instance.UnblockAllObjects();
 
@@ -124,7 +128,7 @@ namespace Assets.Scripts.Builders
         }
         void RainDrainVisualize()
         {
-           var rainDrainpositions = _house2D.GetPartOfBuilding();
+           var rainDrainpositions = m_building2D.GetPartOfBuilding();
 
             Debug.Log("rainDrainpositions-> " + rainDrainpositions.Count);
 
@@ -145,8 +149,8 @@ namespace Assets.Scripts.Builders
                 });
             }
         }
-
         
+
         List<Angle> GetAnglePoints(List<PartOfWall> parts)
         {
             var angles = new List<Angle>();
@@ -168,8 +172,8 @@ namespace Assets.Scripts.Builders
         }
         void VisualizeRoof()
         {
-            var roof = SkeletonBuilder.BuildRoof(_house2D.BuildingForm);
-            var meshData = new RoofMeshData(roof, _house2D.BuildingForm, _house2D.NumberOfFloors, Building2D.FloorHight);
+            var roof = SkeletonBuilder.BuildRoof(m_building2D.BuildingForm);
+            var meshData = new RoofMeshData(roof, m_building2D.BuildingForm, m_building2D.NumberOfFloors-2, Building2D.FloorHight);
             var RoofRoot = new GameObject("RoofRoot");
 
             RoofRoot.transform.parent = BuildingRoot.transform;

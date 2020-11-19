@@ -25,9 +25,9 @@ namespace Floor
         protected override void Create2DSpaceInternal()
         {
 
-            planProcessor2D = new DefaultFloorPlanProcessor2D(MainPolygon, BuildingForm, _exitPoint);
+            PlanProcessor2D = new DefaultFloorPlanProcessor2D(MainPolygon, BuildingForm, ExitPosition);
 
-            planProcessor2D.CreatePlan();
+            PlanProcessor2D.CreatePlan();
 
 
             FindCorrdior();
@@ -42,15 +42,15 @@ namespace Floor
 
         private void FindCorrdior()
         {
-            Corridor = planProcessor2D.Rooms.Find(r => r.RoomType == RoomType.Corridor);
+            Corridor = PlanProcessor2D.Rooms.Find(r => r.RoomType == RoomType.Corridor);
         }
         private void FindLift()
         {
-            Lift = planProcessor2D.Rooms.Find(r => r.RoomType == RoomType.Lift);
+            Lift = PlanProcessor2D.Rooms.Find(r => r.RoomType == RoomType.Lift);
         }
         private void FindStairs()
         {
-            Stairs = planProcessor2D.Rooms.Find(r => r.RoomType == RoomType.Stairs);
+            Stairs = PlanProcessor2D.Rooms.Find(r => r.RoomType == RoomType.Stairs);
         }
 
 
@@ -95,7 +95,7 @@ namespace Floor
         protected void AddExitToStairs()
         {
             Stairs.Walls.ForEach(w => {
-                if (planProcessor2D.ExitCell.PartsOfOutsideWalls != null && planProcessor2D.ExitCell.PartsOfOutsideWalls.Exists(ww => ww.Equals(w)))
+                if (PlanProcessor2D.ExitCell.PartsOfOutsideWalls != null && PlanProcessor2D.ExitCell.PartsOfOutsideWalls.Exists(ww => ww.Equals(w)))
                     w.WallType = WallType.WallWithDoor;
             });
         }
@@ -104,7 +104,7 @@ namespace Floor
             AddDoorBetweenTwoRooms(Corridor, Stairs, WallType.NoWall);
             AddDoorBetweenTwoRooms(Lift, Corridor, WallType.NoWall);
 
-            var localFlatsRooms = planProcessor2D.Rooms.FindAll(r => r.RoomType == RoomType.Flat);
+            var localFlatsRooms = PlanProcessor2D.Rooms.FindAll(r => r.RoomType == RoomType.Flat);
 
 
 

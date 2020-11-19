@@ -245,14 +245,14 @@ public class BuildingUI : MonoBehaviour
     void ShowArchGrid(Premises2D floor1, Color insideColor)
     {
         
-        for (var i = 0; i < floor1.planProcessor2D.Grid.GetLength(0); i++)
+        for (var i = 0; i < floor1.PlanProcessor2D.Grid.GetLength(0); i++)
         {
-            for (var j = 0; j < floor1.planProcessor2D.Grid.GetLength(1); j++)
+            for (var j = 0; j < floor1.PlanProcessor2D.Grid.GetLength(1); j++)
             {
 
-                if (floor1.planProcessor2D.Grid[i, j].Tag == ArchitectureGrid.PlanCellTag.Inside)
+                if (floor1.PlanProcessor2D.Grid[i, j].Tag == ArchitectureGrid.PlanCellTag.Inside)
                 {
-                    ShowList(floor1.planProcessor2D.Grid[i, j].Square, insideColor, multCoef: 8f);
+                    ShowList(floor1.PlanProcessor2D.Grid[i, j].Square, insideColor, multCoef: 8f);
                 }
                
             }
@@ -320,19 +320,19 @@ public class BuildingUI : MonoBehaviour
     {
 
      
-        for (var i = 0; i < floor1.planProcessor2D.Grid.GetLength(0); i++)
+        for (var i = 0; i < floor1.PlanProcessor2D.Grid.GetLength(0); i++)
         {
-            for (var j = 0; j < floor1.planProcessor2D.Grid.GetLength(1); j++)
+            for (var j = 0; j < floor1.PlanProcessor2D.Grid.GetLength(1); j++)
             {
                 //var rnd = new Color((float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f));
                 //ShowList(floor1.planProcessor2D.Grid[i, j].Square, rnd);
-                if (floor1.planProcessor2D.Grid[i, j].PartsOfOutsideWalls != null)
+                if (floor1.PlanProcessor2D.Grid[i, j].PartsOfOutsideWalls != null)
                 {
                     
-                    for (var k = 0; k < floor1.planProcessor2D.Grid[i, j].PartsOfOutsideWalls.Count; k++)
+                    for (var k = 0; k < floor1.PlanProcessor2D.Grid[i, j].PartsOfOutsideWalls.Count; k++)
                     {
                         var rnd = new Color((float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f));
-                        ShowList(new List<Vector2d>() { floor1.planProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].V1, floor1.planProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].V2 }, rnd);
+                        ShowList(new List<Vector2d>() { floor1.PlanProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].V1, floor1.PlanProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].V2 }, rnd);
                         //ShowList(floor1.planProcessor2D.Grid[i, j].Square, rnd);
 
                     }
@@ -350,24 +350,24 @@ public class BuildingUI : MonoBehaviour
     {
 
       
-        for (var i = 0; i < floor1.planProcessor2D.Grid.GetLength(0); i++)
+        for (var i = 0; i < floor1.PlanProcessor2D.Grid.GetLength(0); i++)
         {
-            for (var j = 0; j < floor1.planProcessor2D.Grid.GetLength(1); j++)
+            for (var j = 0; j < floor1.PlanProcessor2D.Grid.GetLength(1); j++)
             {
-                if (floor1.planProcessor2D.Grid[i, j].PartsOfOutsideWalls != null)
+                if (floor1.PlanProcessor2D.Grid[i, j].PartsOfOutsideWalls != null)
                 {
-                    for (var k = 0; k < floor1.planProcessor2D.Grid[i, j].PartsOfOutsideWalls.Count; k++)
+                    for (var k = 0; k < floor1.PlanProcessor2D.Grid[i, j].PartsOfOutsideWalls.Count; k++)
                     {
-                        if (floor1.planProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].WallType == ArchitectureGrid.WallType.WallWithDoor)
+                        if (floor1.PlanProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].WallType == ArchitectureGrid.WallType.WallWithDoor)
                         {
-                            ShowList(new List<Vector2d>() { floor1.planProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].V1, floor1.planProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].V2 }, colorExit);
+                            ShowList(new List<Vector2d>() { floor1.PlanProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].V1, floor1.PlanProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].V2 }, colorExit);
                         }
-                        else if (floor1.planProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].WallType == ArchitectureGrid.WallType.WallWithWindow)
+                        else if (floor1.PlanProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].WallType == ArchitectureGrid.WallType.WallWithWindow)
                         {
-                            ShowList(new List<Vector2d>() { floor1.planProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].V1, floor1.planProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].V2 }, colorWindow);
+                            ShowList(new List<Vector2d>() { floor1.PlanProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].V1, floor1.PlanProcessor2D.Grid[i, j].PartsOfOutsideWalls[k].V2 }, colorWindow);
                         }
                     }
-                    Debug.Log(floor1.planProcessor2D.Grid[i, j].PartsOfOutsideWalls.Count);
+                    Debug.Log(floor1.PlanProcessor2D.Grid[i, j].PartsOfOutsideWalls.Count);
                 }
             }
 

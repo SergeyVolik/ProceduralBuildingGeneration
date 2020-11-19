@@ -24,7 +24,7 @@ namespace Floor
             List<Room2D> rooms = new List<Room2D>();
 
             rooms.Add(Stairs);
-            rooms.AddRange(planProcessor2D.Rooms);
+            rooms.AddRange(PlanProcessor2D.Rooms);
 
             return rooms;
         }
@@ -32,11 +32,11 @@ namespace Floor
         protected override void Create2DSpaceInternal()
         {
             
-            var entraceProcessor2D = new RoofFloorPlanProcessor2D(MainPolygon, BuildingForm, _exitPoint);
+            var entraceProcessor2D = new RoofFloorPlanProcessor2D(MainPolygon, BuildingForm, ExitPosition);
             entraceProcessor2D.AddStairsToExit();
             entraceProcessor2D.AddFlatsToFloor();
 
-            planProcessor2D = entraceProcessor2D;
+            PlanProcessor2D = entraceProcessor2D;
             var room = entraceProcessor2D.Rooms.FindAll(r => r.RoomType == RoomType.Flat);
 
             
@@ -51,7 +51,7 @@ namespace Floor
       
         private void FindStairs()
         {
-            Stairs = planProcessor2D.Rooms.Find(r => r.RoomType == RoomType.Stairs);
+            Stairs = PlanProcessor2D.Rooms.Find(r => r.RoomType == RoomType.Stairs);
         }
 
     }

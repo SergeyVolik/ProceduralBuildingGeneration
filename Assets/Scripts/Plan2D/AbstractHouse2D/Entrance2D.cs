@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Floor
 {
-    public class Entrance2D : Premises2D
+    public class Entrance2D : Premises2D, IBuildingPremises2D
     {
         public Floor2D basementFloor2d;
         public List<Floor2D> floors;
@@ -19,11 +19,12 @@ namespace Floor
         public int FloorNumber;
         protected List<RoomRequisite> roomsRequisite;
         protected Vector2d _exit;
-     
+        private RoofType _roofType;
 
-        public Entrance2D(List<Vector2d> outerPolygon, List<Vector2d> buildingPolygon, int floorsNumber, Vector2d exit , List<RoomRequisite> _roomsRequisite)
+        public RoofType RoofType => _roofType;
+        public Entrance2D(List<Vector2d> outerPolygon, List<Vector2d> buildingPolygon, int floorsNumber, Vector2d exit , List<RoomRequisite> _roomsRequisite, RoofType roofType)
         {
-
+            _roofType = roofType;
             BuildingForm = buildingPolygon;
             FloorNumber = floorsNumber;
             MainPolygon = outerPolygon;
@@ -60,9 +61,12 @@ namespace Floor
                 floors.Add(floor);
             }
 
-            roofFloor2d = new APH_RoofFloor2D(MainPolygon, BuildingForm, roomsRequisite, floors.Count, floors.Count, _exit);
-            roofFloor2d.Create2DSpace();
-            floors.Add(roofFloor2d);
+            if (_roofType == RoofType.FLAT)
+            {
+                roofFloor2d = new APH_RoofFloor2D(MainPolygon, BuildingForm, roomsRequisite, floors.Count, floors.Count, _exit);
+                roofFloor2d.Create2DSpace();
+                floors.Add(roofFloor2d);
+            }
         }
     }
 }

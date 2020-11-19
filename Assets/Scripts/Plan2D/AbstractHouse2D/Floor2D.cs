@@ -10,7 +10,7 @@ using Assets.Scripts.Premies.Buildings.Floors;
 namespace Floor
 {
   
-    public abstract class Floor2D : Premises2D
+    public abstract class Floor2D : Premises2D, IBuildingPremises2D
     {
         
         
@@ -23,7 +23,7 @@ namespace Floor
         public int FloorsNumber;
         public Floor2D(List<Vector2d> _MainPolygon, List<Vector2d> _BuildingForm, Vector2d exitPoint, List<RoomRequisite> requisite, int floor, int floorNumber)
         {
-            _exitPoint = exitPoint;
+            ExitPosition = exitPoint;
             MainPolygon = _MainPolygon;
             BuildingForm = _BuildingForm;
             roomRequisites = requisite;

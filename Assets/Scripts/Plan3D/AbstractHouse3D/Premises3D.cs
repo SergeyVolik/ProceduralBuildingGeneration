@@ -15,7 +15,7 @@ namespace Assets.Scripts
     /// <summary>
     /// класс который определяет действия общие для всех помещений
     /// </summary>
-    public abstract class Premises3D : UnityEngine.Object, IVisualizer, IPremies3D
+    public abstract class Premises3D : UnityEngine.Object, IVisualizer
     {
         protected RoomSetting premisesPrefabs;
         public RoomSetting PremisesPrefabs { get => premisesPrefabs; set => premisesPrefabs = value; }

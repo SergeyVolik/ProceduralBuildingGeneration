@@ -17,8 +17,7 @@ public interface IBuilding2D
     float Area { get; set; }
     int Angles { get; set; }
     
-    List<Entrance2D> Entraces { get; set; }
-    Floor2D mainRoof { get; set; }    
+    List<IBuildingPremises2D> BuildingPremises2D { get; set; }
     List<Vector2d> MainPolygon { get; set; }
 
 

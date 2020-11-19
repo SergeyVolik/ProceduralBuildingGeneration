@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Premies.Buildings.Floors
 {
-    public abstract class Floor3D : UnityEngine.Object, IVisualizer
+    public abstract class Floor3D : UnityEngine.Object, IVisualizer, IBuildingPremises3D
     {
 
         protected List<Premises3D> m_floors3D;
@@ -34,8 +34,11 @@ namespace Assets.Scripts.Premies.Buildings.Floors
 
         protected List<Room3D> rooms3D;
 
-        public Floor3D(Floor2D floor2d, GameObject floorsRoot, GameObject buildingRoot, List<RoomSetting> buildingPossiblePrefabs, Material outerWallMaterial=null)
+        public RoofType RoofType { get; private set; }
+
+        public Floor3D(Floor2D floor2d, GameObject floorsRoot, GameObject buildingRoot, List<RoomSetting> buildingPossiblePrefabs, RoofType roof, Material outerWallMaterial=null)
         {
+            RoofType = roof;
             m_outerWallMaterial = outerWallMaterial;
             m_floor2D = floor2d;
             this.m_floorsRoot = floorsRoot;

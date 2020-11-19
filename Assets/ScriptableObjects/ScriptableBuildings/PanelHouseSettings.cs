@@ -68,7 +68,8 @@ public class PanelHouseSettings : DefaultBuildingSettings
         Debug.Log("PanelHouseSettings awake");
     }
 
-   
+    [SerializeField, Tooltip("True - если то создаст кришу для всего здания, если False то создаст касадную кришу для каждлго подезда отдельно ")]
+    public bool RoofForAllBuilding = true;
 
     [Header("Entrance outer wall materias")]
     [SerializeField]

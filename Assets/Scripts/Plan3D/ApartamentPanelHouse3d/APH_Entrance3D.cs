@@ -31,14 +31,15 @@ namespace Assets.Scripts.Premies.Buildings
             floors3D = new List<Floor3D>();
 
 
-            for (var i = 0; i < m_entrace2D.FloorNumber; i++)
+            for (var i = 0; i < m_entrace2D.floors.Count; i++)
             {
                 var material = m_outerWallMaterial;
 
                 if (m_EntraceSettings.FloorsSettings[i].FloorOuterWallMaterial)
                     material = m_EntraceSettings.FloorsSettings[i].FloorOuterWallMaterial;
 
-                var floor3D = new APH_Floor3D(m_entrace2D.floors[i], m_EntraceSettings.FloorsSettings[i] , m_entraceRoot, m_buildingRoot, m_PanelHouseSettings, buildingPossiblePrefabs, m_EntraceSettings.FloorsSettings.Count, material);
+                var floor3D = new APH_Floor3D(m_entrace2D.floors[i], m_EntraceSettings.FloorsSettings[i] , m_entraceRoot, m_buildingRoot, m_PanelHouseSettings, buildingPossiblePrefabs, m_EntraceSettings.FloorsSettings.Count, m_entrace2D.RoofType, material);
+
                 floor3D.Visualize();
                 floors3D.Add(floor3D);
             }       

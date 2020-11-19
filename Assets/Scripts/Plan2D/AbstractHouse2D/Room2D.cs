@@ -34,7 +34,7 @@ namespace Rooms
         }
     }
 
-    public class Room2D : Polygon
+    public class Room2D : Polygon, IFloorPremises2D
     {
         public int? FlatId = null;
         private RoomRequisite m_roomRequisite;

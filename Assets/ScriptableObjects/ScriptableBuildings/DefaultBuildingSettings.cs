@@ -95,5 +95,10 @@ public abstract class DefaultBuildingSettings : ScriptableObject
     [SerializeField, Space(10)]
     public List<RoomLink> RoomLinks;
 
-    
+
+    [SerializeField]
+    public RoofType RoofType = RoofType.FLAT;
+
+
 }
+public enum RoofType { FLAT, CASCADE }

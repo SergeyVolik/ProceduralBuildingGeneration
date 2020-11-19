@@ -43,15 +43,18 @@ namespace Assets.Scripts.Premies.Buildings.Building2D
         protected int _numberOfFloors;
         protected int _angles;
         protected float _area;
+        private RoofType _roofType;
 
-        protected Building2D(int numberOfFloors, float area, List<Vector2d> outerPolygon)
+        public RoofType RoofType => _roofType;
+        protected Building2D(int numberOfFloors, float area, List<Vector2d> outerPolygon, RoofType roofType)
         {
+            _roofType = roofType;
             NumberOfFloors = numberOfFloors;         
             Area = area;
             MainPolygon = outerPolygon;
 
-            planProcessor2D = new BuildingPlanProcessor(outerPolygon, outerPolygon, Vector2d.Empty);
-            planProcessor2D.CreatePlan();
+            PlanProcessor2D = new BuildingPlanProcessor(outerPolygon, outerPolygon, Vector2d.Empty);
+            PlanProcessor2D.CreatePlan();
         }
 
 
@@ -93,13 +96,13 @@ namespace Assets.Scripts.Premies.Buildings.Building2D
 
         #endregion
 
-        protected List<Entrance2D> entrances;
-        public Floor2D mainRoof { get; set; }
-        public List<Entrance2D> Entraces { get => entrances; set => entrances = value; }
+        protected List<IBuildingPremises2D> m_buildingPremises2D;
+
+        public List<IBuildingPremises2D> BuildingPremises2D { get => m_buildingPremises2D; set => m_buildingPremises2D = value; }
 
         public List<PartOfWall> GetPartOfBuilding()
         {
-            return planProcessor2D.Rooms[0].Walls;
+            return PlanProcessor2D.Rooms[0].Walls;
         }
     }
 }

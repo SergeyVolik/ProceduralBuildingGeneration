@@ -36,7 +36,7 @@ namespace Buldings
                 else _area = value;
             }
         }
-        public PrivateHouse2D(int numberOfFloors, int angles, float area, List<Vector2d> polygon) : base(numberOfFloors, area, polygon)
+        public PrivateHouse2D(int numberOfFloors, int angles, float area, List<Vector2d> polygon, RoofType roof) : base(numberOfFloors, area, polygon, roof)
         {
             NumberOfFloors = numberOfFloors;
             Area = area;

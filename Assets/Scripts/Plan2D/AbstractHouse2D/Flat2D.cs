@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Floor
 {
-    public class Flat2D : Premises2D
+    public class Flat2D : Premises2D, IFloorPremises2D
     {               
 
        
@@ -24,7 +24,7 @@ namespace Floor
             _roomsRequisite.ForEach(req => Rooms.Add(new Room2D(req)));
 
             roomRequisites = _roomsRequisite;
-            _exitPoint = exit;
+            ExitPosition = exit;
             
 
         }
@@ -37,9 +37,9 @@ namespace Floor
         protected override void Create2DSpaceInternal()
         {
 
-            planProcessor2D = new FlatPlanProcessor2D(MainPolygon, BuildingForm, _exitPoint);
-            planProcessor2D.Rooms.AddRange(Rooms);
-            planProcessor2D.CreatePlan();
+            PlanProcessor2D = new FlatPlanProcessor2D(MainPolygon, BuildingForm, ExitPosition);
+            PlanProcessor2D.Rooms.AddRange(Rooms);
+            PlanProcessor2D.CreatePlan();
             UpdateWallsType();
 
 
@@ -52,7 +52,7 @@ namespace Floor
                 r.Walls.ForEach(w =>
                 {
 
-                    var ww = planProcessor2D.Windows.FirstOrDefault(windows => windows.Equals(w));
+                    var ww = PlanProcessor2D.Windows.FirstOrDefault(windows => windows.Equals(w));
 
                     if (ww?.Equals(w) == true)
                         w.WallType = ww.WallType;
