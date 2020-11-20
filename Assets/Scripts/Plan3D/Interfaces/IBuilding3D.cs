@@ -13,8 +13,7 @@ namespace Assets.Scripts.Builders
         GameObject BuildingRoot { get; set; }
       
         List<RoomSetting> RoomsSettings { get; }
-
-        Building2D House { get; /*set;*/ }
+    
 
     }
 }

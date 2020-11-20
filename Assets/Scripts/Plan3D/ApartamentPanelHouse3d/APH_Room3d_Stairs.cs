@@ -1,6 +1,7 @@
 ﻿using ArchitectureGrid;
 using Assets.Scripts.Builders;
 using Assets.Scripts.Premies.Buildings.Building2D;
+using BuildingUtils;
 using Rooms;
 using StraightSkeleton.Primitives;
 using System;
@@ -80,8 +81,8 @@ namespace Assets.Scripts.Plan3D.ApartamentPanelHouse3d
                 var vec3 = new Vector3((float)vec2d.X, high - 3.75f, (float)vec2d.Y) + buildingRoot.transform.position;
 
                 if (floor == 1)
-                    stairs = Instantiate(settings.stairsFirstFloor, vec3, Quaternion.identity);
-                else stairs = Instantiate(settings.stairsnextFloor, vec3, Quaternion.identity);
+                    stairs = GameObject.Instantiate(settings.stairsFirstFloor, vec3, Quaternion.identity);
+                else stairs = GameObject.Instantiate(settings.stairsnextFloor, vec3, Quaternion.identity);
 
                 stairs.transform.parent = roomRoot.transform;
             }

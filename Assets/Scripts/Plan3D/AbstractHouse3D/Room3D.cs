@@ -1,6 +1,7 @@
 ﻿using ArchitectureGrid;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Premies.Buildings.Building2D;
+using BuildingUtils;
 using Newtonsoft.Json.Bson;
 using Rooms;
 using StraightSkeleton.Primitives;
@@ -16,14 +17,14 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 namespace Assets.Scripts.Builders
 {
-    public abstract class Room3D : Premises3D, IRoom3D
+    public abstract class Room3D : Room2D, IRoom3D, IVisualizer
     {
 
         private const float ceilingOffset = -0.01f;
         private const float floorOffset = 0.01f;
 
         protected GameObject wallsWithDoor;
-        protected List<GameObject> Walls;
+        protected List<GameObject> Walls3D;
         protected GameObject OutsideDoor;
 
         protected GameObject buildingRoot;
@@ -51,7 +52,7 @@ namespace Assets.Scripts.Builders
         public Room3D(Room2D room2D, GameObject roomsRoot, GameObject buildingRoot,
             List<RoomSetting> buildingPossiblePrefabs, int floor,
             List<PartOfWall> instantiatedWalls, int floorsNumber,
-            RoomSetting settings, bool visualizeCeiling, bool visualizeFloor, Material outerWallMaterial)
+            RoomSetting settings, bool visualizeCeiling, bool visualizeFloor, Material outerWallMaterial) : base(room2D)
         {
             m_outerWallMaterial = outerWallMaterial;
             this.room2D = room2D;
@@ -76,7 +77,7 @@ namespace Assets.Scripts.Builders
         bool NeedFloor { get; set; }
 
        
-        public override void Visualize()
+        public void Visualize()
         {
            
 
@@ -180,7 +181,7 @@ namespace Assets.Scripts.Builders
 
                 var position = new Vector3((float)center.X, high, (float)center.Y) + buildingRoot.transform.position;
 
-                var local = Instantiate(buildingPossiblePrefabs[0].FloorPrefab, position, Quaternion.identity);
+                var local = GameObject.Instantiate(buildingPossiblePrefabs[0].FloorPrefab, position, Quaternion.identity);
                 local.transform.parent = FloorsRoot.transform;
 
                 yield return new WaitForSeconds(0.1f);
@@ -284,7 +285,7 @@ namespace Assets.Scripts.Builders
             Vector3 position;
             float xOffset, zoffset;
                 
-            var rotationY = FindWallRotation(partWall, out xOffset, out zoffset);
+            var rotationY = Premises3DUtils.FindWallRotation(partWall, out xOffset, out zoffset);
             var center = LineSegment2d.Center(partWall.V1, partWall.V2);
 
             

@@ -10,27 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts
+namespace BuildingUtils
 {
     /// <summary>
     /// класс который определяет действия общие для всех помещений
     /// </summary>
-    public abstract class Premises3D : UnityEngine.Object, IVisualizer
+    public static class Premises3DUtils
     {
-        protected RoomSetting premisesPrefabs;
-        public RoomSetting PremisesPrefabs { get => premisesPrefabs; set => premisesPrefabs = value; }
-
-        public Premises3D(RoomSetting _premisesPrefabs)
-        {
-            premisesPrefabs = _premisesPrefabs;
-        }
-        public Premises3D()
-        {
-
-        }
-
-
-        protected float FindWallRotation(PartOfWall wall, out float xOffset, out float yOffset, float maxOffset = 0.1f, bool moveDiractionInside = true)
+        public static float FindWallRotation(PartOfWall wall, out float xOffset, out float yOffset, float maxOffset = 0.1f, bool moveDiractionInside = true)
         {
 
             var point1 = new Vector3((float)wall.V1.X, 0, (float)wall.V1.Y);
@@ -76,10 +63,7 @@ namespace Assets.Scripts
         }
 
 
-        public abstract void Visualize();
-
-
-        public GameObject InstantiateWallPrefab(PartOfWall partWall, GameObject prefab, Transform parent, Transform buildingTransform, int floor, Vector3 additionalOffset, float rotationPosOffset, bool moveDirectionInside)
+        public static GameObject InstantiateWallPrefab(PartOfWall partWall, GameObject prefab, Transform parent, Transform buildingTransform, int floor, Vector3 additionalOffset, float rotationPosOffset, bool moveDirectionInside)
         {
             float xOffset;
             float zOffset;
@@ -89,7 +73,7 @@ namespace Assets.Scripts
 
             var position = new Vector3((float)center.X + xOffset, Building2D.FloorHight * floor, (float)center.Y + zOffset) + buildingTransform.position + additionalOffset;
 
-            var curRainDrain = Instantiate(prefab, position, Quaternion.identity);
+            var curRainDrain = GameObject.Instantiate(prefab, position, Quaternion.identity);
 
             curRainDrain.transform.SetParent(parent);
             
@@ -99,7 +83,7 @@ namespace Assets.Scripts
             return curRainDrain;
         }
 
-        public GameObject InstacntiateAngleObject(Angle angle, GameObject prefab, Transform parent, Transform buildingTransform, int floor, float YOffset = -0.2f)
+        public static GameObject InstacntiateAngleObject(Angle angle, GameObject prefab, Transform parent, Transform buildingTransform, int floor, float YOffset = -0.2f)
         {
             float xOffset;
             float zOffset;
@@ -115,7 +99,7 @@ namespace Assets.Scripts
             FindWallRotation(angle.SecondWall, out xOffset, out zOffset, 0.1f, false);
             position += new Vector3(xOffset, YOffset, zOffset);
            
-            var curRainDrain = Instantiate(prefab, position, Quaternion.identity);
+            var curRainDrain = GameObject.Instantiate(prefab, position, Quaternion.identity);
 
             curRainDrain.transform.SetParent(parent);
 

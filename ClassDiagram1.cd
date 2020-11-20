@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Assets.Scripts.Builders.Building3D" Collapsed="true">
+    <Position X="5.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIUEAAAAAAEAAAAAAAgAAAAAQIEAIAAAAIAAQ=</HashCode>
+      <FileName>Assets\Scripts\Plan3D\AbstractHouse3D\Building3D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Assets.Scripts.Builders.Room3D" Collapsed="true">
+    <Position X="8" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAiQAADAEAAAsgQFABMEIghASAQgACAAAAGAAggDgA=</HashCode>
+      <FileName>Assets\Scripts\Plan3D\AbstractHouse3D\Room3D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Assets.Scripts.Premies.Buildings.Entrace3D.Entrance3D" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAGAAAAAUEAAAAAIAAAAAAAAAAAgAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Plan3D\AbstractHouse3D\Entrance3D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Assets.Scripts.Premies.Buildings.Floors.Floor3D" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAABAWAACAARAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Plan3D\AbstractHouse3D\Floor3D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BuildingUtils.Premises3DUtils" Collapsed="true">
+    <Position X="6.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAEAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Assets\Scripts\Plan3D\AbstractHouse3D\Premises3DUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Floor.Entrance2D" Collapsed="true">
+    <Position X="2.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAACIAACAAAAAAgYAAAABAQAAAgA=</HashCode>
+      <FileName>Assets\Scripts\Plan2D\AbstractHouse2D\Entrance2D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Floor.Floor2D" Collapsed="true">
+    <Position X="8.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAgAAAAEAAAAAAAAAAAAAAAAAIAAAQI=</HashCode>
+      <FileName>Assets\Scripts\Plan2D\AbstractHouse2D\Floor2D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Rooms.Angle" Collapsed="true">
+    <Position X="14.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAEAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Plan2D\AbstractHouse2D\Room2D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rooms.Room2D" Collapsed="true">
+    <Position X="8.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACDAAIYAAAAgAAAAEIIgAIAwAAAZwAAAAAIARCAAAI=</HashCode>
+      <FileName>Assets\Scripts\Plan2D\AbstractHouse2D\Room2D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Assets.Scripts.Premies.Buildings.Building2D.Polygon" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Plan2D\AbstractHouse2D\Building2D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Scripts.Premies.Buildings.Building2D.Building2D" Collapsed="true">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAABAEAACAAAIACAAAAAAAAAAEEAQQAAABE=</HashCode>
+      <FileName>Assets\Scripts\Plan2D\AbstractHouse2D\Building2D.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Enum Name="Rooms.RoomType" Collapsed="true">
+    <Position X="16" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAEABAAoAAIAAAAAQAEEAAAAAABAQAAAAAAAgGAAQI=</HashCode>
+      <FileName>Assets\Scripts\Plan2D\AbstractHouse2D\Room2D.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Rooms.ZoneType" Collapsed="true">
+    <Position X="14.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAQAAAAAAAAAEAQAA=</HashCode>
+      <FileName>Assets\Scripts\Plan2D\AbstractHouse2D\Room2D.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Rooms.DoorType" Collapsed="true">
+    <Position X="14.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Plan2D\AbstractHouse2D\Room2D.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

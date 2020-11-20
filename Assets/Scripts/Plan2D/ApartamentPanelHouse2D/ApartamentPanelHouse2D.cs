@@ -15,7 +15,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Buildings
 {
-    class ApartamentPanelHouse2D : Building2D
+    public class ApartamentPanelHouse2D : Building2D
     {
        
         public new int Angles

@@ -11,10 +11,10 @@ using UnityEngine;
 
 namespace Assets.Scripts.Premies.Buildings.Entrace3D
 {
-    public abstract class Entrance3D : UnityEngine.Object, IVisualizer, IBuildingPremises3D
+    public abstract class Entrance3D : Entrance2D, IVisualizer, IBuildingPremises3D
     {
 
-        protected Entrance2D m_entrace2D;
+        //protected Entrance2D m_entrace2D;
         protected EntraceSetting m_EntraceSettings;
         protected GameObject m_entracesRoot;
         protected GameObject m_buildingRoot;
@@ -22,15 +22,16 @@ namespace Assets.Scripts.Premies.Buildings.Entrace3D
 
         protected List<RoomSetting> buildingPossiblePrefabs;
 
-        protected List<Floor3D> floors3D;
+        protected List<IFloor3D> floors3D;
 
         protected Material m_outerWallMaterial;
-        public Entrance3D(Entrance2D entrace2D, EntraceSetting settings, GameObject entracesRoot, GameObject buildingRoot, List<RoomSetting> buildingPossiblePrefabs, Material outerWallMaterial=null)
+
+        public Entrance3D(Entrance2D entrace2D, EntraceSetting settings, GameObject entracesRoot, GameObject buildingRoot, List<RoomSetting> buildingPossiblePrefabs, Material outerWallMaterial=null) : base(entrace2D)
         {
            
             m_outerWallMaterial = outerWallMaterial;
-            m_EntraceSettings = settings;
-            this.m_entrace2D = entrace2D;
+            m_EntraceSettings = settings;         
+
             this.m_entracesRoot = entracesRoot;
             this.m_buildingRoot = buildingRoot;
 

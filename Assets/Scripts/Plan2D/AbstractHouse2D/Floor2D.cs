@@ -9,18 +9,26 @@ using Assets.Scripts.Premies.Buildings.Floors;
 
 namespace Floor
 {
-  
+
     public abstract class Floor2D : Premises2D, IBuildingPremises2D
     {
-        
-        
+
+
 
         public List<Flat2D> flats;
-        protected Room2D Corridor;
-        protected Room2D Lift;
-        protected Room2D Stairs;
+        public Room2D Corridor;
+        public Room2D Lift;
+        public Room2D Stairs;
         public int Floor;
         public int FloorsNumber;
+
+        public Floor2D(Floor2D floor) {
+            ExitPosition = floor.ExitPosition;
+            MainPolygon = floor.MainPolygon;
+            BuildingForm = floor.BuildingForm;
+            roomRequisites = floor.roomRequisites;
+            Floor = floor.Floor;
+        }
         public Floor2D(List<Vector2d> _MainPolygon, List<Vector2d> _BuildingForm, Vector2d exitPoint, List<RoomRequisite> requisite, int floor, int floorNumber)
         {
             ExitPosition = exitPoint;

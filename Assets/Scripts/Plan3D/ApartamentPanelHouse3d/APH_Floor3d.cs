@@ -1,5 +1,6 @@
 ﻿using ArchitectureGrid;
 using Assets.Scripts.Builders;
+using Assets.Scripts.Interfaces;
 using Assets.Scripts.Plan3D.ApartamentPanelHouse3d;
 using Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D.Rooms;
 using Assets.Scripts.Premies.Buildings.Floors;
@@ -16,30 +17,54 @@ using UnityEngine.TextCore;
 
 namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D
 {
-    public class APH_Floor3D : Floor3D
+    public class APH_Floor3D : APH_DefaulFloor2D, IVisualizer, IFloor3D
     {
 
         protected PanelHouseSettings m_panelHouseSettings;
         protected FloorSettings m_floorSettings;
         int m_floorNumber;
-      
-        public APH_Floor3D(Floor2D floor2d, FloorSettings floorSettings, GameObject floorsRoot, GameObject buildingRoot,
-            PanelHouseSettings settings, List<RoomSetting> buildingPossiblePrefabs, int floorsNumber, RoofType roof, Material outerWallMaterial=null) : base(floor2d, floorsRoot, buildingRoot, buildingPossiblePrefabs, roof, outerWallMaterial)
+
+        protected List<Room3D> m_floors3D;
+
+        protected GameObject m_floorRoot;
+        protected GameObject m_floorsRoot;
+        protected GameObject m_buildingRoot;
+
+        protected Material m_outerWallMaterial;
+
+
+
+        protected List<RoomSetting> _buildingPossiblePrefabs;
+
+        protected List<Room3D> rooms3D;
+
+        public RoofType RoofType { get; private set; }
+
+        public APH_Floor3D(APH_BaseFloor2D floor2d, FloorSettings floorSettings, GameObject floorsRoot, GameObject buildingRoot,
+            PanelHouseSettings settings, List<RoomSetting> buildingPossiblePrefabs, int floorsNumber, RoofType roof, Material outerWallMaterial=null) : base(floor2d)
         {
+            RoofType = roof;
+            m_outerWallMaterial = outerWallMaterial;
+
+            this.m_floorsRoot = floorsRoot;
+
+            m_buildingRoot = buildingRoot;
+
+            _buildingPossiblePrefabs = buildingPossiblePrefabs;
+
             m_floorNumber = floorsNumber;
             m_floorSettings = floorSettings;
             m_panelHouseSettings = settings;
         }
-
-        public override void Visualize()
+        public void Visualize()
         {
 
             List<PartOfWall> instantiatedWalls = new List<PartOfWall>();
-            var rooms = m_floor2D.GetRooms();
+            var rooms = GetRooms();
 
             rooms3D = new List<Room3D>();
 
-            m_floorRoot = new GameObject("Floor " + m_floor2D.Floor);
+            m_floorRoot = new GameObject("Floor " + Floor);
             m_floorRoot.transform.SetParent(m_floorsRoot.transform);
 
 
@@ -60,35 +85,35 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D
                 roomRoot.transform.parent = m_floorRoot.transform;
                 Room3D room3d = null;
 
-                if (m_floor2D.Floor == 0)
+                if (Floor == 0)
                 {
                     if (rooms[i].RoomType != RoomType.Stairs)
-                        room3d = new APH_Room3D(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, m_floor2D.Floor, m_floorNumber, instantiatedWalls, true, true, outerWallMaterial);                   
+                        room3d = new APH_Room3D(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, Floor, m_floorNumber, instantiatedWalls, true, true, outerWallMaterial);                   
 
-                    else room3d = new APH_Room3d_Stairs(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, m_floor2D.Floor, m_floorNumber, instantiatedWalls, false, true, outerWallMaterial);
+                    else room3d = new APH_Room3d_Stairs(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, Floor, m_floorNumber, instantiatedWalls, false, true, outerWallMaterial);
                 }
 
-                else if (m_floorNumber-2 == m_floor2D.Floor && RoofType == RoofType.CASCADE)
+                else if (m_floorNumber-2 == Floor && RoofType == RoofType.CASCADE)
                 {
                     if (rooms[i].RoomType != RoomType.Stairs)
-                        room3d = new APH_Room3D(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, m_floor2D.Floor, m_floorNumber, instantiatedWalls, true, true, outerWallMaterial);    
+                        room3d = new APH_Room3D(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, Floor, m_floorNumber, instantiatedWalls, true, true, outerWallMaterial);    
                    
-                    else room3d = new APH_Room3d_Stairs(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, m_floor2D.Floor, m_floorNumber, instantiatedWalls, true, false, outerWallMaterial);
+                    else room3d = new APH_Room3d_Stairs(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, Floor, m_floorNumber, instantiatedWalls, true, false, outerWallMaterial);
                 }
-                else if (m_floorNumber == m_floor2D.Floor && RoofType == RoofType.FLAT)
+                else if (m_floorNumber == Floor && RoofType == RoofType.FLAT)
                 {
                     if (rooms[i].RoomType != RoomType.Stairs)
-                        room3d = new APH_Room3D(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, m_floor2D.Floor, m_floorNumber, instantiatedWalls, false, false, outerWallMaterial);
+                        room3d = new APH_Room3D(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, Floor, m_floorNumber, instantiatedWalls, false, false, outerWallMaterial);
 
-                    else room3d = new APH_Room3d_Stairs(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, m_floor2D.Floor, m_floorNumber, instantiatedWalls, true, false, outerWallMaterial);
+                    else room3d = new APH_Room3d_Stairs(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, Floor, m_floorNumber, instantiatedWalls, true, false, outerWallMaterial);
                 }
 
                 else {
                    
                     if (rooms[i].RoomType != RoomType.Stairs)
-                        room3d = new APH_Room3D(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, m_floor2D.Floor, m_floorNumber, instantiatedWalls, true, true, outerWallMaterial);                  
+                        room3d = new APH_Room3D(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, Floor, m_floorNumber, instantiatedWalls, true, true, outerWallMaterial);                  
 
-                    else room3d = new APH_Room3d_Stairs(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, m_floor2D.Floor, m_floorNumber, instantiatedWalls, false, false, outerWallMaterial);
+                    else room3d = new APH_Room3d_Stairs(rooms[i], roomRoot, m_buildingRoot, m_panelHouseSettings, _buildingPossiblePrefabs, Floor, m_floorNumber, instantiatedWalls, false, false, outerWallMaterial);
 
                   
                 }
@@ -147,5 +172,6 @@ namespace Assets.Scripts.Plan3D.Buildings.Entrance3D.Floors3D
 
             //}
         }
+
     }
 }

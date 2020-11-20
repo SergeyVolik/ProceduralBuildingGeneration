@@ -20,7 +20,7 @@ namespace Assets.Scripts.Builders
     /// <summary>
     /// Абстрактный класс который определяет общие действия для всех Домов
     /// </summary>
-    public abstract class Building3D : Premises3D, IBuilding3D
+    public abstract class Building3D : Building2D, IBuilding3D, IVisualizer
     {
         ///пустышка корень дома
         public GameObject BuildingRoot { get; set; }
@@ -48,6 +48,8 @@ namespace Assets.Scripts.Builders
 
         public List<RoomSetting> RoomsSettings { get; set; }
 
+        
+
         protected Building3D(List<RoomSetting> buildingPrefabs, Material _RoofMaterial, List<RoomSetting> roomsPrefabs, GameObject root)
         {
             buildingPossiblePrefabs = buildingPrefabs;
@@ -64,7 +66,7 @@ namespace Assets.Scripts.Builders
        
 
 
-        public override void Visualize()
+        public void Visualize()
         {
             InitializeSpaces3D();
 

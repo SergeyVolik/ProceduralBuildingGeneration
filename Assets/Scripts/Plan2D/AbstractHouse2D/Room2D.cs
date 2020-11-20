@@ -102,7 +102,10 @@ namespace Rooms
             Cells.ForEach(c => c.room = this);
         }
 
+        public Room2D(Room2D room) 
+        { 
 
+        }
         public Room2D(RoomType roomType, string name)
         {
             m_roomType = roomType;

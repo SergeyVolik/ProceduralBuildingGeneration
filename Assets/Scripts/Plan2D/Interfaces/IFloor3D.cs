@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts.Interfaces
+public interface IFloor3D
 {
-    interface IPremies3D
-    {
-        RoomSetting PremisesPrefabs { get; }
-    }
 }
+

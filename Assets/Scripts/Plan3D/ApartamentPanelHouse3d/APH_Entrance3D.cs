@@ -28,20 +28,20 @@ namespace Assets.Scripts.Premies.Buildings
             
             m_entraceRoot = new GameObject("Entrace");
             m_entraceRoot.transform.parent = m_entracesRoot.transform;
-            floors3D = new List<Floor3D>();
+            floors3D = new List<IFloor3D>();
 
 
-            for (var i = 0; i < m_entrace2D.floors.Count; i++)
+            for (var i = 0; i < floors.Count; i++)
             {
                 var material = m_outerWallMaterial;
 
                 if (m_EntraceSettings.FloorsSettings[i].FloorOuterWallMaterial)
                     material = m_EntraceSettings.FloorsSettings[i].FloorOuterWallMaterial;
 
-                var floor3D = new APH_Floor3D(m_entrace2D.floors[i], m_EntraceSettings.FloorsSettings[i] , m_entraceRoot, m_buildingRoot, m_PanelHouseSettings, buildingPossiblePrefabs, m_EntraceSettings.FloorsSettings.Count, m_entrace2D.RoofType, material);
+                var floor3D = new APH_Floor3D(floors[i] as APH_BaseFloor2D, m_EntraceSettings.FloorsSettings[i] , m_entraceRoot, m_buildingRoot, m_PanelHouseSettings, buildingPossiblePrefabs, m_EntraceSettings.FloorsSettings.Count, RoofType, material);
 
                 floor3D.Visualize();
-                floors3D.Add(floor3D);
+                floors3D.Add(floor3D as IFloor3D);
             }       
         }
 

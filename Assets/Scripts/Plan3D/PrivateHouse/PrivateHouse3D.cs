@@ -13,7 +13,7 @@ namespace Assets.Scripts.Builders.Builder3D
 {
 
 
-    public class PrivateHouse3D : Building3D
+    public class PrivateHouse3D 
     {
 
 
@@ -188,10 +188,7 @@ namespace Assets.Scripts.Builders.Builder3D
 
         }
 
-        protected override void InitializeSpaces3D()
-        {
-            throw new NotImplementedException();
-        }
+      
 
 
 

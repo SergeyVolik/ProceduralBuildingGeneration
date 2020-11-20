@@ -46,6 +46,8 @@ namespace Assets.Scripts.Premies.Buildings.Building2D
         private RoofType _roofType;
 
         public RoofType RoofType => _roofType;
+
+        protected Building2D() { }
         protected Building2D(int numberOfFloors, float area, List<Vector2d> outerPolygon, RoofType roofType)
         {
             _roofType = roofType;

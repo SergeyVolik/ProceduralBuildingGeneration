@@ -17,11 +17,24 @@ namespace Floor
         public Floor2D roofFloor2d;
 
         public int FloorNumber;
-        protected List<RoomRequisite> roomsRequisite;
-        protected Vector2d _exit;
-        private RoofType _roofType;
+        public List<RoomRequisite> roomsRequisite;
+        public Vector2d _exit;
+        public RoofType _roofType;
 
         public RoofType RoofType => _roofType;
+        public Entrance2D(Entrance2D entrance) {
+            _roofType = entrance.RoofType;
+            BuildingForm = entrance.BuildingForm;
+            FloorNumber = entrance.FloorNumber;
+            MainPolygon = entrance.MainPolygon;
+            floors = new List<Floor2D>();
+            roomsRequisite = entrance.roomsRequisite;
+            _exit = entrance._exit;
+
+            basementFloor2d = entrance.basementFloor2d;
+            floors = entrance.floors;
+            roofFloor2d = entrance.roofFloor2d;
+        }
         public Entrance2D(List<Vector2d> outerPolygon, List<Vector2d> buildingPolygon, int floorsNumber, Vector2d exit , List<RoomRequisite> _roomsRequisite, RoofType roofType)
         {
             _roofType = roofType;

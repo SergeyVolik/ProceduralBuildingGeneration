@@ -17,7 +17,7 @@ namespace StraightSkeleton
     /// <remarks> 
     ///     This is .NET adopted port of java implementation from kendzi-straight-skeleton library.
     ///     This code is taked from github => https://github.com/reinterpretcat/csharp-libs and 
-    ///     expanded by me(https://github.com/QJ3N/BuildingGeneration).
+
 
     ///     
     /// </remarks>
