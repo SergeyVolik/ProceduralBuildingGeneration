@@ -16,12 +16,6 @@ public class PoolElementData
 
 public abstract class DefaultBuildingSettings : ScriptableObject
 {
-    [Space(10), Header("Optimization")]
-
-    [SerializeField, Tooltip("create pool of object for more faster creation"), Space(5)]
-    public PoolElementData[] PoolElement;
-
-    public GameObject RoomCombiner;
 
     [Space(10), Header("Wall prefabs")]
 

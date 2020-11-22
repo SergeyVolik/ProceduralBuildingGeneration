@@ -25,22 +25,31 @@ namespace ArchitectureGrid
     {
 
 
-
+        List<PlanCell> OutsideCells;
 
         #region Constructors
-        public FlatPlanProcessor2D(List<Vector2d> polygon, List<Vector2d> buildingForm, Vector2d exitPoint) : base(polygon, buildingForm, exitPoint)
+        public FlatPlanProcessor2D(List<Vector2d> polygon, List<Vector2d> buildingForm, Vector2d exitPoint, List<PlanCell> outsideCells) : base(polygon, buildingForm, exitPoint)
         {
+            OutsideCells = outsideCells;
 
-            BuildingForm = buildingForm;
+             BuildingForm = buildingForm;
             neighbourCells = new List<PlanCell>();
             Rooms = new List<Room2D>();
-            FindWindows();
+           
             growthProcessor = new RoomGrowthProcessor2D(Grid, GridVector, Rooms, ExitCell);
 
         }
 
         public override void CreatePlan()
         {
+            FindWindows();
+
+            if(OutsideCells != null)
+                GridVector.ForEach(cell =>
+                {
+                    if (OutsideCells.Exists(c => c.Center.Equals(cell.Center)))
+                        cell.Tag = PlanCellTag.Outside;
+                });
 
             growthProcessor.GrowthOfRooms();
             AddDoorsToRooms();

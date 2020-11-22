@@ -98,18 +98,22 @@ namespace ArchitectureGrid
                     List<PlanCell> bestCells = null;
                     if (leftScore != null && bestScore == leftScore)
                     {
+                        NextLeftCells.RemoveAll(c => !c.IsFree);
                         bestCells = NextLeftCells;
                     }
                     else if (rightScore != null && bestScore == rightScore)
                     {
+                        NextRightCells.RemoveAll(c => !c.IsFree);
                         bestCells = NextRightCells;
                     }
                     else if (topScore != null && bestScore == topScore)
                     {
+                        NextTopCells.RemoveAll(c => !c.IsFree);
                         bestCells = NextTopCells;
                     }
                     else if (bottomScore != null && bestScore == bottomScore)
                     {
+                        NextBottomCells.RemoveAll(c => !c.IsFree);
                         bestCells = NextBottomCells;
                     }
 

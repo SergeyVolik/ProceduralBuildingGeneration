@@ -12,6 +12,9 @@ public class EntraceSetting
     [SerializeField]
     public Material EntraceOuterWallMaterial;
 
+    [SerializeField]
+    public bool NeedPassage = false;
+
     [Header("Floor outer wall materias")]
     public List<FloorSettings> FloorsSettings = new List<FloorSettings>();
 
@@ -80,6 +83,7 @@ public class PanelHouseSettings : DefaultBuildingSettings
     public GameObject stairsFirstFloor;    
     public GameObject stairsnextFloor;
 
+    public GameObject elevatorPrefab;
     public Material stairsWallMaterial;
 
 

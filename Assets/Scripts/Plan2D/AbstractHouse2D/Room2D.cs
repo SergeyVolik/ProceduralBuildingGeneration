@@ -180,9 +180,9 @@ namespace Rooms
             {
                 var wall = nighboarWalls2[UnityEngine.Random.Range(0, nighboarWalls2.Count)];
 
-                wall.WallType = WallType.NoWall;
+                wall.WallType = WallType.WallWithDoor;
                 var wall2 = Walls.FirstOrDefault(w2 => w2.Equals(wall));
-                wall2.WallType = WallType.NoWall;
+                wall2.WallType = WallType.WallWithDoor;
 
                 return true;
             }

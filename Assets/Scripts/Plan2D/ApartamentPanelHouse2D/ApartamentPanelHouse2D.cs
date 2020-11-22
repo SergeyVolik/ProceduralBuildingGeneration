@@ -58,10 +58,10 @@ namespace Assets.Scripts.Buildings
 
         private const int BUILDING_WIDTH = 20;
 
-      
-        public ApartamentPanelHouse2D(int numberOfFloors, float area, int entraces, List<RoomRequisite> requisites, List<Vector2d> buildingPolygon, RoofType roof = RoofType.FLAT) : base(numberOfFloors, area, buildingPolygon, roof)
+        private List<bool> _passages;
+        public ApartamentPanelHouse2D(int numberOfFloors, float area, int entraces, List<RoomRequisite> requisites, List<Vector2d> buildingPolygon, List<bool> passages, RoofType roof = RoofType.FLAT) : base(numberOfFloors, area, buildingPolygon, roof)
         {
-
+            _passages = passages;
             roomRequisites = requisites;
             NumberOfFloors = numberOfFloors;
             Area = area;
@@ -72,7 +72,7 @@ namespace Assets.Scripts.Buildings
             
         }
      
-        public override List<Room2D> GetRooms()
+        public override List<Room2D> GetRooms2D()
         {
             throw new NotImplementedException();
         }
@@ -146,7 +146,7 @@ namespace Assets.Scripts.Buildings
             for (var i = 0; i < entraces.Count; i++)
             {
                 var Center = new LineSegment2d(entraces[i][0], entraces[i][1]).Center();
-                var entrace = new Entrance2D(entraces[i], BuildingForm, NumberOfFloors, Center, roomRequisites, RoofType);
+                var entrace = new Entrance2D(entraces[i], BuildingForm, NumberOfFloors, Center, roomRequisites, RoofType, _passages[i]);
                 entrace.Create2DSpace();
                 m_buildingPremises2D.Add(entrace);
 

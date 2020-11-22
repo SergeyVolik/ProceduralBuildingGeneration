@@ -58,8 +58,8 @@ public class BuildingManager : MonoBehaviour
         //spawnPosition.name = "BuildingRoot";
 
 
-        settings.PoolElement.ToList().ForEach(e =>  ObjectsPool.Instance.AddToPoolObjects(e.PrefabToPool, e.numberPrefabsToPool));
-        ObjectsPool.Instance.AddToPoolObjects(settings.RoomCombiner, 5000, true);
+        //settings.PoolElement.ToList().ForEach(e =>  ObjectsPool.Instance.AddToPoolObjects(e.PrefabToPool, e.numberPrefabsToPool));
+       // ObjectsPool.Instance.AddToPoolObjects(settings.RoomCombiner, 5000, true);
     }
 
     GameObject target;
@@ -105,14 +105,14 @@ public class BuildingManager : MonoBehaviour
         //return house;
      
     }
-    public void CreateHouse()
+    public ApartamentPanelHouse3D CreateHouse()
     {
         DateTime now = DateTime.Now;
 
         Clear();
 
-        foreach (var spawnPosition in spawnPositions)
-        {
+        //foreach (var spawnPosition in spawnPositions)
+        //{
            
 
             if (settings == null)
@@ -122,13 +122,13 @@ public class BuildingManager : MonoBehaviour
 
             
 
-            var house = new ApartamentPanelHouse3D(settings, spawnPosition);
+            var house = new ApartamentPanelHouse3D(settings, spawnPositions[0]);
 
 
 
             house.Visualize();
 
-           
+            return house;
             //house.StartAnimation();
 
 
@@ -152,8 +152,8 @@ public class BuildingManager : MonoBehaviour
 
             //spawnPosition.GetComponent<CombineMesh>().CombineMeshes();
 
-            
-        }
+
+        //}
         Debug.LogError("TIme for calc = " + (DateTime.Now - now));
         Debug.Break();
 

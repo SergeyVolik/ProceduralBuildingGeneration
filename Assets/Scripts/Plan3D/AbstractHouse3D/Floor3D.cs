@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Premies.Buildings.Floors
 {
-    public abstract class Floor3D : Floor2D, IVisualizer, IBuildingPremises3D, IFloor3D
+    public abstract class Floor3D : Floor2D, IVisualizer, IBuildingPremises3D//, IFloor3D
     {
 
         protected List<Room3D> m_floors3D;

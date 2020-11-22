@@ -50,7 +50,7 @@ namespace Buldings
             throw new NotImplementedException();
         }
 
-        public override List<Room2D> GetRooms()
+        public override List<Room2D> GetRooms2D()
         {
             throw new NotImplementedException();
         }

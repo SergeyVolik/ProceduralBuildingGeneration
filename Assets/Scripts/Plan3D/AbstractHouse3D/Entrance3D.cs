@@ -1,4 +1,5 @@
 ﻿using ArchitectureGrid;
+using Assets.Scripts.Builders;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Premies.Buildings.Floors;
 using Floor;
@@ -11,7 +12,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Premies.Buildings.Entrace3D
 {
-    public abstract class Entrance3D : Entrance2D, IVisualizer, IBuildingPremises3D
+    public abstract class Entrance3D : Entrance2D, IVisualizer, IBuildingPremises3D, IRoom3DHolder
     {
 
         //protected Entrance2D m_entrace2D;
@@ -22,7 +23,7 @@ namespace Assets.Scripts.Premies.Buildings.Entrace3D
 
         protected List<RoomSetting> buildingPossiblePrefabs;
 
-        protected List<IFloor3D> floors3D;
+        public List<IFloor3D> floors3D;
 
         protected Material m_outerWallMaterial;
 
@@ -38,6 +39,12 @@ namespace Assets.Scripts.Premies.Buildings.Entrace3D
             this.buildingPossiblePrefabs = buildingPossiblePrefabs;
 
            
+        }
+
+        public List<Room3D> GetRooms3D()
+        {
+            var rooms = new List<Room3D>();
+            throw new NotImplementedException();
         }
 
         public abstract void Visualize();

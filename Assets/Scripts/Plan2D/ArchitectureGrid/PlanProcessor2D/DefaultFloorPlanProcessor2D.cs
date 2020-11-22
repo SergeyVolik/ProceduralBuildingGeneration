@@ -16,22 +16,25 @@ namespace ArchitectureGrid
     /// Основной класс ответсвенный за построение плана помещения 
     /// </summary>
     /// 
+   
     public class DefaultFloorPlanProcessor2D : PlanProcessor2D
     {
-
+        public bool HavePassage;
 
         #region Constructors
-        public DefaultFloorPlanProcessor2D(List<Vector2d> polygon, List<Vector2d> buildingForm, Vector2d exitPoint) : base(polygon, buildingForm, exitPoint)
+        public DefaultFloorPlanProcessor2D(List<Vector2d> polygon, List<Vector2d> buildingForm, Vector2d exitPoint, bool passage = false) : base(polygon, buildingForm, exitPoint)
         {
             neighbourCells = new List<PlanCell>();
             Rooms = new List<Room2D>();
-
+            HavePassage = passage;
             growthProcessor = new FlatGrowthProcessor2D(Grid, GridVector, Rooms, ExitCell);
 
         }
 
         public override void CreatePlan()
         {
+            if (HavePassage)
+                CreatePassage();
 
             AddStairsToExit();
             AddCorridorToStairs();
@@ -40,8 +43,17 @@ namespace ArchitectureGrid
 
             growthProcessor.GrowthOfRooms();
         }
+        public List<PlanCell> outsideCells;
+        void CreatePassage()
+        {
+            outsideCells = new List<PlanCell>();
+            for (var i = 0; i < Grid.GetLength(0); i++)
+            {
+                Grid[i, Grid.GetLength(1) - 1].Tag = PlanCellTag.Outside;
+                outsideCells.Add(Grid[i, Grid.GetLength(1) - 1]);
 
-
+            }
+        }
         #endregion
 
         protected override List<PlanCell> GetCorridorCells(PlanCell door)
@@ -109,11 +121,15 @@ namespace ArchitectureGrid
         }
         public void AddFlatsToFloor()
         {
+            var cells = new List<PlanCell>();
 
+            if (HavePassage)
+                cells.Add(Grid[Grid.GetLength(0) - 1, Grid.GetLength(1) - 2]);
+            else cells.Add(Grid[Grid.GetLength(0) - 1, Grid.GetLength(1) - 1]);
             Rooms.Add(
                 new Room2D(RoomType.Flat, "Flat1")
                 {
-                    Cells = new List<PlanCell>() { Grid[Grid.GetLength(0) - 1, Grid.GetLength(1) - 1] }
+                    Cells = cells
                 }
             );
             growthProcessor.RoomsToGrowth.Add(Rooms[Rooms.Count - 1]);
@@ -124,9 +140,16 @@ namespace ArchitectureGrid
             });
 
             growthProcessor.RoomsToGrowth.Add(Rooms[Rooms.Count - 1]);
+
+            cells = new List<PlanCell>();
+
+            if (HavePassage)
+                cells.Add(Grid[0, Grid.GetLength(1) - 2]);
+            else cells.Add(Grid[0, Grid.GetLength(1) - 1]);
+
             Rooms.Add(new Room2D(RoomType.Flat, "Flat3")
             {
-                Cells = new List<PlanCell>() { Grid[0, Grid.GetLength(1) - 1] }
+                Cells = cells
             }
             );
             growthProcessor.RoomsToGrowth.Add(Rooms[Rooms.Count - 1]);

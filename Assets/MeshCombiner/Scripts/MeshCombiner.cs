@@ -31,7 +31,7 @@ public class MeshCombiner : MonoBehaviour
 	private string folderPath = "Prefabs/CombinedMeshes";
 	[SerializeField]
 	[Tooltip("MeshFilters with Meshes which we don't want to combine into one Mesh.")]
-	private MeshFilter[] meshFiltersToSkip = new MeshFilter[0];
+	public MeshFilter[] meshFiltersToSkip = new MeshFilter[0];
 
 	public bool CreateMultiMaterialMesh { get { return createMultiMaterialMesh; } set { createMultiMaterialMesh = value; } }
 	public bool CombineInactiveChildren { get { return combineInactiveChildren; } set { combineInactiveChildren = value; } }

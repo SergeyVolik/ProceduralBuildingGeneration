@@ -34,7 +34,7 @@ namespace Assets.Scripts.Builders
         protected Room2D room2D;
 
         protected List<RoomSetting> buildingPossiblePrefabs;
-        protected int floor;
+        public int floor;
         protected List<PartOfWall> instantiatedWalls;
 
         protected Material m_wallMaterial;

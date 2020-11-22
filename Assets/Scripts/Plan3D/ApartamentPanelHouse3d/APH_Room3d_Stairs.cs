@@ -16,11 +16,13 @@ namespace Assets.Scripts.Plan3D.ApartamentPanelHouse3d
     public class APH_Room3d_Stairs : Room3D
     {
         protected PanelHouseSettings settings;
-
+        protected RoofType _roof;
         public APH_Room3d_Stairs(Room2D room2D, GameObject roomsRoot, GameObject buildingRoot, PanelHouseSettings _settings,
-            List<RoomSetting> buildingPossiblePrefabs, int floor, int floorNumber, List<PartOfWall> instantiatedWalls, bool needCeiling, bool needFloor, Material outerWallMaterial= null) : base(room2D, roomsRoot, buildingRoot,
+            List<RoomSetting> buildingPossiblePrefabs, int floor, int floorNumber, List<PartOfWall> instantiatedWalls,
+            bool needCeiling, bool needFloor, RoofType roof,Material outerWallMaterial= null) : base(room2D, roomsRoot, buildingRoot,
                 buildingPossiblePrefabs, floor, instantiatedWalls, floorNumber, null, needCeiling, needFloor, outerWallMaterial)
         {
+            _roof = roof;
             settings = _settings;
         }
 
@@ -64,9 +66,14 @@ namespace Assets.Scripts.Plan3D.ApartamentPanelHouse3d
                     currPrefab = settings.BasementWindow;
             }
 
+            if (wall.WallType == WallType.WallWithDoor)
+            {
+                if (floor == m_floorsNumber - 1 || _roof == RoofType.CASCADE && floor == m_floorsNumber - 2)
+                    currPrefab = settings.StairsRoofFaceWall;
+              
+            }
+           
 
-            if (floor == m_floorsNumber-1 && wall.WallType == WallType.WallWithDoor)
-                currPrefab = settings.StairsRoofFaceWall;
         }
       
 

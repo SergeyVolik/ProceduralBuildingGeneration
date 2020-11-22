@@ -9,6 +9,8 @@ using Buldings;
 using Assets.Scripts.Buildings;
 using Floor;
 using UnityStandardAssets.Characters.FirstPerson;
+using ArchitectureGrid;
+using Rooms;
 
 [RequireComponent(typeof(BuildingManager))]
 public class BuildingUI : MonoBehaviour
@@ -23,7 +25,7 @@ public class BuildingUI : MonoBehaviour
     public GameObject SizeMult;
     public GameObject title;
 
-    PrivateHouse2D PrivateHouse;
+
     ApartamentPanelHouse2D ApartmentPanelHouse;
     [SerializeField]
     public BuildingManager creator;
@@ -79,8 +81,11 @@ public class BuildingUI : MonoBehaviour
         playerCOntroller.StopAllCoroutines();
         playerCOntroller.gameObject.SetActive(true);
         rotateCamera.gameObject.SetActive(false);
-        /*var house = */GetComponent<BuildingManager>().CreateHouse();
+        var house = GetComponent<BuildingManager>().CreateHouse();
+        ShowRooms(house.Entaraces3D[0].floors[1].GetRooms2D());
+        ShowRooms(house.Entaraces3D[1].floors[1].GetRooms2D());
     }
+
 
         //void ShowTree(SkeletonCorridor sk)
 
@@ -166,65 +171,7 @@ public class BuildingUI : MonoBehaviour
         title.GetComponent<Text>().text = text;
     }
 
-    public void NextLine()
-    {
-        //var regions = PrivateHouse.floors[0];
-
-       
-
-        switch (state)
-        {
-            case ShowState.ShowOuterPolygon:
-                TitleSetText("Форма здания");
-                Clear();
-                ShowOuterPolygon();
-                state = ShowState.ShowRoof;
-                break;
-            case ShowState.ShowRoof:
-                TitleSetText("Крыша");
-                Clear();
-                //ShowRoof();
-                state = ShowState.ShowCoridor;
-                break;
-            case ShowState.ShowCoridor:
-                TitleSetText("Коридор");
-                Clear();
-                //ShowCorridor();
-                state = ShowState.ShowArchGrid;
-                break;
-            case ShowState.ShowArchGrid:
-                TitleSetText("Архитектурная сетка с внешней и внутренней частью");
-                Clear();
-                //ShowArchGrid();
-                state = ShowState.ShowGridCoridor;
-                break;
-            case ShowState.ShowGridCoridor:
-                TitleSetText("Архитектурная сетка после добавления коридором");
-                ShowGridCoridor();
-                state = ShowState.ShowWindowsAndDoor;
-                break;
-            case ShowState.ShowWindowsAndDoor:
-                TitleSetText("Архитектурная сетка после добавления окон и двери ");
-                //ShowWindowsAndDoor();
-                state = ShowState.ShowCorridorAndCorrectCell;
-                break;
-            case ShowState.ShowCorridorAndCorrectCell:
-                TitleSetText("Архитектурная сетка после определения ячеек кандидатов для роста комнат ");
-                //ShowCorridorAndCorrectCell();
-                state = ShowState.ShowCorridorAndSelectedCells;
-                break;
-            case ShowState.ShowCorridorAndSelectedCells:
-                TitleSetText("Архитектурная сетка после выбора ячеек кандидатов для роста комнат ");
-                //ShowCorridorAndSelectedCells();
-                state = ShowState.Show3d;
-                break;
-            case ShowState.Show3d:
-                state = ShowState.ShowOuterPolygon;
-                break;
-
-
-        }
-    }
+    
 
     Color RndColor()
     {
@@ -232,8 +179,8 @@ public class BuildingUI : MonoBehaviour
     }
     void ShowOuterPolygon()
     {
-        var polygon = PrivateHouse.MainPolygon;
-        ShowList(polygon, new Color((float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f)));
+        
+
     }
    
     //void ShowCorridor()
@@ -242,17 +189,17 @@ public class BuildingUI : MonoBehaviour
     //    ShowOuterPolygon();
     //    ShowList(corridor.polygonOfCorridor, new Color((float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f)));
     //}
-    void ShowArchGrid(Premises2D floor1, Color insideColor)
+    void ShowArchGrid(BasePlanProcessor2D PlanProcessor2D, Color insideColor)
     {
         
-        for (var i = 0; i < floor1.PlanProcessor2D.Grid.GetLength(0); i++)
+        for (var i = 0; i < PlanProcessor2D.Grid.GetLength(0); i++)
         {
-            for (var j = 0; j < floor1.PlanProcessor2D.Grid.GetLength(1); j++)
+            for (var j = 0; j < PlanProcessor2D.Grid.GetLength(1); j++)
             {
 
-                if (floor1.PlanProcessor2D.Grid[i, j].Tag == ArchitectureGrid.PlanCellTag.Inside)
+                if (PlanProcessor2D.Grid[i, j].Tag == ArchitectureGrid.PlanCellTag.Inside)
                 {
-                    ShowList(floor1.PlanProcessor2D.Grid[i, j].Square, insideColor, multCoef: 8f);
+                    ShowList(PlanProcessor2D.Grid[i, j].Square, insideColor, multCoef: 8f);
                 }
                
             }
@@ -261,9 +208,9 @@ public class BuildingUI : MonoBehaviour
     }
 
     
-    void ShowRooms(Premises2D floor1)
+    void ShowRooms(List<Room2D> rooms)
     {
-        var rooms = floor1.GetRooms();
+        //var rooms = floor1.GetRooms();
 
 
         for (var i = 0; i < rooms.Count; i++)
@@ -275,21 +222,21 @@ public class BuildingUI : MonoBehaviour
 
             var rnd = new Color((float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f));
 
-            if (rooms[i].RoomType == Rooms.RoomType.Corridor || rooms[i].RoomType == Rooms.RoomType.Stairs || rooms[i].RoomType == Rooms.RoomType.Lift)
-                continue;
-            for (var j = 0; j < rooms[i].Cells.Count; j++)
-            {
-                ShowList(rooms[i].Cells[j].Square, rnd, rooms[i].RoomName, 8f);
-            }
+            //if (rooms[i].RoomType == Rooms.RoomType.Corridor || rooms[i].RoomType == Rooms.RoomType.Stairs || rooms[i].RoomType == Rooms.RoomType.Lift)
+            //    continue;
+            //for (var j = 0; j < rooms[i].Cells.Count; j++)
+            //{
+            //    ShowList(rooms[i].Cells[j].Square, rnd, rooms[i].RoomName, 8f);
+            //}
             //var rnd = new Color((float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f));
-            ////if (roomWalls != null)
-            ////    for (var j = 0; j < roomWalls.Count; j++)
-            ////    {
+            if (roomWalls != null)
+                for (var j = 0; j < roomWalls.Count; j++)
+                {
 
-            ////        ShowList(new List<Vector2d>() { roomWalls[j].V1, roomWalls[j].V2 }, rnd);
-            ////    }
-            //rnd = new Color((float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f));
-            //ShowList(rooms[i].MainPolygon, rnd);
+                    ShowList(new List<Vector2d>() { roomWalls[j].V1, roomWalls[j].V2 }, rnd);
+                }
+            // rnd = new Color((float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f), (float)UnityEngine.Random.Range(0, 1f));
+            // ShowList(rooms[i].MainPolygon, rnd);
         }
 
         //for (var i = 0; i < floor1.ArchPlan.neighbourCells.Count; i++)      

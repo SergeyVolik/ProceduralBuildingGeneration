@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93459374c3ba0344aa2944bf542cb822, type: 3}
   m_Name: PanelBuildingData1 1
   m_EditorClassIdentifier: 
-  PoolElement: []
-  RoomCombiner: {fileID: 385356959401662716, guid: 7fdff432ce4ec4a43a8bc80d813d2ed7, type: 3}
   houseEnterWall: {fileID: 4578146322459339543, guid: 021901d4649f6bb4aa5a400bf6fee450, type: 3}
   houseEnterWallForMaterial: {fileID: 4730863975532162505, guid: 04e37b08a8aab754ead6ebf29a311c49, type: 3}
   defaultWall: {fileID: 6283819138621053698, guid: b44fa5f0f82ce4d42be24967b100b5fb, type: 3}
@@ -61,10 +59,11 @@ MonoBehaviour:
     _doorType: 1
     _to: bedroom1
     _from: Restroom1
-  RoofType: 1
+  RoofType: 0
   RoofForAllBuilding: 1
   entraces:
   - EntraceOuterWallMaterial: {fileID: 2100000, guid: dc958cef6ac274b409362d583b3fa355, type: 2}
+    NeedPassage: 1
     FloorsSettings:
     - FloorOuterWallMaterial: {fileID: 2100000, guid: aadcaacf8ace75648a262b1c5247763b, type: 2}
       Flat1:
@@ -102,8 +101,156 @@ MonoBehaviour:
         FloorOuterWallMaterial: {fileID: 0}
       Flat4:
         FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+  - EntraceOuterWallMaterial: {fileID: 2100000, guid: dc958cef6ac274b409362d583b3fa355, type: 2}
+    NeedPassage: 0
+    FloorsSettings:
+    - FloorOuterWallMaterial: {fileID: 2100000, guid: aadcaacf8ace75648a262b1c5247763b, type: 2}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 2100000, guid: 16fad12945610fc4d9d9133d8855cbbb, type: 2}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 2100000, guid: 5f1f0c767fb791e4ebec1824bdc43289, type: 2}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 2100000, guid: 799691fff9f6f314d9f8923b9280cd4e, type: 2}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 2100000, guid: ea5ce14ef809d9746a6250384f70980e, type: 2}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
   stairsFirstFloor: {fileID: 6716406475488326899, guid: 8e404b10f1c0c684cb5d5e590f531255, type: 3}
   stairsnextFloor: {fileID: 2232215468068713760, guid: fb46e72c00b013d47a937bcb01ba6c2b, type: 3}
+  elevatorPrefab: {fileID: 4368090982427473977, guid: e9a02819f41212a4cb3805e55b37588f, type: 3}
   stairsWallMaterial: {fileID: 2100000, guid: dace521a48d12644aa91b0758ce2934f, type: 2}
   corridorWallMaterial: {fileID: 2100000, guid: dace521a48d12644aa91b0758ce2934f, type: 2}
   corridoCeilingMaterial: {fileID: 0}

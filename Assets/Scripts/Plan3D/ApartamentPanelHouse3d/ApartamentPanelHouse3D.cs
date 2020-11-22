@@ -28,7 +28,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 namespace Assets.Scripts.Builders
 {
-    public class ApartamentPanelHouse3D : ApartamentPanelHouse2D, IBuilding3D, IVisualizer
+    public class ApartamentPanelHouse3D : ApartamentPanelHouse2D, IBuilding3D, IVisualizer, IRoom3DHolder
     {
         public GameObject BuildingRoot { get; set; }  
 
@@ -47,9 +47,9 @@ namespace Assets.Scripts.Builders
         }
 
         //
-        protected Floor3D roof3D;
-        protected List<Entrance3D> Entaraces3D;
-        protected Floor3D basemante3D;
+        public Floor3D roof3D;
+        public List<Entrance3D> Entaraces3D;
+        public Floor3D basemante3D;
 
         public Material RoofMaterial { get; set; }
 
@@ -58,6 +58,15 @@ namespace Assets.Scripts.Builders
         private const int BUILDING_WIDTH = 20;
 
         PanelHouseSettings m_panelHousesettings;
+
+        public List<Room3D> GetRooms3D()
+        {
+            var Rooms = new List<Room3D>();
+
+            Entaraces3D.ForEach(e => Rooms.AddRange(e.GetRooms3D()));
+
+            return Rooms;
+        }
         public ApartamentPanelHouse3D(PanelHouseSettings settings, GameObject root) : base(
             settings.entraces[0].FloorsSettings.Count,
             settings.areaForEntrace,
@@ -65,7 +74,9 @@ namespace Assets.Scripts.Builders
             settings.possibleRooms.Select(rs => rs.Requisite).ToList(),
             new ControlledRandomRectangularPolygon(4, settings.areaForEntrace * settings.entraces.Count).
                 CreateRectangle(BUILDING_WIDTH, BUILDING_WIDTH),
+            settings.entraces.Select(e => e.NeedPassage).ToList(),
             settings.RoofType
+            
             )
         {
 
@@ -105,15 +116,17 @@ namespace Assets.Scripts.Builders
 
             meshCombiner.DeactivateCombinedChildrenMeshRenderers = true;
             meshCombiner.CreateMultiMaterialMesh = true;
+            meshCombiner.DeactivateCombinedChildren = false;
 
-           
-            
+
+
             for (var j = 0; j < entraces.Count; j++)
             {
                 var outerWallMaterial = m_panelHousesettings.entraces[j].EntraceOuterWallMaterial;
 
                 var entrance3d = new APH_Entrance3D(entraces[j] as Entrance2D, m_panelHousesettings.entraces[j] ,EntracesRoot, BuildingRoot, m_panelHousesettings, buildingPossiblePrefabs, outerWallMaterial);
                 entrance3d.Visualize();
+                Entaraces3D.Add(entrance3d);
             }
 
             if (RoofType == RoofType.CASCADE)
@@ -121,12 +134,31 @@ namespace Assets.Scripts.Builders
 
             RainDrainVisualize();
 
-            meshCombiner.CombineMeshes(true);
-            //meshCombiner.CreateMeshCollider();
-
             
+            meshCombiner.meshFiltersToSkip = BuildingRoot.GetComponentsInChildren<MeshFilter>().ToList().Where(mf => mf.CompareTag("IgnoreMeshCombiner")).ToArray();
+            meshCombiner.CombineMeshes(true);
+           // meshCombiner.CreateMeshCollider();
 
-            ObjectsPool.Instance.UnblockAllObjects();
+            var liftRoomsFirstFloor = new List<Room3D>();
+
+            Entaraces3D.ForEach(e =>
+            {
+               var lift = e.floors[1].GetRooms2D().FirstOrDefault(r => r.RoomType == RoomType.Lift);
+
+                var center2d = lift.FindCenterOfRoomForRectangle();
+                var center = new Vector3((float)center2d.X, Building3D.FloorHight, (float)center2d.Y);
+
+                var LiftController = GameObject.Instantiate(
+                    m_panelHousesettings.elevatorPrefab,
+                    center + BuildingRoot.transform.position,
+                    Quaternion.identity).GetComponent<ElevatorController>();
+
+                LiftController.SetSettings(_numberOfFloors-2, 1, FloorHight);
+            });
+
+
+
+            //ObjectsPool.Instance.UnblockAllObjects();
 
             BuildingRoot.transform.rotation = Quaternion.Euler(BuildingRoot.transform.rotation.eulerAngles + BuildingRoot.transform.rotation.eulerAngles);
         }

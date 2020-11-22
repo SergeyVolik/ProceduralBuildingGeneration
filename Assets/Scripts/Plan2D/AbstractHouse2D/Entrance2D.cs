@@ -22,20 +22,21 @@ namespace Floor
         public RoofType _roofType;
 
         public RoofType RoofType => _roofType;
+        public bool NeedFirstFloorPassage;
         public Entrance2D(Entrance2D entrance) {
             _roofType = entrance.RoofType;
             BuildingForm = entrance.BuildingForm;
             FloorNumber = entrance.FloorNumber;
             MainPolygon = entrance.MainPolygon;
-            floors = new List<Floor2D>();
             roomsRequisite = entrance.roomsRequisite;
             _exit = entrance._exit;
 
             basementFloor2d = entrance.basementFloor2d;
             floors = entrance.floors;
             roofFloor2d = entrance.roofFloor2d;
+            NeedFirstFloorPassage = entrance.NeedFirstFloorPassage;
         }
-        public Entrance2D(List<Vector2d> outerPolygon, List<Vector2d> buildingPolygon, int floorsNumber, Vector2d exit , List<RoomRequisite> _roomsRequisite, RoofType roofType)
+        public Entrance2D(List<Vector2d> outerPolygon, List<Vector2d> buildingPolygon, int floorsNumber, Vector2d exit , List<RoomRequisite> _roomsRequisite, RoofType roofType, bool passage)
         {
             _roofType = roofType;
             BuildingForm = buildingPolygon;
@@ -44,32 +45,45 @@ namespace Floor
             floors = new List<Floor2D>();
             roomsRequisite = _roomsRequisite;
             _exit = exit;
-
+            NeedFirstFloorPassage = passage;
         }
 
-        public override List<Room2D> GetRooms()
+        public override List<Room2D> GetRooms2D()
         {
             var rooms = new List<Room2D>();
 
-            floors.ForEach(e => rooms.AddRange(e.GetRooms()));
+            floors.ForEach(e => rooms.AddRange(e.GetRooms2D()));
 
             return rooms;
         }
 
-        //public new List<PartOfWall> GetPartOfBuilding()
-        //{
 
-        //    return floors[1].GetPartOfBuilding();
-        //}
         protected override void Create2DSpaceInternal()
         {
-            basementFloor2d = new APH_BasementFloor2D(MainPolygon, BuildingForm, roomsRequisite, floors.Count, _exit);
+            bool passage = false;
+
+            if (NeedFirstFloorPassage)
+            {                            
+                    passage = true;               
+            }
+            else passage = false;
+
+            basementFloor2d = new APH_BasementFloor2D(MainPolygon, BuildingForm, roomsRequisite, floors.Count, _exit, passage);
             basementFloor2d.Create2DSpace();
             floors.Add(basementFloor2d);
 
+           
             for (var i = 0; i < FloorNumber-2; i++)
             {
-                var floor = new APH_DefaulFloor2D(MainPolygon, BuildingForm, roomsRequisite, i + 1, floors.Count, _exit);
+                if (NeedFirstFloorPassage)
+                {
+                    if (i == 0)
+                        passage = true;
+                    else passage = false;
+                }
+                
+
+                var floor = new APH_DefaulFloor2D(MainPolygon, BuildingForm, roomsRequisite, i + 1, floors.Count, _exit, passage);
                 floor.Create2DSpace();
                 floors.Add(floor);
             }

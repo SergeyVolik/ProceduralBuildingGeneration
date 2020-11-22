@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public interface IFloor3D
+public interface IFloor3D : IRoom3DHolder
 {
 }
 

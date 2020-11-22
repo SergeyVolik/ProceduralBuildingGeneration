@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 namespace Floor
 {
     public class Flat2D : Premises2D, IFloorPremises2D
-    {               
+    {
 
-       
+        List<PlanCell> OutsideCells;
 
-        public Flat2D(List<Vector2d> mainPolygon, List<Vector2d> buildinPolygon,  List<RoomRequisite> _roomsRequisite, Vector2d exit)
+        public Flat2D(List<Vector2d> mainPolygon, List<Vector2d> buildinPolygon,  List<RoomRequisite> _roomsRequisite, Vector2d exit, List<PlanCell> outsideCells)
         {
-
+            OutsideCells = outsideCells;
             BuildingForm = buildinPolygon;
             MainPolygon = mainPolygon;
             Rooms = new List<Room2D>();
@@ -29,7 +29,7 @@ namespace Floor
 
         }
         
-        public override List<Room2D> GetRooms()
+        public override List<Room2D> GetRooms2D()
         {
             return Rooms;
         }
@@ -37,7 +37,7 @@ namespace Floor
         protected override void Create2DSpaceInternal()
         {
 
-            PlanProcessor2D = new FlatPlanProcessor2D(MainPolygon, BuildingForm, ExitPosition);
+            PlanProcessor2D = new FlatPlanProcessor2D(MainPolygon, BuildingForm, ExitPosition, OutsideCells);
             PlanProcessor2D.Rooms.AddRange(Rooms);
             PlanProcessor2D.CreatePlan();
             UpdateWallsType();

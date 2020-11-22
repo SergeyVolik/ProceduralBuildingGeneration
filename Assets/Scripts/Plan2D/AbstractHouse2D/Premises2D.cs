@@ -34,7 +34,7 @@ namespace Floor
 
         }
 
-        public abstract List<Room2D> GetRooms();
+        public abstract List<Room2D> GetRooms2D();
 
 
         

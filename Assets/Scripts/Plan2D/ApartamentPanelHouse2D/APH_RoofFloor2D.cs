@@ -18,8 +18,23 @@ namespace Floor
         {
 
         }
+        public APH_RoofFloor2D()
+        {
+            
+        }
+        public APH_RoofFloor2D(APH_RoofFloor2D floor2D)
+        {
+            ExitPosition = floor2D.ExitPosition;
+            MainPolygon = floor2D.MainPolygon;
+            BuildingForm = floor2D.BuildingForm;
+            roomRequisites = floor2D.roomRequisites;
+            Floor = floor2D.Floor;
+            flats = floor2D.flats;
+            PlanProcessor2D = floor2D.PlanProcessor2D;
 
-        public override List<Room2D> GetRooms()
+            Create2DSpaceInternal();
+        }
+        public override List<Room2D> GetRooms2D()
         {
             List<Room2D> rooms = new List<Room2D>();
 
