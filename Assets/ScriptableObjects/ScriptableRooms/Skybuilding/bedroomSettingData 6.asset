@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c74e63d7ec28faf4ab8162c48f924843, type: 3}
+  m_Name: bedroomSettingData 6
+  m_EditorClassIdentifier: 
+  _wallPrefab: {fileID: 6283819138621053698, guid: b44fa5f0f82ce4d42be24967b100b5fb, type: 3}
+  _wallForDoorPrefab: {fileID: 2817590022721157599, guid: bb941942e2bb3734e95f1ed05e411900, type: 3}
+  _wallWithWindowPrefab: {fileID: 6559556739727586357, guid: f5a5f36b9aeb9334aa642806105f7661, type: 3}
+  _wallWithWindowPrefabForRandom:
+  - {fileID: 6559556739727586357, guid: f5a5f36b9aeb9334aa642806105f7661, type: 3}
+  - {fileID: -927199367670048503, guid: d540ca5145fb24e4d9e65b933eb8e88e, type: 3}
+  _floorPrefab: {fileID: 9067027106840869735, guid: 33dd63fe10580c44680878f335de748d, type: 3}
+  m_requisite: {fileID: 11400000, guid: 3cca178aae1990447a76ae73c67e9739, type: 2}
+  _ceilingPrefab: {fileID: 9067027106840869735, guid: 33dd63fe10580c44680878f335de748d, type: 3}
+  _wallMaterial: {fileID: 2100000, guid: cdc5bc126e79784498b51d2fcb891b1f, type: 2}
+  _ceilingMaterial: {fileID: 2100000, guid: 60a4cda6e4f512f45b871230b4caf413, type: 2}
+  _floorMaterial: {fileID: 2100000, guid: 42dd0c3b78285fd4881cd209de65dcc1, type: 2}
+  wallPrefabForMaterial: {fileID: 2740209968976373107, guid: 3dbbc3a3e86d37e4aae193b145ad5b0f, type: 3}
+  wallForDoorPrefabForMaterial: {fileID: 1587642205990576176, guid: c8c3f50365fc1114684deeec917b7f38, type: 3}
+  wallWithWindowPrefabForMaterial: {fileID: 0}

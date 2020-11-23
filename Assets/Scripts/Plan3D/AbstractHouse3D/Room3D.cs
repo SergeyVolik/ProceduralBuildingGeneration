@@ -151,7 +151,7 @@ namespace Assets.Scripts.Builders
 
                 var position = new Vector3((float)center.X, high, (float)center.Y) + buildingRoot.transform.position;
 
-                var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].FloorPrefab);
+                var local = GameObject.Instantiate(buildingPossiblePrefabs[0].FloorPrefab);
                 local.transform.position = position;
 
                 //var local = Instantiate(buildingPossiblePrefabs[0].FloorPrefab, position, Quaternion.identity);
@@ -210,7 +210,7 @@ namespace Assets.Scripts.Builders
                 var position = new Vector3((float)center.X, high, (float)center.Y) + buildingRoot.transform.position;
 
                 //var local = Instantiate(buildingPossiblePrefabs[0].CeilingPrefab, position, Quaternion.identity);
-                var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].CeilingPrefab);
+                var local = GameObject.Instantiate(buildingPossiblePrefabs[0].CeilingPrefab);
                 local.transform.position = position;
                 local.transform.parent = ceilingRoot.transform;
             });
@@ -233,7 +233,7 @@ namespace Assets.Scripts.Builders
 
                 var position = new Vector3((float)center.X, high, (float)center.Y) + buildingRoot.transform.position;
 
-                var local = ObjectsPool.Instance.GetObjectFromPool(buildingPossiblePrefabs[0].CeilingPrefab);
+                var local = GameObject.Instantiate(buildingPossiblePrefabs[0].CeilingPrefab);
                 local.transform.position = position;
                 local.transform.parent = ceilingRoot.transform;
 
@@ -302,7 +302,7 @@ namespace Assets.Scripts.Builders
                         currPrefabForMaterial.GetComponent<Renderer>().material = m_wallMaterial;
 
 
-                    curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefabForMaterial);
+                    curWall = GameObject.Instantiate(currPrefabForMaterial);
 
                     //curWall = Instantiate(currPrefabForMaterial, position, Quaternion.identity);
                     //curWall.name = "wallForMaterial(" + partWall.V1 + " "+partWall.V2+")";
@@ -319,11 +319,15 @@ namespace Assets.Scripts.Builders
             if (currPrefab != null)
             {
                 //curWall = Instantiate(currPrefab, position, Quaternion.identity);
-                curWall = ObjectsPool.Instance.GetObjectFromPool(currPrefab);
+                curWall = GameObject.Instantiate(currPrefab);
                 curWall.transform.position = position;
 
-                if(m_outerWallMaterial)
-                    curWall.GetComponent<MeshRenderer>().sharedMaterial = m_outerWallMaterial;
+                if (m_outerWallMaterial)
+                {
+                    var meshRendered = curWall.GetComponent<MeshRenderer>();
+                    if (meshRendered)
+                        meshRendered.sharedMaterial = m_outerWallMaterial;
+                }
 
                 //curWall.name = "wall(" + partWall.V1 + " " + partWall.V2 + ")"; ;
                 curWall.transform.parent = wallsRoot.transform;

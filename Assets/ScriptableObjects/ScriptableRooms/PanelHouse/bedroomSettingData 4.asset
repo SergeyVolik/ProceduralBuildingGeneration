@@ -12,26 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c74e63d7ec28faf4ab8162c48f924843, type: 3}
   m_Name: bedroomSettingData 4
   m_EditorClassIdentifier: 
-  _wallPrefab: {fileID: 6283819138621053698, guid: b44fa5f0f82ce4d42be24967b100b5fb,
-    type: 3}
-  _wallForDoorPrefab: {fileID: 2817590022721157599, guid: bb941942e2bb3734e95f1ed05e411900,
-    type: 3}
-  _wallWithWindowPrefab: {fileID: 5625300126448925555, guid: 9244c27be0988554a8dc303d887f850b,
-    type: 3}
+  _wallPrefab: {fileID: 6283819138621053698, guid: b44fa5f0f82ce4d42be24967b100b5fb, type: 3}
+  _wallForDoorPrefab: {fileID: 2817590022721157599, guid: bb941942e2bb3734e95f1ed05e411900, type: 3}
+  _wallWithWindowPrefab: {fileID: 5625300126448925555, guid: 9244c27be0988554a8dc303d887f850b, type: 3}
   _wallWithWindowPrefabForRandom:
   - {fileID: 4026234526951509021, guid: 2abb9a09ef1deae4291241d33082324f, type: 3}
   - {fileID: 5625300126448925555, guid: 9244c27be0988554a8dc303d887f850b, type: 3}
-  _floorPrefab: {fileID: 9067027106840869735, guid: 33dd63fe10580c44680878f335de748d,
-    type: 3}
+  _floorPrefab: {fileID: 9067027106840869735, guid: 33dd63fe10580c44680878f335de748d, type: 3}
   m_requisite: {fileID: 11400000, guid: 3cca178aae1990447a76ae73c67e9739, type: 2}
-  _ceilingPrefab: {fileID: 9067027106840869735, guid: 33dd63fe10580c44680878f335de748d,
-    type: 3}
+  _ceilingPrefab: {fileID: 9067027106840869735, guid: 33dd63fe10580c44680878f335de748d, type: 3}
   _wallMaterial: {fileID: 2100000, guid: 5117b973a70f9744f946b055b48d006f, type: 2}
   _ceilingMaterial: {fileID: 2100000, guid: 60a4cda6e4f512f45b871230b4caf413, type: 2}
   _floorMaterial: {fileID: 2100000, guid: 42dd0c3b78285fd4881cd209de65dcc1, type: 2}
-  wallPrefabForMaterial: {fileID: 2740209968976373107, guid: 3dbbc3a3e86d37e4aae193b145ad5b0f,
-    type: 3}
-  wallForDoorPrefabForMaterial: {fileID: 1587642205990576176, guid: c8c3f50365fc1114684deeec917b7f38,
-    type: 3}
-  wallWithWindowPrefabForMaterial: {fileID: 3776202608072612282, guid: 3c35f57f7f2af1d4f930cca6720ae3fa,
-    type: 3}
+  wallPrefabForMaterial: {fileID: 2740209968976373107, guid: 3dbbc3a3e86d37e4aae193b145ad5b0f, type: 3}
+  wallForDoorPrefabForMaterial: {fileID: 1587642205990576176, guid: c8c3f50365fc1114684deeec917b7f38, type: 3}
+  wallWithWindowPrefabForMaterial: {fileID: 3776202608072612282, guid: 3c35f57f7f2af1d4f930cca6720ae3fa, type: 3}

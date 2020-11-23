@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93459374c3ba0344aa2944bf542cb822, type: 3}
-  m_Name: PanelBuildingData1 1
+  m_Name: PanelBuildingData3
   m_EditorClassIdentifier: 
   houseEnterWall: {fileID: 4578146322459339543, guid: 021901d4649f6bb4aa5a400bf6fee450, type: 3}
   houseEnterWallForMaterial: {fileID: 4730863975532162505, guid: 04e37b08a8aab754ead6ebf29a311c49, type: 3}
@@ -59,7 +59,7 @@ MonoBehaviour:
     _doorType: 1
     _to: bedroom1
     _from: Restroom1
-  RoofType: 0
+  RoofType: 1
   RoofForAllBuilding: 1
   entraces:
   - EntraceOuterWallMaterial: {fileID: 2100000, guid: dc958cef6ac274b409362d583b3fa355, type: 2}
@@ -110,53 +110,8 @@ MonoBehaviour:
         FloorOuterWallMaterial: {fileID: 0}
       Flat4:
         FloorOuterWallMaterial: {fileID: 0}
-    - FloorOuterWallMaterial: {fileID: 0}
-      Flat1:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat2:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat3:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat4:
-        FloorOuterWallMaterial: {fileID: 0}
-    - FloorOuterWallMaterial: {fileID: 0}
-      Flat1:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat2:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat3:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat4:
-        FloorOuterWallMaterial: {fileID: 0}
-    - FloorOuterWallMaterial: {fileID: 0}
-      Flat1:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat2:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat3:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat4:
-        FloorOuterWallMaterial: {fileID: 0}
-    - FloorOuterWallMaterial: {fileID: 0}
-      Flat1:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat2:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat3:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat4:
-        FloorOuterWallMaterial: {fileID: 0}
-    - FloorOuterWallMaterial: {fileID: 0}
-      Flat1:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat2:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat3:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat4:
-        FloorOuterWallMaterial: {fileID: 0}
   - EntraceOuterWallMaterial: {fileID: 2100000, guid: dc958cef6ac274b409362d583b3fa355, type: 2}
-    NeedPassage: 0
+    NeedPassage: 1
     FloorsSettings:
     - FloorOuterWallMaterial: {fileID: 2100000, guid: aadcaacf8ace75648a262b1c5247763b, type: 2}
       Flat1:
@@ -176,51 +131,6 @@ MonoBehaviour:
         FloorOuterWallMaterial: {fileID: 2100000, guid: 799691fff9f6f314d9f8923b9280cd4e, type: 2}
       Flat4:
         FloorOuterWallMaterial: {fileID: 2100000, guid: ea5ce14ef809d9746a6250384f70980e, type: 2}
-    - FloorOuterWallMaterial: {fileID: 0}
-      Flat1:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat2:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat3:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat4:
-        FloorOuterWallMaterial: {fileID: 0}
-    - FloorOuterWallMaterial: {fileID: 0}
-      Flat1:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat2:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat3:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat4:
-        FloorOuterWallMaterial: {fileID: 0}
-    - FloorOuterWallMaterial: {fileID: 0}
-      Flat1:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat2:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat3:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat4:
-        FloorOuterWallMaterial: {fileID: 0}
-    - FloorOuterWallMaterial: {fileID: 0}
-      Flat1:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat2:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat3:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat4:
-        FloorOuterWallMaterial: {fileID: 0}
-    - FloorOuterWallMaterial: {fileID: 0}
-      Flat1:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat2:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat3:
-        FloorOuterWallMaterial: {fileID: 0}
-      Flat4:
-        FloorOuterWallMaterial: {fileID: 0}
     - FloorOuterWallMaterial: {fileID: 0}
       Flat1:
         FloorOuterWallMaterial: {fileID: 0}

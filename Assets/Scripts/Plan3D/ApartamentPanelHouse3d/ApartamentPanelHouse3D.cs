@@ -134,10 +134,12 @@ namespace Assets.Scripts.Builders
 
             RainDrainVisualize();
 
-            
-            meshCombiner.meshFiltersToSkip = BuildingRoot.GetComponentsInChildren<MeshFilter>().ToList().Where(mf => mf.CompareTag("IgnoreMeshCombiner")).ToArray();
+            var meshes = BuildingRoot.GetComponentsInChildren<MeshFilter>().ToList();
+            var Ingore = meshes.Where(mf => mf.CompareTag("IgnoreMeshCombiner") || mf.CompareTag("AfterGenerationMeshCollider"));
+
+            meshCombiner.meshFiltersToSkip = Ingore.ToArray();
             meshCombiner.CombineMeshes(true);
-           // meshCombiner.CreateMeshCollider();
+            meshCombiner.CreateMeshCollider();
 
             var liftRoomsFirstFloor = new List<Room3D>();
 
@@ -154,6 +156,8 @@ namespace Assets.Scripts.Builders
                     Quaternion.identity).GetComponent<ElevatorController>();
 
                 LiftController.SetSettings(_numberOfFloors-2, 1, FloorHight);
+
+                LiftController.transform.parent = BuildingRoot.transform;
             });
 
 

@@ -8,23 +8,23 @@ using UnityEngine;
 
 namespace Assets.Scripts.UnityEditor
 {
-    class BuildingWindow : EditorWindow
-    {
+    //class BuildingWindow : EditorWindow
+    //{
 
-        [MenuItem("Window/BuildingCreator")]
-        public static void ShowWindow()
-        {
-            GetWindow<BuildingWindow>("BuildingCreator");
-        }
+    //    [MenuItem("Window/BuildingCreator")]
+    //    public static void ShowWindow()
+    //    {
+    //        GetWindow<BuildingWindow>("BuildingCreator");
+    //    }
 
-        private void OnGUI()
-        {
-            GUILayout.Label("Building Settings", EditorStyles.boldLabel);
+    //    private void OnGUI()
+    //    {
+    //        GUILayout.Label("Building Settings", EditorStyles.boldLabel);
 
-            if (GUILayout.Button("Create"))
-            {
+    //        if (GUILayout.Button("Create"))
+    //        {
                 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 }

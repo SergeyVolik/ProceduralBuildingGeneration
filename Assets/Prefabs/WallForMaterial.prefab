@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4484451075759280559}
   m_Layer: 0
   m_Name: WallForMaterial
-  m_TagString: CombineMesh
+  m_TagString: AfterGenerationMeshCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dace521a48d12644aa91b0758ce2934f, type: 2}
+  - {fileID: 2100000, guid: cdc5bc126e79784498b51d2fcb891b1f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

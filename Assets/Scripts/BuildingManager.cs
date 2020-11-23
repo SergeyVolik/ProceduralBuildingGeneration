@@ -39,131 +39,55 @@ public class BuildingManager : MonoBehaviour
     [Space(10), Header("Building Settings")]
 
     [SerializeField]
-    PanelHouseSettings settings;
+    public PanelHouseSettings settings;
 
 
     [Space(20), Header("Other")]
-    [SerializeField]
-    public CameraRotateAround cameraRotator;
 
     [SerializeField]
-    private GameObject[] spawnPositions;
+    private GameObject spawnPosition;
    
 
     public IBuilding3D visualizator;
 
     private void Awake()
     {
-
+        position = spawnPosition.transform.position;
+        rotation = spawnPosition.transform.rotation;
         //spawnPosition.name = "BuildingRoot";
 
 
         //settings.PoolElement.ToList().ForEach(e =>  ObjectsPool.Instance.AddToPoolObjects(e.PrefabToPool, e.numberPrefabsToPool));
-       // ObjectsPool.Instance.AddToPoolObjects(settings.RoomCombiner, 5000, true);
+        // ObjectsPool.Instance.AddToPoolObjects(settings.RoomCombiner, 5000, true);
     }
 
-    GameObject target;
-
-    public void CreateHouseWithAnimation()
-    {
-        
-       
-       // Clear();
-
-       // if (settings == null)
-       // {
-       //     settings = Resources.Load("PanelBuildingData1") as PanelHouseSettings;
-       // }
-
-       // var house = new ApartamentPanelHouse3D(settings, spawnPosition);
-
-       // //house.Visualize();
-
-       // house.StartAnimation();
-
-
-       //var childTrans = spawnPosition.GetComponentsInChildren<MeshRenderer>().ToList();
-
-
-
-       // var points = new List<Vector3>();
-
-       // childTrans.ForEach(r => points.Add(r.transform.position));
-
-       // var center = points.CenterMassUnityVector3();
-
-       // if (target)
-       //     Destroy(target);
-
-       // target = new GameObject("Target");
-       // target.transform.position = center;
-       // Camera.main.GetComponent<CameraRotateAround>().target = target.transform;
-
-
-       
-
-        //return house;
-     
-    }
+    public Vector3 position;
+    public Quaternion rotation;
     public ApartamentPanelHouse3D CreateHouse()
     {
-        DateTime now = DateTime.Now;
+       
 
         Clear();
+        
 
-        //foreach (var spawnPosition in spawnPositions)
-        //{
+        spawnPosition = new GameObject();
+        spawnPosition.transform.position = position;
+        spawnPosition.transform.rotation = rotation;
+
+       var house = new ApartamentPanelHouse3D(settings, spawnPosition);
+
+
+
+        house.Visualize();
            
-
-            if (settings == null)
-            {
-                settings = Resources.Load("PanelBuildingData1") as PanelHouseSettings;
-            }
-
-            
-
-            var house = new ApartamentPanelHouse3D(settings, spawnPositions[0]);
-
-
-
-            house.Visualize();
-
-            return house;
-            //house.StartAnimation();
-
-
-            //var childTrans = spawnPosition.GetComponentsInChildren<MeshRenderer>().ToList();
-
-
-
-            //var points = new List<Vector3>();
-
-            //childTrans.ForEach(r => points.Add(r.transform.position));
-
-            //var center = points.CenterMassUnityVector3();
-
-            //if (target)
-            //    Destroy(target);
-
-            //target = new GameObject("Target");
-            //target.transform.position = center;
-            //Camera.main.GetComponent<CameraRotateAround>().target = target.transform;
-
-
-            //spawnPosition.GetComponent<CombineMesh>().CombineMeshes();
-
-
-        //}
-        Debug.LogError("TIme for calc = " + (DateTime.Now - now));
-        Debug.Break();
-
+        return house;
+         
     }
     public void Clear()
     {
-        foreach(var spawnPosition in spawnPositions)
-            foreach (Transform child in spawnPosition.transform)           
-                GameObject.Destroy(child.gameObject);
-            
+
+        Destroy(spawnPosition);
+
     }
 
    
