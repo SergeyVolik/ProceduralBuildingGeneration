@@ -63,6 +63,7 @@ MonoBehaviour:
   RoofForAllBuilding: 1
   entraces:
   - EntraceOuterWallMaterial: {fileID: 2100000, guid: dc958cef6ac274b409362d583b3fa355, type: 2}
+    RoofType: 0
     NeedPassage: 1
     FloorsSettings:
     - FloorOuterWallMaterial: {fileID: 2100000, guid: aadcaacf8ace75648a262b1c5247763b, type: 2}
@@ -110,10 +111,7 @@ MonoBehaviour:
         FloorOuterWallMaterial: {fileID: 0}
       Flat4:
         FloorOuterWallMaterial: {fileID: 0}
-  - EntraceOuterWallMaterial: {fileID: 2100000, guid: dc958cef6ac274b409362d583b3fa355, type: 2}
-    NeedPassage: 1
-    FloorsSettings:
-    - FloorOuterWallMaterial: {fileID: 2100000, guid: aadcaacf8ace75648a262b1c5247763b, type: 2}
+    - FloorOuterWallMaterial: {fileID: 0}
       Flat1:
         FloorOuterWallMaterial: {fileID: 0}
       Flat2:
@@ -124,13 +122,112 @@ MonoBehaviour:
         FloorOuterWallMaterial: {fileID: 0}
     - FloorOuterWallMaterial: {fileID: 0}
       Flat1:
-        FloorOuterWallMaterial: {fileID: 2100000, guid: 16fad12945610fc4d9d9133d8855cbbb, type: 2}
+        FloorOuterWallMaterial: {fileID: 0}
       Flat2:
-        FloorOuterWallMaterial: {fileID: 2100000, guid: 5f1f0c767fb791e4ebec1824bdc43289, type: 2}
+        FloorOuterWallMaterial: {fileID: 0}
       Flat3:
-        FloorOuterWallMaterial: {fileID: 2100000, guid: 799691fff9f6f314d9f8923b9280cd4e, type: 2}
+        FloorOuterWallMaterial: {fileID: 0}
       Flat4:
-        FloorOuterWallMaterial: {fileID: 2100000, guid: ea5ce14ef809d9746a6250384f70980e, type: 2}
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
     - FloorOuterWallMaterial: {fileID: 0}
       Flat1:
         FloorOuterWallMaterial: {fileID: 0}

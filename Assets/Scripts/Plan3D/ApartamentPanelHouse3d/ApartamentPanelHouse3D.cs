@@ -33,8 +33,8 @@ namespace Assets.Scripts.Builders
         public GameObject BuildingRoot { get; set; }  
 
         protected List<RoomSetting> buildingPossiblePrefabs;
-      
 
+        List<IRoof3D> _roofs;
         public Vector3 Center
         {
             get
@@ -46,10 +46,8 @@ namespace Assets.Scripts.Builders
             }
         }
 
-        //
-        public Floor3D roof3D;
         public List<Entrance3D> Entaraces3D;
-        public Floor3D basemante3D;
+ 
 
         public Material RoofMaterial { get; set; }
 
@@ -68,15 +66,15 @@ namespace Assets.Scripts.Builders
             return Rooms;
         }
         public ApartamentPanelHouse3D(PanelHouseSettings settings, GameObject root) : base(
-            settings.entraces[0].FloorsSettings.Count,
+            settings.entraces.Select(e => e.FloorsSettings.Count).ToList(),
             settings.areaForEntrace,
             settings.entraces.Count,
             settings.possibleRooms.Select(rs => rs.Requisite).ToList(),
             new ControlledRandomRectangularPolygon(4, settings.areaForEntrace * settings.entraces.Count).
                 CreateRectangle(BUILDING_WIDTH, BUILDING_WIDTH),
             settings.entraces.Select(e => e.NeedPassage).ToList(),
-            settings.RoofType
-            
+            settings.entraces.Select(e => e.RoofType).ToList()
+
             )
         {
 
@@ -91,8 +89,9 @@ namespace Assets.Scripts.Builders
             var random = new ControlledRandomRectangularPolygon(4, settings.areaForEntrace * settings.entraces.Count);
 
             var MainPolygon = random.CreateRectangle(BUILDING_WIDTH, BUILDING_WIDTH);
+            _roofs = new List<IRoof3D>();
 
-            
+
 
         }
 
@@ -124,13 +123,13 @@ namespace Assets.Scripts.Builders
             {
                 var outerWallMaterial = m_panelHousesettings.entraces[j].EntraceOuterWallMaterial;
 
-                var entrance3d = new APH_Entrance3D(entraces[j] as Entrance2D, m_panelHousesettings.entraces[j] ,EntracesRoot, BuildingRoot, m_panelHousesettings, buildingPossiblePrefabs, outerWallMaterial);
+                var entrance3d = new APH_Entrance3D(entraces[j] as Entrance2D, m_panelHousesettings.entraces[j], EntracesRoot, BuildingRoot, m_panelHousesettings, buildingPossiblePrefabs, outerWallMaterial);
                 entrance3d.Visualize();
                 Entaraces3D.Add(entrance3d);
             }
 
-            if (RoofType == RoofType.CASCADE)
-                VisualizeRoof();
+           
+            VisualizeRoof();
 
             RainDrainVisualize();
 
@@ -166,36 +165,7 @@ namespace Assets.Scripts.Builders
 
             BuildingRoot.transform.rotation = Quaternion.Euler(BuildingRoot.transform.rotation.eulerAngles + BuildingRoot.transform.rotation.eulerAngles);
         }
-
-        public IEnumerator VisualizeaAnimationCorotine()
-        {
-            //var entraces = _house2D.Entraces;
-            //var EntracesRoot = new GameObject("Entraces");
-            //EntracesRoot.transform.parent = BuildingRoot.transform;
-
-            //Entaraces3D = new List<Entrance3D>();
-
-
-
-            //for (var j = 0; j < entraces.Count; j++)
-            //{
-            //    var entrance3d = new APH_Entrance3D(entraces[j], EntracesRoot, BuildingRoot, m_panelHousesettings, buildingPossiblePrefabs);
-            //    yield return entrance3d.VisualizeAnimation();
-            //}
-
-
-
-
-            ////VisualizeRoof();
-            //RainDrainVisualize();
-            yield return null;
-
-        }
-
-        public void StartAnimation()
-        {
-            Camera.main.GetComponentInParent<CameraRotateAround>().StartCoroutine(VisualizeaAnimationCorotine());
-        }
+ 
 
         void RainDrainVisualize()
         {
@@ -241,64 +211,90 @@ namespace Assets.Scripts.Builders
             }
             return angles;
         }
+
         void VisualizeRoof()
         {
-            var roof = SkeletonBuilder.BuildRoof(BuildingForm);
-            var meshData = new RoofMeshData(roof, BuildingForm, NumberOfFloors-2, Building2D.FloorHight);
-            var RoofRoot = new GameObject("RoofRoot");
-
-            RoofRoot.transform.parent = BuildingRoot.transform;
-
-            for (var i = 0; i < meshData.verticesOfPolygons.Count; i++)
+           
+            if (m_panelHousesettings.entraces.All(e => e.RoofType == RoofType.CASCADE && e.FloorsSettings.Count == m_panelHousesettings.entraces[0].FloorsSettings.Count))
             {
-                Mesh msh = new Mesh();
-                for (var j = 0; j < meshData.verticesOfPolygons[i].Count; j++)
-                {
-                    meshData.verticesOfPolygons[i][j] += BuildingRoot.transform.position;
-                }
-                msh.vertices = meshData.verticesOfPolygons[i].ToArray();
-                msh.triangles = meshData.indicesOfPolygons[i].ToArray();
-                msh.RecalculateNormals();
-                msh.RecalculateBounds();
-
-                var emptyObj = new GameObject("roofPart" + i.ToString());
-                emptyObj.transform.parent = RoofRoot.transform;
-                // Set up game object with mesh;
-                emptyObj.AddComponent(typeof(MeshRenderer));
-
-                var meshRender = emptyObj.GetComponent<MeshRenderer>();
-                meshRender.material = m_panelHousesettings.defalutRoofMaterial;
-
-               Vector3[] vertices = msh.vertices;
-
-                Vector2[] uvs = new Vector2[vertices.Length];
-
-                //for (int k = 0; k < uvs.Length; k++)
-                //{
-                //    uvs[i] = new Vector2(vertices[i].x, vertices[i].z);
-                //}
-
-                if (vertices.Length == 4)
-                {
-                    uvs[0] = new Vector2(0, 0);
-                    uvs[1] = new Vector2(0, 1);
-                    uvs[2] = new Vector2(1, 1);
-                    uvs[3] = new Vector2(1, 0);
-                }
-                else if (vertices.Length == 3)
-                {
-                    uvs[0] = new Vector2(0, 0);
-                    uvs[1] = new Vector2(0, 1);
-                    uvs[2] = new Vector2(1, 1);
-                }
-                msh.uv = uvs;
-
-                MeshFilter filter = emptyObj.AddComponent(typeof(MeshFilter)) as MeshFilter;
-                filter.mesh = msh;            
+                var roof = new CascadeRoof(BuildingForm, FloorHight, NumberOfFloors, BuildingRoot.transform, m_panelHousesettings.defalutRoofMaterial);
+                _roofs.Add(roof);
+                roof.VisualizeRoof();
             }
-            
+            else {
 
-        }
+                var CascadeRoofs = new List<List<Vector2d>>();
+                var roofFloorForCreationRoof = new List<int>();
+                var roofontinuationFloor = new List<int>();
+                
+                var curretRoofForm = new List<Vector2d>();
+
+                Entaraces3D.ForEach(e =>
+                {
+
+                    if (e.HaveRoof && e.RoofType == RoofType.FLAT)
+                    {
+                        e.Roof.VisualizeRoof();
+
+                        if (curretRoofForm.Count != 0)
+                        {
+                            CascadeRoofs.Add(curretRoofForm);
+                            roofFloorForCreationRoof.Add(roofontinuationFloor[0]);
+                            roofontinuationFloor.Clear();
+                            curretRoofForm = new List<Vector2d>();
+                        }
+
+
+                    }
+                    else if (e.RoofType == RoofType.CASCADE)
+                    {
+                        if (roofontinuationFloor.Exists(floor => floor == e.FloorNumber) || roofontinuationFloor.Count == 0)
+                        {
+                            curretRoofForm.AddRange(e.MainPolygon);
+                            roofontinuationFloor.Add(e.FloorNumber);
+                        }
+                        else
+                        {
+                            CascadeRoofs.Add(curretRoofForm);
+                            roofFloorForCreationRoof.Add(roofontinuationFloor[0]);
+                            roofFloorForCreationRoof.Clear();
+                            curretRoofForm = new List<Vector2d>();
+                        }
+                    }
+
+                });
+
+                if (curretRoofForm.Count != 0)
+                {
+                    CascadeRoofs.Add(curretRoofForm);
+                    roofFloorForCreationRoof.Add(roofontinuationFloor[0]);
+                }
+
+                for (var i = 0; i < CascadeRoofs.Count; i++)
+                {
+                    var roofForm = CascadeRoofs[i];
+                    var maxX = roofForm.Max(v => v.X);
+                    var maxY = roofForm.Max(v => v.Y);
+
+                    var minX = roofForm.Min(v => v.X);
+                    var minY = roofForm.Min(v => v.Y);
+
+                    List<Vector2d> roofFOrm = new List<Vector2d>()
+                    {
+                        new Vector2d(minX, minY),
+                        new Vector2d(minX, maxY),
+                        new Vector2d(maxX, maxY),
+                        new Vector2d(maxX, minY),
+                    };
+
+                    IRoof3D roof = new CascadeRoof(roofFOrm, FloorHight, roofFloorForCreationRoof[i], BuildingRoot.transform, m_panelHousesettings.defalutRoofMaterial);
+                    roof.VisualizeRoof();
+                    _roofs.Add(roof);
+
+               }
+            }
+                                   
+        }       
 
 
     }

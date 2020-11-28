@@ -42,8 +42,8 @@ namespace Assets.Scripts.Premies.Buildings
             {
                 floorsNumber = floors.Count - 1;
                 var roof = new APH_RoofFloor3D(floors[floors.Count-1] as APH_RoofFloor2D, m_EntraceSettings.FloorsSettings[floors.Count - 1], m_entraceRoot, m_buildingRoot, m_PanelHouseSettings, buildingPossiblePrefabs, m_EntraceSettings.FloorsSettings.Count, RoofType, material);
-
-                roof.Visualize();
+                Roof = roof;
+                //roof.Visualize();
                 floors3D.Add(roof);
             }
             else floorsNumber = floors.Count;

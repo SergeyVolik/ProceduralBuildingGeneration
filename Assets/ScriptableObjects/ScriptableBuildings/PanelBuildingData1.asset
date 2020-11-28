@@ -63,6 +63,7 @@ MonoBehaviour:
   RoofForAllBuilding: 1
   entraces:
   - EntraceOuterWallMaterial: {fileID: 2100000, guid: ea5ce14ef809d9746a6250384f70980e, type: 2}
+    RoofType: 0
     NeedPassage: 0
     FloorsSettings:
     - FloorOuterWallMaterial: {fileID: 0}
@@ -101,7 +102,26 @@ MonoBehaviour:
         FloorOuterWallMaterial: {fileID: 0}
       Flat4:
         FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 0}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
   - EntraceOuterWallMaterial: {fileID: 0}
+    RoofType: 1
     NeedPassage: 0
     FloorsSettings:
     - FloorOuterWallMaterial: {fileID: 2100000, guid: 799691fff9f6f314d9f8923b9280cd4e, type: 2}
@@ -140,7 +160,17 @@ MonoBehaviour:
         FloorOuterWallMaterial: {fileID: 0}
       Flat4:
         FloorOuterWallMaterial: {fileID: 0}
+    - FloorOuterWallMaterial: {fileID: 2100000, guid: ea5ce14ef809d9746a6250384f70980e, type: 2}
+      Flat1:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat2:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat3:
+        FloorOuterWallMaterial: {fileID: 0}
+      Flat4:
+        FloorOuterWallMaterial: {fileID: 0}
   - EntraceOuterWallMaterial: {fileID: 0}
+    RoofType: 0
     NeedPassage: 0
     FloorsSettings:
     - FloorOuterWallMaterial: {fileID: 2100000, guid: ea5ce14ef809d9746a6250384f70980e, type: 2}

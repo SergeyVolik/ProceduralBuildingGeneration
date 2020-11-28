@@ -13,6 +13,8 @@ public class EntraceSetting
     public Material EntraceOuterWallMaterial;
 
     [SerializeField]
+    public RoofType RoofType = RoofType.FLAT;
+    [SerializeField]
     public bool NeedPassage = false;
 
     [Header("Floor outer wall materias")]

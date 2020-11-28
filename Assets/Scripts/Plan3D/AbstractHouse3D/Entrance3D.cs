@@ -24,6 +24,8 @@ namespace Assets.Scripts.Premies.Buildings.Entrace3D
         protected List<RoomSetting> buildingPossiblePrefabs;
 
         public List<IFloor3D> floors3D;
+        public IRoof3D Roof { get; set; }
+        public bool HaveRoof => Roof != null;
 
         protected Material m_outerWallMaterial;
 
@@ -39,6 +41,11 @@ namespace Assets.Scripts.Premies.Buildings.Entrace3D
             this.buildingPossiblePrefabs = buildingPossiblePrefabs;
 
            
+        }
+
+        public void GetOutlisetePartOfWalls()
+        {
+            
         }
 
         public List<Room3D> GetRooms3D()

@@ -15,7 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class APH_RoofFloor3D : APH_RoofFloor2D, IVisualizer, IFloor3D
+public class APH_RoofFloor3D : APH_RoofFloor2D, IVisualizer, IFloor3D, IRoof3D
 {
 
     protected PanelHouseSettings m_panelHouseSettings;
@@ -162,6 +162,11 @@ public class APH_RoofFloor3D : APH_RoofFloor2D, IVisualizer, IFloor3D
     public List<Room3D> GetRooms3D()
     {
         return rooms3D;
+    }
+
+    public void VisualizeRoof()
+    {
+        Visualize();
     }
 }
 

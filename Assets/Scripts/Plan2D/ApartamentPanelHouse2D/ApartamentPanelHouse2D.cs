@@ -59,11 +59,16 @@ namespace Assets.Scripts.Buildings
         private const int BUILDING_WIDTH = 20;
 
         private List<bool> _passages;
-        public ApartamentPanelHouse2D(int numberOfFloors, float area, int entraces, List<RoomRequisite> requisites, List<Vector2d> buildingPolygon, List<bool> passages, RoofType roof = RoofType.FLAT) : base(numberOfFloors, area, buildingPolygon, roof)
+
+        private List<RoofType> m_entrancesRoofs;
+        private List<int> m_entancesFloorsNumber;
+        public ApartamentPanelHouse2D(List<int> numberOfFloors, float area, int entraces, List<RoomRequisite> requisites, List<Vector2d> buildingPolygon, List<bool> passages, List<RoofType> roofs) : base(numberOfFloors[0], area, buildingPolygon, roofs[0])
         {
+            m_entancesFloorsNumber = numberOfFloors;
+            m_entrancesRoofs = roofs;
             _passages = passages;
             roomRequisites = requisites;
-            NumberOfFloors = numberOfFloors;
+            NumberOfFloors = numberOfFloors[0];
             Area = area;
             Angles = 4;
             EntracesNumber = entraces;
@@ -76,7 +81,7 @@ namespace Assets.Scripts.Buildings
         {
             throw new NotImplementedException();
         }
-        List<List<Vector2d>> CreateEntrances()             
+        List<List<Vector2d>> CreateEntrances()
         {
             
             BuildingForm = MainPolygon;
@@ -146,7 +151,7 @@ namespace Assets.Scripts.Buildings
             for (var i = 0; i < entraces.Count; i++)
             {
                 var Center = new LineSegment2d(entraces[i][0], entraces[i][1]).Center();
-                var entrace = new Entrance2D(entraces[i], BuildingForm, NumberOfFloors, Center, roomRequisites, RoofType, _passages[i]);
+                var entrace = new Entrance2D(entraces[i], BuildingForm, m_entancesFloorsNumber[i], Center, roomRequisites, m_entrancesRoofs[i], _passages[i]);
                 entrace.Create2DSpace();
                 m_buildingPremises2D.Add(entrace);
 
